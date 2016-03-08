@@ -32,14 +32,21 @@ configurations {
 }
 
 dependencies {
+	compile('javax.servlet:jstl:1.2')
+	compile('org.apache.pdfbox:pdfbox:1.8.11')
+
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+
 	runtime('mysql:mysql-connector-java')
-	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+//	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
+//	providedRuntime 'org.apache.tomcat:tomcat-jsp-api:8.0.32'
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-	testCompile('org.springframework.boot:spring-boot-starter-test') 
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 

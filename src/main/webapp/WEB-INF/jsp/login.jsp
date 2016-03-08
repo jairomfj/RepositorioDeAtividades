@@ -5,6 +5,9 @@
     <title>Spring Security Example </title>
 </head>
 <body>
+
+JSP
+
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
