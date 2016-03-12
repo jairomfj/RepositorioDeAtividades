@@ -22,15 +22,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http.csrf().disable();
+
         http
             .authorizeRequests()
             .antMatchers("/", "/home").permitAll()
-            .anyRequest().permitAll()
-        .and()
+            .anyRequest().permitAll();
+
+        http
             .formLogin()
             .loginPage("/login")
-            .permitAll()
-        .and()
+            .permitAll();
+
+        http
             .logout()
             .permitAll()
         ;

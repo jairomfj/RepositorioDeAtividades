@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Hello World!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" />
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/file-upload.css}" />
+
+    <!--<link href="../css/file-upload.css" rel="stylesheet" type="text/css"/>-->
+</head>
+<body>
+
+
+<h1>This is the upload file page</h1>
+
+
+<form id="upload-file-form" enctype="multipart/form-data" action="/uploadFile" method="post">
+    <label for="upload-file-input">Upload your file:</label>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input id="upload-file-input" type="file" name="uploadfile" accept="*" />
+    <input type="submit" />
+</form>
+
+
+<br />
+<hr />
+<br />
+
+<div th:each="exercise : ${exercises}">
+    <input type="text" th:value="${exercise.label}" />
+    <div th:each="option : ${exercise.exerciseOptions}">
+        <input th:value="${option.label}" />
+    </div>
+    <hr />
+</div>
+
+
+</body>
+</html>

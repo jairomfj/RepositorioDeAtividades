@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.repositoriodeatividades.domains.PdfReaderTests" tests="0" skipped="0" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="MacBook-Pro-de-Jairo.local" time="0.0">
+  <properties/>
+  <system-out><![CDATA[2016-03-11 20:26:07.189  INFO 955 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [br.com.repositoriodeatividades.domains.PdfReaderTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2016-03-11 20:26:07.195  INFO 955 --- [    Test worker] o.s.t.c.web.WebTestContextBootstrapper   : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-03-11 20:26:07.207  INFO 955 --- [    Test worker] o.s.t.c.web.WebTestContextBootstrapper   : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5bc9fe7c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2a62adf8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@348b8a85, org.springframework.test.context.support.DirtiesContextTestExecutionListener@35333cb6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@36d6ec03, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5820d515]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

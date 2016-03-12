@@ -1,8 +1,9 @@
 package br.com.repositoriodeatividades.domains.interfaces;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 public interface Extractable {
-    String read(File file) throws IOException;
+
+    List<String> extract(String fileContent) throws Exception;
+
 }
