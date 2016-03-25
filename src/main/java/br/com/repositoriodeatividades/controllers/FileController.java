@@ -21,8 +21,8 @@ public class FileController {
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public String uploadFile(@RequestParam("uploadfile") MultipartFile uploadfile, Model model) {
-        model.addAttribute("exercises", importMultipleChoiceExercise.execute(uploadfile));
+    public String uploadFile(@RequestParam("uploadFile") MultipartFile uploadFile, Model model) {
+        model.addAttribute("exercises", importMultipleChoiceExercise.execute(uploadFile));
         return "file/upload";
     }
 }

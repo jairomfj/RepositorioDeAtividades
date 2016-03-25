@@ -1,0 +1,53 @@
+package br.com.repositoriodeatividades.usecases.exercise;
+
+
+import br.com.repositoriodeatividades.domains.dao.exercise.ExerciseDao;
+import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.ExerciseOption;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class CreateExercise {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    ExerciseDao exerciseDao;
+
+    public void saveFileExtractedExercise(String exerciseLabel, String[] optionLabels) throws IllegalAccessException {
+
+        log.info("Sanving exercise extracted from file");
+
+        if(exerciseLabel.equals(null)) {
+            throw new IllegalArgumentException("Exercise label cannot be null");
+        }
+
+        List<ExerciseOption> exerciseOptionList = new ArrayList<ExerciseOption>();
+        if(optionLabels.length > 0) {
+            log.info("Exercise has " + optionLabels.length + " options");
+
+            for(String optionLabel : optionLabels) {
+                optionLabel = optionLabel.trim();
+
+                if(optionLabel.equals("") || optionLabel.equals(null))
+                    continue;
+
+                ExerciseOption exerciseOption = new ExerciseOption();
+                exerciseOption.setLabel(optionLabel);
+                exerciseOptionList.add(exerciseOption);
+            }
+        }
+        persist(new Exercise(exerciseLabel, exerciseOptionList));
+    }
+
+
+    private void persist(Exercise exercise) {
+        exerciseDao.create(exercise);
+    }
+}

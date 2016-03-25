@@ -34,9 +34,20 @@ public class Exercise {
     @ManyToOne
     private User teacher;
 
-
     @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ExerciseOption> exerciseOption;
+
+
+    public Exercise() {}
+
+    public Exercise(String label, List<ExerciseOption> exerciseOptionList) {
+        this.label = label;
+        this.exerciseOption = exerciseOptionList;
+
+        for(ExerciseOption exerciseOption : exerciseOptionList) {
+            exerciseOption.setExercise(this);
+        }
+    }
 
     public Long getId() {
         return id;

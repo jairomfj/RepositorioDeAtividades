@@ -1,6 +1,8 @@
 package br.com.repositoriodeatividades.domains.dao.exercise;
 
 import br.com.repositoriodeatividades.entities.Exercise;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,10 +13,13 @@ import javax.persistence.PersistenceContext;
 @Transactional
 public class ExerciseDao {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @PersistenceContext
     private EntityManager entityManager;
 
     public void create(Exercise exercise) {
+        log.info("Creating new exercise for user: " + exercise.getTeacher());
         entityManager.persist(exercise);
     }
 
