@@ -26,17 +26,19 @@ public class Exercise {
     private String type = "";
 
     @Column(nullable = false)
-    private boolean deleted = false;
+    private boolean active = true;
 
-    @Column(nullable = true)
-    private String enumerationType;
+    @Column(nullable = false)
+    private String level = "";
 
     @ManyToOne
-    private User teacher;
+    private User user;
 
     @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ExerciseOption> exerciseOption;
 
+    @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Tag> tag;
 
     public Exercise() {}
 
@@ -57,14 +59,6 @@ public class Exercise {
         this.id = id;
     }
 
-    public String getEnumerationType() {
-        return enumerationType;
-    }
-
-    public void setEnumerationType(String enumerationType) {
-        this.enumerationType = enumerationType;
-    }
-
     public String getLabel() {
         return label;
     }
@@ -81,20 +75,20 @@ public class Exercise {
         this.created = created;
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
-    public User getTeacher() {
-        return teacher;
+    public User getUser() {
+        return user;
     }
 
-    public void setTeacher(User teacher) {
-        this.teacher = teacher;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getType() {
@@ -111,5 +105,21 @@ public class Exercise {
 
     public void setExerciseOptions(List<ExerciseOption> questionOption) {
         this.exerciseOption = questionOption;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public List<ExerciseOption> getExerciseOption() {
+        return exerciseOption;
+    }
+
+    public void setExerciseOption(List<ExerciseOption> exerciseOption) {
+        this.exerciseOption = exerciseOption;
     }
 }

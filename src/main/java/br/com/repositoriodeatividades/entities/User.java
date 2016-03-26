@@ -27,7 +27,7 @@ public class User {
     @NotNull
     private boolean active;
 
-    public User() { }
+    public User() {}
 
     public long getId() {
         return id;

@@ -19,7 +19,7 @@ public class ExerciseDao {
     private EntityManager entityManager;
 
     public void create(Exercise exercise) {
-        log.info("Creating new exercise for user: " + exercise.getTeacher());
+        log.info("Creating new exercise for user: " + exercise.getUser());
         entityManager.persist(exercise);
     }
 
