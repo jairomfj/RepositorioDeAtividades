@@ -22,8 +22,6 @@ public class ExerciseBuilder {
             throw new IllegalAccessException("ExerciseItemList cannot be null");
         }
 
-
-        //TODO remove enumeration from labels
         List<Exercise> exerciseList = new ArrayList<Exercise>();
         for(List<ExerciseItem> individualExerciseList : exerciseItemList) {
             Exercise exercise = new Exercise();

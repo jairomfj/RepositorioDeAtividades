@@ -31,45 +31,46 @@ public class ExerciseParserParallel implements Runnable {
             List<List<ExerciseItem>> exerciseItemList = buildExerciseItems();
             parseExerciseItemsToExerciseList(exerciseItemList);
         } catch (Exception e) {
-            log.error("Error during parse:" + e.getStackTrace().toString());
             e.printStackTrace();
         }
     }
 
-    private void parseExerciseItemsToExerciseList(List<List<ExerciseItem>> exerciseItemList) {
-        try {
-            exerciseList.add(new ExerciseBuilder().build(exerciseItemList).get(0));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void parseExerciseItemsToExerciseList(List<List<ExerciseItem>> exerciseItemList) throws Exception {
+        Exercise exercise = new ExerciseBuilder().build(exerciseItemList).get(0);
+        exerciseList.add(exercise);
     }
 
     private List<List<ExerciseItem>> buildExerciseItems() throws Exception {
 
         log.info("Building exercise items");
 
-        List<List<ExerciseItem>> exerciseItemList = new ArrayList<List<ExerciseItem>>();
-
         if(exerciseString == null) {
             throw new IllegalAccessException("Exercise list cannot be null");
         }
 
-        try {
-            String[] splittedText = exerciseString.split("\\n");
-            List<Integer> enumeratedIndex = getEnumeratedIndexes(splittedText);
-            List<ExerciseItem> multipleChoiceExerciseItemList = extractExerciseItems(enumeratedIndex, splittedText);
-            exerciseItemList.add(multipleChoiceExerciseItemList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        List<List<ExerciseItem>> exerciseItemList = new ArrayList<List<ExerciseItem>>();
+        String[] splittedText = exerciseString.split("\\n");
+        List<Integer> enumeratedIndex = getEnumeratedIndexes(splittedText);
+        List<ExerciseItem> multipleChoiceExerciseItemList = extractExerciseItems(enumeratedIndex, splittedText);
+        exerciseItemList.add(multipleChoiceExerciseItemList);
         return exerciseItemList;
     }
 
     private List<ExerciseItem> extractExerciseItems(List<Integer> enumeratedIndex, String[] splittedText) {
+
+        if(enumeratedIndex.size() == 0) {
+            throw new IllegalArgumentException("Enumerated index is invalid");
+        }
+
+        if(splittedText.length == 0) {
+            throw new IllegalArgumentException("Splitted text is invalid");
+        }
+
+
         List<ExerciseItem> multipleChoiceExerciseItemList = new ArrayList();
         for(int i = 0; i < enumeratedIndex.size(); i++) {
-
             int startIndex;
+
             if(i == (enumeratedIndex.size() -1)) {
                 startIndex = splittedText.length - 1;
             } else {
@@ -100,7 +101,6 @@ public class ExerciseParserParallel implements Runnable {
     private List<Integer> getEnumeratedIndexes(String[] splittedString) throws Exception {
 
         if(splittedString == null || splittedString.equals("")) {
-            log.error("Cannot get enumerated index of an invalid array");
             throw new IllegalAccessException("Content cannot be null or empty");
         }
 
@@ -112,7 +112,6 @@ public class ExerciseParserParallel implements Runnable {
                 indexList.add(i);
             }
         }
-
         return indexList;
     }
 }

@@ -22,45 +22,43 @@ public class PdfReader implements Readable {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public void createFile(MultipartFile file) {
+    public void createFile(MultipartFile file) throws Exception {
 
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
-                stream.write(bytes);
-                stream.close();
-            } catch (Exception e) {
-            }
+        if(file.isEmpty()) {
+            throw new IllegalArgumentException("File is empty");
         }
+
+        byte[] bytes = file.getBytes();
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+        stream.write(bytes);
+        stream.close();
     }
 
     @Override
-    public String read(MultipartFile multipartFile)  {
-        createFile(multipartFile);
-        File file = new File(multipartFile.getOriginalFilename());
-        String content = extractContent(file);
-        file.delete();
-        return content;
+    public String read(MultipartFile multipartFile) throws Exception {
+        try {
+            createFile(multipartFile);
+            File file = new File(multipartFile.getOriginalFilename());
+            String content = extractContent(file);
+            file.delete();
+            return content;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    public String extractContent(File file) {
+    public String extractContent(File file) throws Exception {
         String fileContent = "";
-        try {
-            PDDocument document = PDDocument.load(file);
-            document.getClass();
-            if(!document.isEncrypted()){
-                PDFTextStripperByArea stripper = new PDFTextStripperByArea();
-                stripper.setSortByPosition( true );
-                PDFTextStripper Tstripper = new PDFTextStripper();
-                fileContent =  Tstripper.getText(document);
-            }
-            document.close();
-            log.info("File successfully read");
-        } catch (Exception e) {
-            log.error("Error reading file: " + e.getStackTrace().toString());
-            e.printStackTrace();
+        PDDocument document = PDDocument.load(file);
+        document.getClass();
+        if(!document.isEncrypted()){
+            PDFTextStripperByArea stripper = new PDFTextStripperByArea();
+            stripper.setSortByPosition( true );
+            PDFTextStripper Tstripper = new PDFTextStripper();
+            fileContent =  Tstripper.getText(document);
         }
+        document.close();
+        log.info("File successfully read");
         return fileContent.trim();
 
     }

@@ -15,11 +15,6 @@ public class FileController {
     @Autowired
     ImportMultipleChoiceExercise importMultipleChoiceExercise;
 
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)
-    public String showView() {
-        return "file/upload";
-    }
-
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("uploadFile") MultipartFile uploadFile, Model model) {
         model.addAttribute("exercises", importMultipleChoiceExercise.execute(uploadFile));

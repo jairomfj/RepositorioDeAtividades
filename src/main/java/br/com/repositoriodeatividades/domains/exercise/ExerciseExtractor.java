@@ -30,10 +30,10 @@ public class ExerciseExtractor implements Extractable {
         }
 
         List<String> exercises = new ArrayList<String>();
-        String exercise = "";
         ExerciseEnumeration candidateExerciseEnumeration = null;
         String[] splitFileContent = fileContent.split("\\n");
 
+        String exercise = "";
         for(String line : splitFileContent) {
             ExerciseEnumeration exerciseEnumeration = repositoryUtils.findEnumeration(line.trim());
 

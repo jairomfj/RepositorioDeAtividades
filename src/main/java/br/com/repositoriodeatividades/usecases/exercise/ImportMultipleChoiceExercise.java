@@ -41,16 +41,9 @@ public class ImportMultipleChoiceExercise implements Importable {
             String fileContent = pdfReader.read(file);
             List<String> exercisesAsString = exerciseExtractor.extract(fileContent);
             exerciseList = exerciseParser.parse(exercisesAsString);
-//            persistExerciseList(exerciseList);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return exerciseList;
-    }
-
-    private void persistExerciseList(List<Exercise> exerciseList) {
-        for(Exercise exercise : exerciseList) {
-            exerciseDao.create(exercise);
-        }
     }
 }

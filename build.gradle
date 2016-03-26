@@ -40,6 +40,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('com.fasterxml:jackson-module-json-org:0.9.1')
+
 
 	runtime('mysql:mysql-connector-java')
 

@@ -6,6 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 public interface Readable {
-    String read(MultipartFile file) throws IOException;
+    String read(MultipartFile file) throws Exception;
 
 }

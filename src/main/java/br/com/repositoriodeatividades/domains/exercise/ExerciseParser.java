@@ -21,10 +21,9 @@ public class ExerciseParser implements Parseable {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final int THREAD_AMMOUNT = 5;
-    ExecutorService executor = Executors.newFixedThreadPool(THREAD_AMMOUNT);
 
     @Override
-    public List<Exercise> parse(List<String> exercises) throws Exception{
+    public List<Exercise> parse(List<String> exercises) throws Exception {
         if(exercises == null || exercises.size() == 0) {
             throw new IllegalAccessException("List of exercises cannot be or empty");
         }

@@ -5,10 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-/**
- * Created by jairomendes on 3/9/16.
- */
 public interface Importable {
 
-    List<Exercise> execute(MultipartFile file);
+    List<Exercise> execute(MultipartFile file) throws Exception;
 }
