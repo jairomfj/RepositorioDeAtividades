@@ -2,6 +2,7 @@ package br.com.repositoriodeatividades.usecases.exercise;
 
 
 import br.com.repositoriodeatividades.domains.dao.exercise.ExerciseDao;
+import br.com.repositoriodeatividades.domains.vo.exercise.ExercisePlain;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.ExerciseOption;
 import org.slf4j.Logger;
@@ -20,11 +21,11 @@ public class CreateExercise {
     @Autowired
     ExerciseDao exerciseDao;
 
-    public void saveFileExtractedExercise(String exerciseLabel, String[] optionLabels) throws IllegalAccessException {
+    public void saveFileExtractedExercise(ExercisePlain exercisePlain, String[] optionLabels) throws IllegalAccessException {
 
-        log.info("Sanving exercise extracted from file");
+        log.info("Saving exercise extracted from file");
 
-        if(exerciseLabel.equals(null)) {
+        if(exercisePlain.equals(null)) {
             throw new IllegalArgumentException("Exercise label cannot be null");
         }
 
@@ -43,7 +44,7 @@ public class CreateExercise {
                 exerciseOptionList.add(exerciseOption);
             }
         }
-        persist(new Exercise(exerciseLabel, exerciseOptionList));
+        persist(new Exercise(exercisePlain, exerciseOptionList));
     }
 
 

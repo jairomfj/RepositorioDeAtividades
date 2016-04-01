@@ -58,7 +58,9 @@
             <form class="form-horizontal exercise-form" enctype="multipart/form-data" action="/exercise" method="post" th:each="exercise : ${exercises}">
                 <fieldset>
                     <div class="form-group">
-                        <input th:name="exercise-label" th:value="${exercise.label}" class="form-control" />
+                        <input type="hidden" th:id="exercise-type" th:value="${exercise.type}" th:name="exerciseType" />
+                        <input th:name="exerciseLabel" th:value="${exercise.label}" class="form-control" />
+                        <input th:type="hidden" th:name="option-label" value="" class="form-control"  />
                         <div th:each="option : ${exercise.exerciseOptions}">
                             <input th:name="option-label" th:value="${option.label}" class="form-control"  />
                         </div>

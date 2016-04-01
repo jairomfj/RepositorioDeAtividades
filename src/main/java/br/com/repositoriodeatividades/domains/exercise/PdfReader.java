@@ -22,17 +22,6 @@ public class PdfReader implements Readable {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public void createFile(MultipartFile file) throws Exception {
-
-        if(file.isEmpty()) {
-            throw new IllegalArgumentException("File is empty");
-        }
-
-        byte[] bytes = file.getBytes();
-        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
-        stream.write(bytes);
-        stream.close();
-    }
 
     @Override
     public String read(MultipartFile multipartFile) throws Exception {
@@ -47,7 +36,7 @@ public class PdfReader implements Readable {
         }
     }
 
-    public String extractContent(File file) throws Exception {
+    private String extractContent(File file) throws Exception {
         String fileContent = "";
         PDDocument document = PDDocument.load(file);
         document.getClass();
@@ -60,6 +49,15 @@ public class PdfReader implements Readable {
         document.close();
         log.info("File successfully read");
         return fileContent.trim();
+    }
 
+    private void createFile(MultipartFile file) throws Exception {
+        if(file.isEmpty()) {
+            throw new IllegalArgumentException("File is empty");
+        }
+        byte[] bytes = file.getBytes();
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+        stream.write(bytes);
+        stream.close();
     }
 }

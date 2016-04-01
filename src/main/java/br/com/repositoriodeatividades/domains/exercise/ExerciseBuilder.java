@@ -1,5 +1,6 @@
 package br.com.repositoriodeatividades.domains.exercise;
 
+import br.com.repositoriodeatividades.domains.enums.ExerciseType;
 import br.com.repositoriodeatividades.domains.interfaces.ExerciseItem;
 import br.com.repositoriodeatividades.domains.util.RepositoryUtils;
 import br.com.repositoriodeatividades.entities.Exercise;
@@ -12,7 +13,7 @@ import java.util.List;
 @Component
 public class ExerciseBuilder {
 
-    public List<Exercise> build(List<List<ExerciseItem>> exerciseItemList) throws Exception {
+    public Exercise build(List<List<ExerciseItem>> exerciseItemList) throws Exception {
 
         if(exerciseItemList == null) {
             throw new IllegalAccessException("ExerciseItemList cannot be null");
@@ -22,14 +23,17 @@ public class ExerciseBuilder {
             throw new IllegalAccessException("ExerciseItemList cannot be null");
         }
 
-        List<Exercise> exerciseList = new ArrayList<Exercise>();
+        Exercise exercise = new Exercise();
+        exercise.setType(ExerciseType.DEFAULT.toString());
+
         for(List<ExerciseItem> individualExerciseList : exerciseItemList) {
-            Exercise exercise = new Exercise();
+
             List<ExerciseOption> exerciseOptions = new ArrayList<ExerciseOption>();
             for(ExerciseItem exerciseItem : individualExerciseList) {
                 if(exercise.getLabel() == null) {
                     exercise.setLabel(exerciseItem.getLabel());
                 } else {
+                    exercise.setType(ExerciseType.MULTIPLE_CHOICE.toString());
                     ExerciseOption exerciseOption = new ExerciseOption();
                     exerciseOption.setExercise(exercise);
                     exerciseOption.setLabel(exerciseItem.getLabel());
@@ -37,10 +41,9 @@ public class ExerciseBuilder {
                     exercise.setExerciseOptions(exerciseOptions);
                 }
             }
-            exerciseList.add(exercise);
         }
 
-        return exerciseList;
+        return exercise;
     }
 
 }

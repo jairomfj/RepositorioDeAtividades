@@ -1,5 +1,6 @@
 package br.com.repositoriodeatividades.controllers;
 
+import br.com.repositoriodeatividades.domains.vo.exercise.ExercisePlain;
 import br.com.repositoriodeatividades.usecases.exercise.CreateExercise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +25,12 @@ public class ExerciseController {
     CreateExercise createExercise;
 
     @RequestMapping(value = "/exercise", method = RequestMethod.POST)
-    public ResponseEntity<String> uploadFile(@RequestParam(value="exercise-label") String exerciseLabel, @RequestParam(value="option-label") String[] optionLabels) {
+    public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain, @RequestParam(value="option-label") String[] optionLabels) {
 
         HttpStatus status;
         String body = "";
         try {
-            createExercise.saveFileExtractedExercise(exerciseLabel, optionLabels);
+            createExercise.saveFileExtractedExercise(exercisePlain, optionLabels);
             status = HttpStatus.CREATED;
         } catch (IllegalArgumentException iae) {
             status = HttpStatus.BAD_REQUEST;

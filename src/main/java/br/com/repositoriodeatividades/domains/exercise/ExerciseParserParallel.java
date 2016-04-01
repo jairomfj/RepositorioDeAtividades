@@ -36,7 +36,8 @@ public class ExerciseParserParallel implements Runnable {
     }
 
     private void parseExerciseItemsToExerciseList(List<List<ExerciseItem>> exerciseItemList) throws Exception {
-        Exercise exercise = new ExerciseBuilder().build(exerciseItemList).get(0);
+        ExerciseBuilder exerciseBuilder = new ExerciseBuilder();
+        Exercise exercise = exerciseBuilder.build(exerciseItemList);
         exerciseList.add(exercise);
     }
 

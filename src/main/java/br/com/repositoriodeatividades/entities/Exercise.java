@@ -1,5 +1,6 @@
 package br.com.repositoriodeatividades.entities;
 
+import br.com.repositoriodeatividades.domains.vo.exercise.ExercisePlain;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
@@ -44,6 +45,16 @@ public class Exercise {
 
     public Exercise(String label, List<ExerciseOption> exerciseOptionList) {
         this.label = label;
+        this.exerciseOption = exerciseOptionList;
+
+        for(ExerciseOption exerciseOption : exerciseOptionList) {
+            exerciseOption.setExercise(this);
+        }
+    }
+
+    public Exercise(ExercisePlain exercisePlain, List<ExerciseOption> exerciseOptionList) {
+        this.label = exercisePlain.getExerciseLabel();
+        this.type = exercisePlain.getExerciseType();
         this.exerciseOption = exerciseOptionList;
 
         for(ExerciseOption exerciseOption : exerciseOptionList) {

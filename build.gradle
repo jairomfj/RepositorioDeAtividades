@@ -32,7 +32,6 @@ configurations {
 }
 
 dependencies {
-	compile('javax.servlet:jstl:1.2')
 	compile('org.apache.pdfbox:pdfbox:1.8.11')
 	compile('commons-io:commons-io:2.4')
 
