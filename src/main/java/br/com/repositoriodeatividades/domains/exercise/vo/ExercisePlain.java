@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.domains.vo.exercise;
+package br.com.repositoriodeatividades.domains.exercise.vo;
 
 import br.com.repositoriodeatividades.entities.Exercise;
 

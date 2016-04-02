@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.domains.dao.exercise;
+package br.com.repositoriodeatividades.domains.exercise.dao;
 
 import br.com.repositoriodeatividades.entities.Exercise;
 import org.slf4j.Logger;

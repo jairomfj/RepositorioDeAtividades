@@ -2,10 +2,10 @@ package br.com.repositoriodeatividades.domains.interfaces;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-
+/**
+ * Created by jairomendes on 4/2/16.
+ */
 public interface Readable {
-    String read(MultipartFile file) throws Exception;
 
+    public String read(MultipartFile multipartFile) throws Exception;
 }

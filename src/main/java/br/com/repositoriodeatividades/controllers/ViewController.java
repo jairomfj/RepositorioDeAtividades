@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ViewController {
 
-    @RequestMapping(value = "/uploadExercises", method = RequestMethod.GET)
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)
     public String uploadFileView() {
         return "file/upload";
     }

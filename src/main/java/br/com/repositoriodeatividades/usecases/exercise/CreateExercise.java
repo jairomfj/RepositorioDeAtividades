@@ -1,8 +1,8 @@
 package br.com.repositoriodeatividades.usecases.exercise;
 
 
-import br.com.repositoriodeatividades.domains.dao.exercise.ExerciseDao;
-import br.com.repositoriodeatividades.domains.vo.exercise.ExercisePlain;
+import br.com.repositoriodeatividades.domains.exercise.dao.ExerciseDao;
+import br.com.repositoriodeatividades.domains.exercise.vo.ExercisePlain;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.ExerciseOption;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ public class CreateExercise {
     @Autowired
     ExerciseDao exerciseDao;
 
-    public void saveFileExtractedExercise(ExercisePlain exercisePlain, String[] optionLabels) throws IllegalAccessException {
+    public void saveFileExtractedExercises(ExercisePlain exercisePlain, String[] optionLabels) throws IllegalAccessException {
 
         log.info("Saving exercise extracted from file");
 
@@ -29,6 +29,11 @@ public class CreateExercise {
             throw new IllegalArgumentException("Exercise label cannot be null");
         }
 
+        Exercise exercise = parseExercise(exercisePlain, optionLabels);
+        persist(exercise);
+    }
+
+    private Exercise parseExercise(ExercisePlain exercisePlain, String[] optionLabels) {
         List<ExerciseOption> exerciseOptionList = new ArrayList<ExerciseOption>();
         if(optionLabels.length > 0) {
             log.info("Exercise has " + optionLabels.length + " options");
@@ -44,7 +49,7 @@ public class CreateExercise {
                 exerciseOptionList.add(exerciseOption);
             }
         }
-        persist(new Exercise(exercisePlain, exerciseOptionList));
+        return new Exercise(exercisePlain, exerciseOptionList);
     }
 
 

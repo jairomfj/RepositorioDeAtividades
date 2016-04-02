@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.domains.enums;
+package br.com.repositoriodeatividades.domains.exercise.enums;
 
 public enum ExerciseEnumeration {
 

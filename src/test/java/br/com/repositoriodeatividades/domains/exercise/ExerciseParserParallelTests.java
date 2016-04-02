@@ -27,16 +27,16 @@ public class ExerciseParserParallelTests {
     @Autowired
     RepositoryUtils repositoryUtils;
 
-    @Test
-    public void shouldParseExercise() {
-        String path = "classpath:single_exercise_enumerated_by_number_and_choices_by_alphabet.txt";
-        List<String> exerciseListAsString = exerciseExtractor.extract(repositoryUtils.getFileContent(path));
-        List<Exercise> exerciseList = new ArrayList();
-        ExerciseParserParallel exerciseParserParallel = new ExerciseParserParallel(exerciseListAsString.get(0), exerciseList);
-        exerciseParserParallel.run();
-
-        assertEquals(5, exerciseList.size());
-    }
+//    @Test
+//    public void shouldParseExercise() {
+//        String path = "classpath:single_exercise_enumerated_by_number_and_choices_by_alphabet.txt";
+//        List<String> exerciseListAsString = exerciseExtractor.extract(repositoryUtils.getFileContent(path));
+//        List<Exercise> exerciseList = new ArrayList();
+//        ExerciseParserParallel exerciseParserParallel = new ExerciseParserParallel(exerciseListAsString.get(0), exerciseList);
+//        exerciseParserParallel.run();
+//
+//        assertEquals(5, exerciseList.size());
+//    }
 
 //    @Test
 //    @Ignore

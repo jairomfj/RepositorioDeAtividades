@@ -1,36 +1,37 @@
 package br.com.repositoriodeatividades.usecases;
 
 import br.com.repositoriodeatividades.Application;
-import br.com.repositoriodeatividades.usecases.exercise.ImportMultipleChoiceExercise;
-import org.junit.Test;
+import br.com.repositoriodeatividades.usecases.exercise.ImportExercise;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.io.IOException;
-
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class ImportMultipleChoiceExerciseTests {
+public class ImportExerciseTests {
 
     @Autowired
     ApplicationContext applicationContext;
 
     @Autowired
-    ImportMultipleChoiceExercise importMultipleChoiceExercise;
+    ImportExercise importExercise;
 
-    @Test
-    public void contextLoads() throws IOException {
-        Resource resource = applicationContext.getResource("classpath:exercise_enumerated_by_number_choices_enumerated_by_alphabet.pdf");
-        importMultipleChoiceExercise.execute(resource.getFile());
-    }
+//    @Test
+//    public void contextLoads() throws IOException {
+//        Readable fileReader = importExercise.getFileReader("application/pdf");
+//
+//        assertTrue(fileReader instanceof PdfReader);
+//
+//    }
+
+
 
 }

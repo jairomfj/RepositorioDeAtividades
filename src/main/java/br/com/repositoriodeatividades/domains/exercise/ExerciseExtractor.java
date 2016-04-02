@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.domains.exercise;
 
-import br.com.repositoriodeatividades.domains.enums.ExerciseEnumeration;
+import br.com.repositoriodeatividades.domains.exercise.enums.ExerciseEnumeration;
 import br.com.repositoriodeatividades.domains.interfaces.Extractable;
 import br.com.repositoriodeatividades.domains.util.RepositoryUtils;
 import org.slf4j.Logger;
@@ -39,8 +39,8 @@ public class ExerciseExtractor implements Extractable {
 
             if (candidateExerciseEnumeration == null) {
                 candidateExerciseEnumeration = exerciseEnumeration;
-            } else if(exerciseEnumeration == candidateExerciseEnumeration) {
-                log.info("Exercise text: \n" + exercise);
+            } else if(isNewExercise(candidateExerciseEnumeration, exerciseEnumeration)) {
+                log.info("Exercise text: " + exercise);
                 exercises.add(exercise);
                 exercise = "";
             }
@@ -53,5 +53,9 @@ public class ExerciseExtractor implements Extractable {
 
         exercises.add(exercise);
         return exercises;
+    }
+
+    private boolean isNewExercise(ExerciseEnumeration candidateExerciseEnumeration, ExerciseEnumeration exerciseEnumeration) {
+        return exerciseEnumeration == candidateExerciseEnumeration && exerciseEnumeration != ExerciseEnumeration.NONE;
     }
 }

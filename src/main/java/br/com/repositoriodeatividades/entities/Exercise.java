@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.entities;
 
-import br.com.repositoriodeatividades.domains.vo.exercise.ExercisePlain;
+import br.com.repositoriodeatividades.domains.exercise.vo.ExercisePlain;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
