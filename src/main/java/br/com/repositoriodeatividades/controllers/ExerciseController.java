@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.domains.exercise.vo.ExercisePlain;
-import br.com.repositoriodeatividades.usecases.exercise.CreateExercise;
+import br.com.repositoriodeatividades.domains.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.CreateExercise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ public class ExerciseController {
     CreateExercise createExercise;
 
     @RequestMapping(value = "/exercise", method = RequestMethod.POST)
-    public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain, @RequestParam(value="option-label") String[] optionLabels) {
+    public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain, @RequestParam(value="exerciseTags") String[] exerciseTags, @RequestParam(value="optionLabel") String[] optionLabel) {
 
         HttpStatus status;
         String body = "";
         try {
-            createExercise.saveFileExtractedExercises(exercisePlain, optionLabels);
+            createExercise.saveFileExtractedExercises(exercisePlain, optionLabel, exerciseTags);
             status = HttpStatus.CREATED;
         } catch (IllegalArgumentException iae) {
             status = HttpStatus.BAD_REQUEST;

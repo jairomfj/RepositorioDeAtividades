@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.usecases.exercise.ImportExercise;
+import br.com.repositoriodeatividades.usecases.ImportExercise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

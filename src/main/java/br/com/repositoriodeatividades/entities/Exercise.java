@@ -1,6 +1,7 @@
 package br.com.repositoriodeatividades.entities;
 
-import br.com.repositoriodeatividades.domains.exercise.vo.ExercisePlain;
+import br.com.repositoriodeatividades.domains.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.domains.vo.ExercisePlain;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class Exercise {
     private boolean active = true;
 
     @Column(nullable = false)
-    private String level = "";
+    private ExerciseLevelType level;
 
     @ManyToOne
     private User user;
@@ -38,7 +39,7 @@ public class Exercise {
     @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ExerciseOption> exerciseOption;
 
-    @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "exercise", targetEntity = ExerciseTag.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Tag> tag;
 
     public Exercise() {}
@@ -55,6 +56,7 @@ public class Exercise {
     public Exercise(ExercisePlain exercisePlain, List<ExerciseOption> exerciseOptionList) {
         this.label = exercisePlain.getExerciseLabel();
         this.type = exercisePlain.getExerciseType();
+        this.level = exercisePlain.getExerciseLevel();
         this.exerciseOption = exerciseOptionList;
 
         for(ExerciseOption exerciseOption : exerciseOptionList) {
@@ -118,11 +120,11 @@ public class Exercise {
         this.exerciseOption = questionOption;
     }
 
-    public String getLevel() {
+    public ExerciseLevelType getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(ExerciseLevelType level) {
         this.level = level;
     }
 

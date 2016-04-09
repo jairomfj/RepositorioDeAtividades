@@ -2,7 +2,9 @@ package br.com.repositoriodeatividades.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tag")
@@ -16,13 +18,16 @@ public class Tag {
     private String label;
 
     @NotNull
-    @ManyToOne
-    private User user;
+    private Date created = Calendar.getInstance().getTime();
 
-    @NotNull
-    private Date created;
+    @OneToMany(mappedBy = "tag", targetEntity = ExerciseTag.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Tag> tag;
 
     public Tag() { }
+
+    public Tag(String label) {
+        this.label = label;
+    }
 
     public long getId() {
         return id;
@@ -38,14 +43,6 @@ public class Tag {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Date getCreated() {

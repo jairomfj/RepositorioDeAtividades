@@ -12,6 +12,11 @@ public class ViewController {
         return "file/upload";
     }
 
+    @RequestMapping(value = "/uploadFile2", method = RequestMethod.GET)
+    public String uploadFileView2() {
+        return "file/upload2";
+    }
+
     @RequestMapping(value = { "/", "/home" })
     public String homeView() {
         return "home";

@@ -1,6 +1,8 @@
 package br.com.repositoriodeatividades.domains.exercise;
 
 import br.com.repositoriodeatividades.Application;
+import br.com.repositoriodeatividades.domains.extractors.ExerciseExtractor;
+import br.com.repositoriodeatividades.domains.parsers.ExerciseParser;
 import br.com.repositoriodeatividades.domains.util.RepositoryUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

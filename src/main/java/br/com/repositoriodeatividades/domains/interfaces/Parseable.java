@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface Parseable {
 
-    List<Exercise> parse(List<String> exercise) throws Exception;
+    List parse(List content) throws Exception;
 
 }

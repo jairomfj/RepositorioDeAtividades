@@ -1,7 +1,6 @@
 package br.com.repositoriodeatividades.usecases;
 
 import br.com.repositoriodeatividades.Application;
-import br.com.repositoriodeatividades.usecases.exercise.ImportExercise;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;

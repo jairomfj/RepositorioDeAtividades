@@ -2,6 +2,7 @@ package br.com.repositoriodeatividades.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -13,18 +14,20 @@ public class ExerciseTag {
     private long id;
 
     @NotNull
-    private String label;
+    private Date created = Calendar.getInstance().getTime();
 
-    @NotNull
-    private Date created;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Exercise exercise;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Tag tag;
 
     public ExerciseTag() { }
+
+    public ExerciseTag(Exercise exercise, Tag tag) {
+        this.exercise = exercise;
+        this.tag = tag;
+    }
 
     public long getId() {
         return id;
@@ -32,14 +35,6 @@ public class ExerciseTag {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
     }
 
     public Date getCreated() {
