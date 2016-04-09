@@ -5,10 +5,12 @@ import br.com.repositoriodeatividades.domains.interfaces.ExerciseItem;
 import br.com.repositoriodeatividades.domains.vo.ExercisePlain;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.ExerciseOption;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ExerciseBuilder {
 
     public Exercise build(List<ExerciseItem> exerciseItemList) throws Exception {
