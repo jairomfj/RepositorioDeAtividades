@@ -110,15 +110,15 @@
     <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: mysql:mysql-connector-java:5.1.38" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.poi:poi:3.14" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml:jackson-module-json-org:0.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.jackson:jackson-mapper-asl:1.7.4" level="project" />
     <orderEntry type="library" name="Gradle: org.json:json:20140107" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.jackson:jackson-core-asl:1.7.4" level="project" />
-    <orderEntry type="library" name="poi-3.0.1-FINAL" level="project" />
-    <orderEntry type="library" name="poi-scratchpad-3.2-FINAL" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.poi:poi-scratchpad:3.0.1-FINAL" level="project" />
+    <orderEntry type="library" name="Gradle: com.h2database:h2:1.4.191" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.poi:poi:3.0.1-FINAL" level="project" />
+    <orderEntry type="library" name="Gradle: log4j:log4j:1.2.17" level="project" />
   </component>
 </module>

@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.usecases.ImportExercise;
+import br.com.repositoriodeatividades.usecases.exercise.imports.ImportExercise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +18,6 @@ public class FileController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("uploadFile") MultipartFile uploadFile, Model model) {
         model.addAttribute("exercises", importExercise.execute(uploadFile));
-        return "file/upload";
+        return "upload";
     }
 }

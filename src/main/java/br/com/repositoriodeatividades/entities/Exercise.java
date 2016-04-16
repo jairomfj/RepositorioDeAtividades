@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.entities;
 
-import br.com.repositoriodeatividades.domains.enums.ExerciseLevelType;
-import br.com.repositoriodeatividades.domains.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.usecases.vo.ExercisePlain;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;

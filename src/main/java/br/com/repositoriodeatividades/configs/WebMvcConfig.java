@@ -1,5 +1,7 @@
 package br.com.repositoriodeatividades.configs;
 
+import org.h2.server.web.WebServlet;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -24,29 +26,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
     }
 
-//    @Bean
-//    public UrlBasedViewResolver urlBasedViewResolver() {
-//        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-//        resolver.setPrefix("/WEB-INF/jsp/");
-//        resolver.setSuffix(".jsp");
-//        resolver.setCache(false);
-//        resolver.setViewClass(JstlView.class);
-//        return resolver;
-//    }
-//
-//    @Bean
-//    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
-//        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//        templateEngine.setTemplateResolver(templateResolver);
-//        return templateEngine;
-//    }
-//
-//    @Bean
-//    public TemplateResolver templateResolver() {
-//        TemplateResolver templateResolver = new ServletContextTemplateResolver();
-//        templateResolver.setPrefix("/WEB-INF/jsp/");
-//        templateResolver.setSuffix(".jsp");
-//        return templateResolver;
-//    }
+    @Bean
+    ServletRegistrationBean h2servletRegistration(){
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
+        registrationBean.addUrlMappings("/console/*");
+        return registrationBean;
+    }
 
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Criar atividade</title>
+</head>
+<body>
+
+<div th:include="fragments/header :: header"></div>
+
+<link rel="stylesheet" type="text/css" th:href="@{/assets/css/jquery.tagsinput.css}" />
+<script th:src="@{/assets/js/jquery.tagsinput.js}" type="text/javascript"></script>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" />
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+
+            <div class="row headers">
+                <div class="col-sm-1">ID</div>
+                <div class="col-sm-7">Tags</div>
+                <div class="col-sm-1">Dificuldade</div>
+                <div class="col-sm-1">Quantidade</div>
+            </div>
+
+            <form class="form-horizontal exercise-form" action="/activity" method="post">
+                <fieldset>
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <input type="hidden" th:name="id_0" th:value="0" />
+                            </div>
+
+                            <div class="col-sm-7">
+                                <input type="text" class="tags" th:name="tags_0" />
+                            </div>
+
+                            <div class="col-sm-1">
+                                <select th:name="level_0">
+                                    <option th:value="EASY">Fácil</option>
+                                    <option th:value="MEDIUM">Médio</option>
+                                    <option th:value="HARD">Difícil</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <input th:name="ammount_0" th:value="0" class="ammount" /> <strong class="percentage">%</strong>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-2"><button class="btn btn-primary save-exercise">OK</button></div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+
+
+</div>
+
+<script th:src="@{/assets/js/jquery.tagsparser.js}" type="text/javascript"></script>
+
+
+</body>
+</html>

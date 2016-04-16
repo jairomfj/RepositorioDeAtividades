@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.domains.vo.ExercisePlain;
-import br.com.repositoriodeatividades.usecases.CreateExercise;
+import br.com.repositoriodeatividades.usecases.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.exercise.create.CreateExercise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

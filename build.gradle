@@ -7,6 +7,8 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'org.springframework:springloaded:1.2.0.RELEASE'
+
 	}
 }
 
@@ -36,8 +38,10 @@ dependencies {
 	compile('org.apache.poi:poi-scratchpad:3.9')
 	compile('org.apache.poi:poi-scratchpad:3.0.1-FINAL')
 	compile('commons-io:commons-io:2.4')
+    compile("com.h2database:h2")
 
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -53,11 +57,13 @@ dependencies {
 }
 
 
-eclipse {
-	classpath {
-		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7'
-	}
+apply plugin: 'idea'
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
 }
 
 task wrapper(type: Wrapper) {

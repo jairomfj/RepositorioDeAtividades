@@ -9,20 +9,18 @@ public class ViewController {
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)
     public String uploadFileView() {
-        return "file/upload";
+        return "upload";
     }
 
-    @RequestMapping(value = "/uploadFile2", method = RequestMethod.GET)
-    public String uploadFileView2() {
-        return "file/upload2";
-    }
-
-    @RequestMapping(value = { "/", "/home" })
+    @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
     public String homeView() {
         return "home";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginView() { return "login"; }
+
+    @RequestMapping(value = "/createActivity", method = RequestMethod.GET)
+    public String createActivityView() { return "activity"; }
 
 }
