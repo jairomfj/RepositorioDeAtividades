@@ -1,4 +1,4 @@
 
 # Ignoring build files
-/build/
-/.idea/
+build/
+.idea/
