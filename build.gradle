@@ -13,6 +13,8 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'groovy'
+
 apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot' 
 apply plugin: 'war'
@@ -38,6 +40,7 @@ dependencies {
 	compile('org.apache.poi:poi-scratchpad:3.9')
 	compile('org.apache.poi:poi-scratchpad:3.0.1-FINAL')
 	compile('commons-io:commons-io:2.4')
+	compile('org.spockframework:spock-core:1.0-groovy-2.4')
     compile("com.h2database:h2")
 
 

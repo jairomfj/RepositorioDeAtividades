@@ -1,8 +1,12 @@
 package br.com.repositoriodeatividades.repositories;
 
-import br.com.repositoriodeatividades.usecases.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
+import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivityParameters;
+import br.com.repositoriodeatividades.usecases.enums.ExerciseLevelType;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class ExerciseRepositoryImplementation extends GenericRepositoryImplementation<Exercise> implements ExerciseRepositoryInterface {
@@ -11,4 +15,13 @@ public class ExerciseRepositoryImplementation extends GenericRepositoryImplement
         super(Exercise.class);
     }
 
+    @Override
+    public List findAllByActivityParameters(CreateActivityParameters activityParameters) {
+            return entityManager.createQuery(
+                    "select e from Exercise e " +
+                    "where e.level = :level")
+                    .setParameter("level", ExerciseLevelType.valueOf(activityParameters.getLevel()))
+                    .getResultList();
+
+    }
 }

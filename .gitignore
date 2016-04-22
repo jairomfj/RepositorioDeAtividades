@@ -1,4 +1,10 @@
 
 # Ignoring build files
-build/
-.idea/
+/build/
+/.idea/
+/.gradle/
+/gradle/
+/out/
+
+# Intellij config files
+*.iml

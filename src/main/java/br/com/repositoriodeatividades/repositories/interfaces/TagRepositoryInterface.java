@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.interfaces;
+package br.com.repositoriodeatividades.repositories.interfaces;
 
 import br.com.repositoriodeatividades.entities.Tag;
 

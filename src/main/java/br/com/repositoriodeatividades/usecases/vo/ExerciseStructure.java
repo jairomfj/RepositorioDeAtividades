@@ -11,7 +11,7 @@ public class ExerciseStructure {
 
     public Exercise exercise;
     public List<Tag> tagList;
-    public List<ExerciseTag> exerciseTagList;
+    public List<Tag> exerciseTagList;
 
     public ExerciseStructure(Exercise exercise, List<Tag> tagList) {
         this.exercise = exercise;

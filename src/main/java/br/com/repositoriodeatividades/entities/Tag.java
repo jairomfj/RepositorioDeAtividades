@@ -20,8 +20,9 @@ public class Tag {
     @NotNull
     private Date created = Calendar.getInstance().getTime();
 
-    @OneToMany(mappedBy = "tag", targetEntity = ExerciseTag.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Tag> tag;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Exercise exercise;
 
     public Tag() { }
 
@@ -51,5 +52,13 @@ public class Tag {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Exercise getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 }

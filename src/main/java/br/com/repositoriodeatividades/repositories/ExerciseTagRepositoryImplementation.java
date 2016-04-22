@@ -1,7 +1,8 @@
 package br.com.repositoriodeatividades.repositories;
 
-import br.com.repositoriodeatividades.usecases.interfaces.ExerciseTagRepositoryInterface;
+import br.com.repositoriodeatividades.repositories.interfaces.ExerciseTagRepositoryInterface;
 import br.com.repositoriodeatividades.entities.ExerciseTag;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;

@@ -39,7 +39,7 @@ public class Exercise {
     @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ExerciseOption> exerciseOption;
 
-    @OneToMany(mappedBy = "exercise", targetEntity = ExerciseTag.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "exercise", targetEntity = Tag.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Tag> tag;
 
     public Exercise() {}
@@ -134,5 +134,13 @@ public class Exercise {
 
     public void setExerciseOption(List<ExerciseOption> exerciseOption) {
         this.exerciseOption = exerciseOption;
+    }
+
+    public List<Tag> getTag() {
+        return tag;
+    }
+
+    public void setTag(List<Tag> tag) {
+        this.tag = tag;
     }
 }

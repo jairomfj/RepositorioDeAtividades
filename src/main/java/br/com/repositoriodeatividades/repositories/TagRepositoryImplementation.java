@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.repositories;
 
-import br.com.repositoriodeatividades.usecases.interfaces.TagRepositoryInterface;
+import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.entities.Tag;
 import org.springframework.stereotype.Repository;
 

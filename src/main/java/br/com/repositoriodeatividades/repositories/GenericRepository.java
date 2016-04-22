@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.repositories;
 
-import br.com.repositoriodeatividades.usecases.interfaces.GenericRepositoryInterface;
+import br.com.repositoriodeatividades.repositories.interfaces.GenericRepositoryInterface;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
