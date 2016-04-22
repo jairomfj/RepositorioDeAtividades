@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports.models;
 
-import br.com.repositoriodeatividades.usecases.interfaces.Parseable;
+import br.com.repositoriodeatividades.usecases.exercise.interfaces.Parseable;
 import br.com.repositoriodeatividades.entities.Exercise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

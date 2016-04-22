@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.interfaces;
+package br.com.repositoriodeatividades.usecases.exercise.interfaces;
 
 import br.com.repositoriodeatividades.entities.Exercise;
 import org.springframework.web.multipart.MultipartFile;

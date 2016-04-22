@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Criar atividade</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/bootstrap.min.css}" />
+    <script th:src="@{/assets/js/bootstrap.min.js}" type="text/javascript"></script>
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="page-header">
+            <h1>Lista de exercícios</h1>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div th:each="exercise : ${exercises}">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p th:text="${exercise.label}" th:value="${exercise.label}"></p>
+                        <div th:each="option : ${exercise.exerciseOptions}">
+                            <p th:text="${option.label}"></p>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+</body>
+</html>

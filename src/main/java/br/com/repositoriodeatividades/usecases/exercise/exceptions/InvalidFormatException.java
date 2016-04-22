@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.exceptions;
+package br.com.repositoriodeatividades.usecases.exercise.exceptions;
 
 /**
  * Created by jairomendes on 4/2/16.

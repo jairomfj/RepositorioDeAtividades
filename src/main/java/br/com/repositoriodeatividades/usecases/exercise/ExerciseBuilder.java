@@ -1,8 +1,8 @@
 package br.com.repositoriodeatividades.usecases.exercise;
 
-import br.com.repositoriodeatividades.usecases.enums.ExerciseType;
-import br.com.repositoriodeatividades.usecases.interfaces.ExerciseItem;
-import br.com.repositoriodeatividades.usecases.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseType;
+import br.com.repositoriodeatividades.usecases.exercise.interfaces.ExerciseItem;
+import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.ExerciseOption;
 import org.springframework.stereotype.Component;

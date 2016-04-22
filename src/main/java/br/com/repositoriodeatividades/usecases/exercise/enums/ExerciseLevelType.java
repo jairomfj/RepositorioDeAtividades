@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.enums;
+package br.com.repositoriodeatividades.usecases.exercise.enums;
 
 
 public enum ExerciseLevelType {

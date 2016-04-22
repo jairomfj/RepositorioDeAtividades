@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.usecases.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
 import br.com.repositoriodeatividades.usecases.exercise.create.CreateExercise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

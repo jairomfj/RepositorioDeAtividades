@@ -1,8 +1,8 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports.models;
 
-import br.com.repositoriodeatividades.usecases.enums.ExerciseEnumeration;
-import br.com.repositoriodeatividades.usecases.vo.MultipleChoiceExerciseItem;
-import br.com.repositoriodeatividades.usecases.interfaces.ExerciseItem;
+import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseEnumeration;
+import br.com.repositoriodeatividades.usecases.exercise.vo.MultipleChoiceExerciseItem;
+import br.com.repositoriodeatividades.usecases.exercise.interfaces.ExerciseItem;
 import br.com.repositoriodeatividades.usecases.util.RepositoryUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.usecases.util;
 
 
-import br.com.repositoriodeatividades.usecases.enums.ExerciseEnumeration;
+import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseEnumeration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

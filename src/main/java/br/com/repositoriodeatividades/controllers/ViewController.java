@@ -23,4 +23,7 @@ public class ViewController {
     @RequestMapping(value = "/createActivity", method = RequestMethod.GET)
     public String createActivityView() { return "activity"; }
 
+    @RequestMapping(value = "/document", method = RequestMethod.GET)
+    public String activityView() { return "document"; }
+
 }

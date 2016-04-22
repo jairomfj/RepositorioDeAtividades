@@ -1,9 +1,9 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports;
 
 
-import br.com.repositoriodeatividades.usecases.enums.FileReaderType;
-import br.com.repositoriodeatividades.usecases.interfaces.Importable;
-import br.com.repositoriodeatividades.usecases.interfaces.Readable;
+import br.com.repositoriodeatividades.usecases.exercise.enums.FileReaderType;
+import br.com.repositoriodeatividades.usecases.exercise.interfaces.Importable;
+import br.com.repositoriodeatividades.usecases.exercise.interfaces.Readable;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseExtractor;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseParser;
@@ -29,7 +29,7 @@ public class ImportExercise implements Importable {
 
     @Override
     public List<Exercise> execute(MultipartFile file) {
-        List<Exercise> exerciseList = new ArrayList<Exercise>();
+        List<Exercise> exerciseList = new ArrayList();
         try {
             log.info("Initiating importation of the file " + file.getOriginalFilename());
             Readable fileReader = getFileReader(file.getOriginalFilename());

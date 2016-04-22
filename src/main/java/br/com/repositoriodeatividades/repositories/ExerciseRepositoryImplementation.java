@@ -3,7 +3,7 @@ package br.com.repositoriodeatividades.repositories;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivityParameters;
-import br.com.repositoriodeatividades.usecases.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseLevelType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

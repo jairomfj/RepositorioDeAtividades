@@ -1,8 +1,7 @@
-package br.com.repositoriodeatividades.usecases.vo;
+package br.com.repositoriodeatividades.usecases.exercise.vo;
 
 
 import br.com.repositoriodeatividades.entities.Exercise;
-import br.com.repositoriodeatividades.entities.ExerciseTag;
 import br.com.repositoriodeatividades.entities.Tag;
 
 import java.util.List;

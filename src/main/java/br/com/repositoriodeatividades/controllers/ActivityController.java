@@ -1,9 +1,13 @@
 package br.com.repositoriodeatividades.controllers;
 
+import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.usecases.activities.create.CreateActivity;
 import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivityParameters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,11 +19,13 @@ import java.util.List;
 @Controller
 public class ActivityController {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     CreateActivity createActivity;
 
-    @RequestMapping(value = "/activity", method = RequestMethod.POST)
-    public void createActivity(HttpServletRequest request) {
+    @RequestMapping(value = "/createActivity", method = RequestMethod.POST)
+    public String createActivity(HttpServletRequest request, Model model) {
 
         List<CreateActivityParameters> createActivityParametersList = new ArrayList<>();
 
@@ -37,12 +43,17 @@ public class ActivityController {
                 i++;
             }
 
-            createActivity.execute(createActivityParametersList);
+            List<Exercise> exercises = createActivity.execute(createActivityParametersList);
+
+            model.addAttribute("exercises", exercises);
+            log.info("Activity has been created");
+            return "document";
         } catch (IllegalArgumentException iae) {
             iae.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "";
     }
 
     public String[] extractTags(String[] tags) {
@@ -51,7 +62,7 @@ public class ActivityController {
             return null;
         }
 
-        return tags[0].split(",");
+        return tags[0].toUpperCase().split(",");
 
     }
 

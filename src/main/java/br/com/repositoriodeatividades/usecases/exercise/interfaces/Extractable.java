@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.interfaces;
+package br.com.repositoriodeatividades.usecases.exercise.interfaces;
 
 import java.util.List;
 

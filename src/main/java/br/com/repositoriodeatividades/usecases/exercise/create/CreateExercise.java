@@ -6,7 +6,7 @@ import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepository
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseTagRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.exercise.ExerciseBuilder;
-import br.com.repositoriodeatividades.usecases.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.ExerciseTag;
 import br.com.repositoriodeatividades.entities.Tag;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

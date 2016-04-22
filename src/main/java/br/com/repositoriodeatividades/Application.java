@@ -15,7 +15,6 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan
 @EnableAutoConfiguration
 @SpringBootApplication
-@PropertySource({"classpath:application.properties"})
 public class Application extends SpringBootServletInitializer {
 
 	@Override
