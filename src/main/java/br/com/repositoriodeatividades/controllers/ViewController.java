@@ -1,5 +1,6 @@
 package br.com.repositoriodeatividades.controllers;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,9 +13,11 @@ public class ViewController {
         return "upload";
     }
 
-    @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String homeView() {
-        return "home";
+//        TODO allow html redirect according to current login state
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return "index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -25,5 +28,10 @@ public class ViewController {
 
     @RequestMapping(value = "/document", method = RequestMethod.GET)
     public String activityView() { return "document"; }
+
+    @RequestMapping(value = "/activeExercises", method = RequestMethod.GET)
+    public String activeExercises() {
+        return "active-exercise";
+    }
 
 }

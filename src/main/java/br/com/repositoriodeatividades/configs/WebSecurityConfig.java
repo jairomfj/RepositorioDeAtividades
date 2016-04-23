@@ -8,37 +8,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    private CsrfTokenRepository csrfTokenRepository()
-//    {
-//        HttpSessionCsrfTokenRepository repositories = new HttpSessionCsrfTokenRepository();
-//        repositories.setSessionAttributeName("_csrf");
-//        return repositories;
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.csrf().disable();
-
         http
-            .authorizeRequests()
-            .antMatchers("/", "/home").permitAll()
-            .anyRequest().permitAll();
-
+            .authorizeRequests().anyRequest().authenticated();
         http
-            .formLogin()
+            .formLogin().failureUrl("/login?error")
+            .defaultSuccessUrl("/")
             .loginPage("/login")
-            .permitAll();
-
-        http
-            .logout()
             .permitAll()
-        ;
+            .and()
+            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+            .permitAll();
     }
 
     @Autowired
