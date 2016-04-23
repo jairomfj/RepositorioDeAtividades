@@ -10,14 +10,10 @@ public class ExercisePlain {
     private String exerciseLabel;
     private String exerciseType;
     private ExerciseLevelType exerciseLevel;
+    private String[] optionLabel;
+    private String[] exerciseTags;
 
     public ExercisePlain() {}
-
-    public ExercisePlain(String exerciseLabel, String exerciseType, String exerciseLevel) {
-        this.exerciseLabel = exerciseLabel;
-        this.exerciseType  = exerciseType;
-        this.exerciseLevel = ExerciseLevelType.valueOf(exerciseLevel);
-    }
 
     public String getExerciseLabel() {
         return exerciseLabel;
@@ -41,5 +37,21 @@ public class ExercisePlain {
 
     public void setExerciseLevel(ExerciseLevelType exerciseLevel) {
         this.exerciseLevel = exerciseLevel;
+    }
+
+    public String[] getOptionLabel() {
+        return optionLabel;
+    }
+
+    public void setOptionLabel(String[] optionLabel) {
+        this.optionLabel = optionLabel;
+    }
+
+    public String[] getExerciseTags() {
+        return exerciseTags;
+    }
+
+    public void setExerciseTags(String[] exerciseTags) {
+        this.exerciseTags = exerciseTags;
     }
 }

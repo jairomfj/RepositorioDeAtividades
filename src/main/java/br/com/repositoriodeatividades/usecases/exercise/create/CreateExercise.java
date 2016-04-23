@@ -42,7 +42,7 @@ public class CreateExercise {
     @Autowired
     ExerciseBuilder exerciseBuilder;
 
-    public void saveFileExtractedExercises(ExercisePlain exercisePlain, String[] optionLabels, String[] tags) throws IllegalAccessException {
+    public void saveFileExtractedExercises(ExercisePlain exercisePlain) throws IllegalAccessException {
 
         log.info("Saving exercise extracted from file");
 
@@ -50,21 +50,13 @@ public class CreateExercise {
             throw new IllegalArgumentException("Exercise label cannot be null");
         }
 
-        Exercise exercise = exerciseBuilder.build(exercisePlain, optionLabels);
+        Exercise exercise = exerciseBuilder.build(exercisePlain);
         exerciseRepositoryImplementation.save(exercise);
 
-        List<Tag> tagList = tagParser.parse(tags, exercise);
+        List<Tag> tagList = tagParser.parse(exercisePlain.getExerciseTags(), exercise);
         for(Tag tag : tagList) {
             tagRepositoryImplementation.save(tag);
         }
 
-    }
-
-    private void persistExerciseTags(List<ExerciseTag> exerciseTagList) {
-        if(exerciseTagList != null && exerciseTagList.size() > 0) {
-            for(ExerciseTag exerciseTag : exerciseTagList) {
-                exerciseTagRepositoryImplementation.save(exerciseTag);
-            }
-        }
     }
 }

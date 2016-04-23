@@ -128,14 +128,6 @@ public class Exercise {
         this.level = level;
     }
 
-    public List<ExerciseOption> getExerciseOption() {
-        return exerciseOption;
-    }
-
-    public void setExerciseOption(List<ExerciseOption> exerciseOption) {
-        this.exerciseOption = exerciseOption;
-    }
-
     public List<Tag> getTag() {
         return tag;
     }

@@ -1,8 +1,11 @@
 package br.com.repositoriodeatividades.usecases.activities.create;
 
 import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.ExerciseOption;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivityParameters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,8 @@ import java.util.*;
 
 @Service
 public class CreateActivity {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     ExerciseRepositoryInterface exerciseRepository;
@@ -30,14 +35,35 @@ public class CreateActivity {
                 List<Map> exercisesClassified = exerciseClassifier.classify(persistedExercises, createActivityParameters.getTags());
                 finalExerciseList.addAll(getValuesFromListLimitedBy(createActivityParameters.getAmmount(), exercisesClassified));
             } catch (Exception e) {
-
+                log.error("Error while extracting exercises");
             }
         }
 
         long seed = System.nanoTime();
         Collections.shuffle(finalExerciseList, new Random(seed));
 
+        // TODO improve enumeration algorithm
+        enumerateExercises(finalExerciseList);
+
         return finalExerciseList;
+    }
+
+    private void enumerateExercises(List<Exercise> exerciseList) {
+        for(int i = 0; i < exerciseList.size(); i++) {
+            Exercise exercise = exerciseList.get(i);
+            String exerciseLabel = i + 1 + ") " + exercise.getLabel();
+            exercise.setLabel(exerciseLabel);
+            enumerateExerciseOptions(exercise.getExerciseOptions());
+        }
+    }
+
+    private void enumerateExerciseOptions(List<ExerciseOption> exerciseOptionList) {
+        char enumeration = 'a';
+        for(ExerciseOption option : exerciseOptionList) {
+            String optionLabel = enumeration + ") " + option.getLabel();
+            option.setLabel(optionLabel);
+            enumeration++;
+        }
     }
 
     private List<Exercise> getValuesFromListLimitedBy(int ammount, List<Map> exercises) {

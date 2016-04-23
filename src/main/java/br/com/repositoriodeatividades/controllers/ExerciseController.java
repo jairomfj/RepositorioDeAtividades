@@ -21,18 +21,18 @@ public class ExerciseController {
     CreateExercise createExercise;
 
     @RequestMapping(value = "/exercise", method = RequestMethod.POST)
-    public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain, @RequestParam(value="exerciseTags") String[] exerciseTags, @RequestParam(value="optionLabel") String[] optionLabel) {
+    public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain) {
 
         HttpStatus status;
         String body = "";
         try {
-            createExercise.saveFileExtractedExercises(exercisePlain, optionLabel, exerciseTags);
+            createExercise.saveFileExtractedExercises(exercisePlain);
             status = HttpStatus.CREATED;
         } catch (IllegalArgumentException iae) {
             status = HttpStatus.BAD_REQUEST;
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        return new ResponseEntity<String>(body, status);
+        return new ResponseEntity<>(body, status);
     }
 }

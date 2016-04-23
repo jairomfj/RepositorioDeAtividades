@@ -53,17 +53,16 @@ public class ActivityController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //TODO improve error handling
         return "";
     }
 
     public String[] extractTags(String[] tags) {
-
         if(StringUtils.isEmpty(tags)) {
             return null;
         }
-
         return tags[0].toUpperCase().split(",");
-
     }
 
 

@@ -5,6 +5,8 @@ import br.com.repositoriodeatividades.usecases.exercise.interfaces.ExerciseItem;
 import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.ExerciseOption;
+import br.com.repositoriodeatividades.usecases.util.RepositoryUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Component
 public class ExerciseBuilder {
+
+    @Autowired
+    RepositoryUtils repositoryUtils;
 
     public Exercise build(List<ExerciseItem> exerciseItemList) throws Exception {
 
@@ -26,7 +31,7 @@ public class ExerciseBuilder {
         Exercise exercise = new Exercise();
         exercise.setType(ExerciseType.NO_CHOICE.toString());
 
-        List<ExerciseOption> exerciseOptions = new ArrayList<ExerciseOption>();
+        List<ExerciseOption> exerciseOptions = new ArrayList<>();
         for(ExerciseItem exerciseItem : exerciseItemList) {
             if(exercise.getLabel() == null) {
                 exercise.setLabel(exerciseItem.getLabel());
@@ -43,11 +48,11 @@ public class ExerciseBuilder {
         return exercise;
     }
 
-    public Exercise build(ExercisePlain exercisePlain, String[] optionLabels) {
-        List<ExerciseOption> exerciseOptionList = new ArrayList<ExerciseOption>();
-        if(optionLabels.length > 0) {
-            for(String optionLabel : optionLabels) {
-                optionLabel = optionLabel.trim();
+    public Exercise build(ExercisePlain exercisePlain) {
+        List<ExerciseOption> exerciseOptionList = new ArrayList<>();
+        if(exercisePlain.getOptionLabel().length > 0) {
+            for(String optionLabel : exercisePlain.getOptionLabel()) {
+                optionLabel = repositoryUtils.extractEnumerationFromString(optionLabel.trim()).trim();
 
                 if(optionLabel.equals("") || optionLabel.equals(null))
                     continue;
@@ -57,6 +62,9 @@ public class ExerciseBuilder {
                 exerciseOptionList.add(exerciseOption);
             }
         }
+
+        String exerciseLabel = repositoryUtils.extractEnumerationFromString(exercisePlain.getExerciseLabel().trim()).trim();
+        exercisePlain.setExerciseLabel(exerciseLabel);
         return new Exercise(exercisePlain, exerciseOptionList);
     }
 
