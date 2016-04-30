@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div th:include="fragments/header :: header"></div>
+<div th:include="fragments/home-header :: home-header"></div>
 
 <link rel="stylesheet" type="text/css" th:href="@{/assets/css/jquery.tagsinput.css}" />
 <script th:src="@{/assets/js/jquery.tagsinput.js}" type="text/javascript"></script>
@@ -97,6 +97,7 @@
                             <div class="col-sm-3"></div>
                             <div class="col-sm-2"><button class="btn btn-primary">OK</button></div>
                             <div class="col-sm-3"></div>
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                         </div>
 
                     </div>

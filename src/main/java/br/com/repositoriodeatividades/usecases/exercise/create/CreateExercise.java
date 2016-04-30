@@ -1,15 +1,12 @@
 package br.com.repositoriodeatividades.usecases.exercise.create;
 
 
-import br.com.repositoriodeatividades.usecases.exercise.create.builders.ExerciseTagBuilder;
+import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.Tag;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
-import br.com.repositoriodeatividades.repositories.interfaces.ExerciseTagRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.exercise.ExerciseBuilder;
 import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
-import br.com.repositoriodeatividades.entities.Exercise;
-import br.com.repositoriodeatividades.entities.ExerciseTag;
-import br.com.repositoriodeatividades.entities.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +25,10 @@ public class CreateExercise {
     ExerciseRepositoryInterface exerciseRepositoryImplementation;
 
     @Autowired
-    ExerciseTagRepositoryInterface exerciseTagRepositoryImplementation;
-
-    @Autowired
     TagRepositoryInterface tagRepositoryImplementation;
 
     @Autowired
     TagParser tagParser;
-
-    @Autowired
-    ExerciseTagBuilder exerciseTagBuilder;
 
     @Autowired
     ExerciseBuilder exerciseBuilder;

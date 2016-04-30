@@ -6,6 +6,7 @@ import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivi
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -27,8 +28,14 @@ public class ActivityController {
     @RequestMapping(value = "/createActivity", method = RequestMethod.POST)
     public String createActivity(HttpServletRequest request, Model model) {
 
-        List<CreateActivityParameters> createActivityParametersList = new ArrayList<>();
 
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(principal == "anonymousUser") {
+            return "";
+        }
+
+        List<CreateActivityParameters> createActivityParametersList = new ArrayList<>();
         try {
             int i = 0;
             while(true) {

@@ -13,11 +13,9 @@ public class ViewController {
         return "upload";
     }
 
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/home" }, method = RequestMethod.GET)
     public String homeView() {
-//        TODO allow html redirect according to current login state
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return "index";
+        return "home";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -25,13 +23,21 @@ public class ViewController {
 
     @RequestMapping(value = "/createActivity", method = RequestMethod.GET)
     public String createActivityView() { return "activity"; }
-
     @RequestMapping(value = "/document", method = RequestMethod.GET)
     public String activityView() { return "document"; }
 
     @RequestMapping(value = "/activeExercises", method = RequestMethod.GET)
     public String activeExercises() {
         return "active-exercise";
+    }
+
+    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    public String indexView() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal == "anonymousUser") {
+            return "index";
+        }
+        return "home";
     }
 
 }
