@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class FileController {
+public class FileController extends AbstractController {
 
     @Autowired
     ImportExercise importExercise;

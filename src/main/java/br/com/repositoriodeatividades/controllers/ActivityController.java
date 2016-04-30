@@ -6,7 +6,7 @@ import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivi
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class ActivityController {
+public class ActivityController extends AbstractController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -29,24 +29,19 @@ public class ActivityController {
     public String createActivity(HttpServletRequest request, Model model) {
 
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if(principal == "anonymousUser") {
-            return "";
-        }
-
-        List<CreateActivityParameters> createActivityParametersList = new ArrayList<>();
         try {
-            int i = 0;
-            while(true) {
+            User currentUser = getCurrentUser();
+
+            List<CreateActivityParameters> createActivityParametersList = new ArrayList<>();
+            for(int i = 0; ; i++) {
                 String id = request.getParameter("id_" + i);
 
                 if(id == null) break;
 
                 String level = request.getParameter("level_" + i);
-                String ammount = request.getParameter("ammount_" + i);
+                String amount = request.getParameter("amount_" + i);
                 String[] tags = extractTags(request.getParameterValues("tags_" + i));
-                createActivityParametersList.add(new CreateActivityParameters(Integer.parseInt(id), level, Integer.parseInt(ammount), tags));
+                createActivityParametersList.add(new CreateActivityParameters(Integer.parseInt(id), level, Integer.parseInt(amount), tags, currentUser.getUsername()));
                 i++;
             }
 
@@ -65,12 +60,14 @@ public class ActivityController {
         return "";
     }
 
-    public String[] extractTags(String[] tags) {
+    private String[] extractTags(String[] tags) {
         if(StringUtils.isEmpty(tags)) {
             return null;
         }
         return tags[0].toUpperCase().split(",");
     }
+
+
 
 
 }

@@ -19,8 +19,9 @@ public class ExerciseRepositoryImplementation extends GenericRepositoryImplement
     public List findAllByActivityParameters(CreateActivityParameters activityParameters) {
             return entityManager.createQuery(
                     "select e from Exercise e " +
-                    "where e.level = :level")
+                    "where e.level = :level and e.user = :user")
                     .setParameter("level", ExerciseLevelType.valueOf(activityParameters.getLevel()))
+                    .setParameter("user", activityParameters.getUser())
                     .getResultList();
 
     }

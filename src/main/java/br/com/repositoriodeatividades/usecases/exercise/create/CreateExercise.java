@@ -3,8 +3,10 @@ package br.com.repositoriodeatividades.usecases.exercise.create;
 
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.Tag;
+import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
+import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.exercise.ExerciseBuilder;
 import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
 import org.slf4j.Logger;
@@ -28,6 +30,9 @@ public class CreateExercise {
     TagRepositoryInterface tagRepositoryImplementation;
 
     @Autowired
+    UserRepositoryInterface userRepository;
+
+    @Autowired
     TagParser tagParser;
 
     @Autowired
@@ -41,7 +46,13 @@ public class CreateExercise {
             throw new IllegalArgumentException("Exercise label cannot be null");
         }
 
+        User user = userRepository.findByUsername(exercisePlain.getUsername());
+        if(user == null) {
+            throw new IllegalStateException("User not found");
+        }
+
         Exercise exercise = exerciseBuilder.build(exercisePlain);
+        exercise.setUser(user);
         exerciseRepositoryImplementation.save(exercise);
 
         List<Tag> tagList = tagParser.parse(exercisePlain.getExerciseTags(), exercise);

@@ -2,7 +2,9 @@ package br.com.repositoriodeatividades.usecases.activities.create;
 
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.ExerciseOption;
+import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
+import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivityParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,9 @@ public class CreateActivity {
     ExerciseRepositoryInterface exerciseRepository;
 
     @Autowired
+    UserRepositoryInterface userRepository;
+
+    @Autowired
     ExerciseClassifier exerciseClassifier;
 
     public List<Exercise> execute(List<CreateActivityParameters> createActivityParametersList) throws Exception {
@@ -28,12 +33,20 @@ public class CreateActivity {
             throw new IllegalArgumentException("No data has been passed");
         }
 
+        User user = userRepository.findByUsername(createActivityParametersList.get(0).getUsername());
+        if(user == null) {
+            throw new IllegalStateException("User not found");
+        }
+
         List<Exercise> finalExerciseList = new ArrayList<>();
         for(CreateActivityParameters createActivityParameters : createActivityParametersList) {
+
+            createActivityParameters.setUser(user);
+
             try {
                 List persistedExercises = exerciseRepository.findAllByActivityParameters(createActivityParameters);
                 List<Map> exercisesClassified = exerciseClassifier.classify(persistedExercises, createActivityParameters.getTags());
-                finalExerciseList.addAll(getValuesFromListLimitedBy(createActivityParameters.getAmmount(), exercisesClassified));
+                finalExerciseList.addAll(getValuesFromListLimitedBy(createActivityParameters.getAmount(), exercisesClassified));
             } catch (Exception e) {
                 log.error("Error while extracting exercises");
             }

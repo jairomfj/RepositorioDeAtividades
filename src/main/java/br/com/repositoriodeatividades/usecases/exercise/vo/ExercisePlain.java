@@ -1,5 +1,6 @@
 package br.com.repositoriodeatividades.usecases.exercise.vo;
 
+import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseLevelType;
 
 /**
@@ -12,6 +13,7 @@ public class ExercisePlain {
     private ExerciseLevelType exerciseLevel;
     private String[] optionLabel;
     private String[] exerciseTags;
+    private String username;
 
     public ExercisePlain() {}
 
@@ -53,5 +55,13 @@ public class ExercisePlain {
 
     public void setExerciseTags(String[] exerciseTags) {
         this.exerciseTags = exerciseTags;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
