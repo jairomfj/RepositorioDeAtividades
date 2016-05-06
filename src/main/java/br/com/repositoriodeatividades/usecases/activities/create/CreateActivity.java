@@ -44,7 +44,7 @@ public class CreateActivity {
             createActivityParameters.setUser(user);
 
             try {
-                List persistedExercises = exerciseRepository.findAllByActivityParameters(createActivityParameters);
+                List persistedExercises = exerciseRepository.findAllBy(createActivityParameters);
                 List<Map> exercisesClassified = exerciseClassifier.classify(persistedExercises, createActivityParameters.getTags());
                 finalExerciseList.addAll(getValuesFromListLimitedBy(createActivityParameters.getAmount(), exercisesClassified));
             } catch (Exception e) {

@@ -1,6 +1,7 @@
 package br.com.repositoriodeatividades.repositories;
 
 import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivityParameters;
 import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseLevelType;
@@ -16,7 +17,7 @@ public class ExerciseRepositoryImplementation extends GenericRepositoryImplement
     }
 
     @Override
-    public List findAllByActivityParameters(CreateActivityParameters activityParameters) {
+    public List findAllBy(CreateActivityParameters activityParameters) {
             return entityManager.createQuery(
                     "select e from Exercise e " +
                     "where e.level = :level and e.user = :user")
@@ -24,5 +25,24 @@ public class ExerciseRepositoryImplementation extends GenericRepositoryImplement
                     .setParameter("user", activityParameters.getUser())
                     .getResultList();
 
+    }
+
+    @Override
+    public List<Exercise> findAllBy(User user) {
+        return entityManager.createQuery(
+                "select e from Exercise e " +
+                "where e.user = :user", Exercise.class)
+                .setParameter("user", user)
+                .getResultList();
+    }
+
+    @Override
+    public Exercise findBy(User user, Long id) {
+        return entityManager.createQuery(
+                "select e from Exercise e " +
+                "where e.user = :user and e.id = :id", Exercise.class)
+                .setParameter("user", user)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 }

@@ -31,12 +31,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated();
 
         http
-            .formLogin().failureUrl("/login?error")
-            .defaultSuccessUrl("/")
-            .loginPage("/login")
-            .permitAll()
+            .formLogin()
+                .failureUrl("/login?error")
+                .defaultSuccessUrl("/")
+                .loginPage("/login")
+                .permitAll()
             .and()
-            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/index")
+                .deleteCookies()
+                .invalidateHttpSession(true)
             .permitAll();
     }
 

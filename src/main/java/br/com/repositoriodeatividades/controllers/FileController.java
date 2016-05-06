@@ -15,6 +15,12 @@ public class FileController extends AbstractController {
     @Autowired
     ImportExercise importExercise;
 
+
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)
+    public String uploadFileView() {
+        return "upload";
+    }
+
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam("uploadFile") MultipartFile uploadFile, Model model) {
         model.addAttribute("exercises", importExercise.execute(uploadFile));

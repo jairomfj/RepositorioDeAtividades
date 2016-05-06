@@ -14,7 +14,7 @@ public class ExerciseClassifier {
 
         for(Exercise exercise : exerciseList) {
             Map map = new HashMap();
-            String[] exerciseTags = extractExerciseTags(exercise.getTag());
+            String[] exerciseTags = extractExerciseTags(exercise.getTags());
             map.put("score", calculateScore(exerciseTags, tags));
             map.put("exercise", exercise);
             exerciseMapList.add(getIndex((Double) map.get("score"), exerciseMapList), map);

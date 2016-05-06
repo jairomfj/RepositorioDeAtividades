@@ -35,7 +35,7 @@ class ExerciseClassifierSpec extends Specification {
     }
 
     def createExercise(def tags) {
-        return new Exercise(tag: tags)
+        return new Exercise(tags: tags)
     }
 
     def createTags(def tags) {

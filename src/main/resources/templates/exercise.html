@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+
+<div th:include="fragments/home-header :: home-header"></div>
+
+    <div class="container-fluid">
+
+        <div class="row-fluid">
+            <div class="page-header">
+                <h1>Exercícios <small>Gerencie aqui seus exercícios já importados</small></h1>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Exercícios</div>
+                    <!--<div class="panel-body">-->
+                        <!--<p>...</p>-->
+                    <!--</div>-->
+
+                    <!-- Table -->
+                    <table class="table">
+                        <thead>
+                            <th>#</th>
+                            <th class="col-lg-5">Enunciado</th>
+                            <th>Criado</th>
+                            <th>Tipo</th>
+                            <th>Ativo</th>
+                            <th>-</th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="exercise : ${exercises}">
+                                <td th:text="${exercise.id}"></td>
+                                <td th:text="${exercise.label}"></td>
+                                <td th:text="${#dates.format(exercise.created, 'dd/MM/YYYY hh:mm:ss')}"></td>
+                                <td th:text="${exercise.type}"></td>
+                                <td th:text="${exercise.active}"></td>
+                                <td>
+                                    <a th:href="@{/editExercise(id = ${exercise.id})}">Editar</a>,
+                                    <a href="#">Excluir</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

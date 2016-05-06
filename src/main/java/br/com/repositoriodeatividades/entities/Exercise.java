@@ -3,6 +3,7 @@ package br.com.repositoriodeatividades.entities;
 import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseLevelType;
 import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
 import com.fasterxml.jackson.annotation.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -21,7 +22,7 @@ public class Exercise {
     @Column(nullable = false)
     private String label;
 
-    @Column(nullable = false)
+    @Column(nullable = false) @DateTimeFormat(pattern="dd-MM-YYYY hh:mm:ss")
     private Date created = Calendar.getInstance().getTime();
 
     @Column(nullable = true)
@@ -40,7 +41,7 @@ public class Exercise {
     private List<ExerciseOption> exerciseOption;
 
     @OneToMany(mappedBy = "exercise", targetEntity = Tag.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Tag> tag;
+    private List<Tag> tags;
 
     public Exercise() {}
 
@@ -128,11 +129,11 @@ public class Exercise {
         this.level = level;
     }
 
-    public List<Tag> getTag() {
-        return tag;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setTag(List<Tag> tag) {
-        this.tag = tag;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

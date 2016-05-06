@@ -1,10 +1,12 @@
 package br.com.repositoriodeatividades.repositories;
 
+import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.repositories.interfaces.GenericRepositoryInterface;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 class GenericRepositoryImplementation<T> implements GenericRepositoryInterface<T> {
@@ -58,4 +60,6 @@ class GenericRepositoryImplementation<T> implements GenericRepositoryInterface<T
     public T find(Long empId) {
         return (T) entityManager.find(type.getClass(), empId);
     }
+
+
 }

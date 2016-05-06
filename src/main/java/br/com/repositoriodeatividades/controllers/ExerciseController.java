@@ -1,41 +1,47 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
-import br.com.repositoriodeatividades.usecases.exercise.create.CreateExercise;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.User;
+import br.com.repositoriodeatividades.usecases.exercise.RetrieveExercises;
+import br.com.repositoriodeatividades.usecases.user.FindLoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class ExerciseController extends AbstractController {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    @Autowired FindLoggedUser findLoggedUser;
+    @Autowired RetrieveExercises retrieveExercises;
 
-    @Autowired
-    CreateExercise createExercise;
-
-    @RequestMapping(value = "/exercise", method = RequestMethod.POST)
-    public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain) {
-
-        HttpStatus status;
-        String body = "";
+    @RequestMapping(value = "/exercise", method = RequestMethod.GET)
+    public String retrieveExercises(Model model) {
         try {
-            User currentUser = getCurrentUser();
-            exercisePlain.setUsername(currentUser.getUsername());
-            createExercise.saveFileExtractedExercises(exercisePlain);
-            status = HttpStatus.CREATED;
-        } catch (IllegalArgumentException iae) {
-            status = HttpStatus.BAD_REQUEST;
+            User user = findLoggedUser.find(getCurrentUser());
+            model.addAttribute("exercises", retrieveExercises.findAllBy(user));
+            return "exercise";
         } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            e.printStackTrace();
+            return "login";
         }
-        return new ResponseEntity<>(body, status);
+    }
+
+    @RequestMapping(value = "/editExercise", method = RequestMethod.GET)
+    public String showView(String id, Model model) {
+        try {
+            Long exerciseId = Long.parseLong(id);
+            User currentUser = findLoggedUser.find(getCurrentUser());
+            Exercise exercise = retrieveExercises.retrieveBy(currentUser, exerciseId);
+            if(exercise == null) {
+                return "redirect:/exercise";
+            }
+            model.addAttribute("exercise", exercise);
+            return "edit-exercise";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "login";
+        }
     }
 }
