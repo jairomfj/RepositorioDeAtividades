@@ -44,7 +44,7 @@
                                 <td th:text="${exercise.active}"></td>
                                 <td>
                                     <a th:href="@{/editExercise(id = ${exercise.id})}">Editar</a>,
-                                    <a href="#">Excluir</a>
+                                    <a href="#" onclick="return alert('Exercício excluído com sucesso');">Excluir</a>
                                 </td>
                             </tr>
                         </tbody>

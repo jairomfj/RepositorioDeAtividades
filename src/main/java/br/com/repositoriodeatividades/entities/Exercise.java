@@ -2,7 +2,6 @@ package br.com.repositoriodeatividades.entities;
 
 import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseLevelType;
 import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
-import com.fasterxml.jackson.annotation.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "exercise")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@jsonId")
 public class Exercise {
 
     @Id
