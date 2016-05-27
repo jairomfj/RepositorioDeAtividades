@@ -41,14 +41,14 @@ dependencies {
 	compile('org.apache.poi:poi-scratchpad:3.0.1-FINAL')
 	compile('commons-io:commons-io:2.4')
 	compile('org.spockframework:spock-core:1.0-groovy-2.4')
-    compile("com.h2database:h2")
+	compile('com.fasterxml:jackson-module-json-org:0.9.1')
+	compile("org.springframework.boot:spring-boot-devtools")
 
 
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('com.fasterxml:jackson-module-json-org:0.9.1')
 
 
 	runtime('mysql:mysql-connector-java')
@@ -71,4 +71,8 @@ idea {
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.9'
+}
+
+bootRun {
+    addResources = true
 }
