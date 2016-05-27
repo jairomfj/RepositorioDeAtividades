@@ -1,12 +1,11 @@
 package br.com.repositoriodeatividades.repositories;
 
-import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.repositories.interfaces.GenericRepositoryInterface;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
+import javax.transaction.Transactional;
 
 @Repository
 class GenericRepositoryImplementation<T> implements GenericRepositoryInterface<T> {
@@ -37,7 +36,7 @@ class GenericRepositoryImplementation<T> implements GenericRepositoryInterface<T
         return emp;
     }
 
-    @Override
+    @Override @Transactional
     public Boolean delete(T emp) {
         try {
             entityManager.remove(emp);
@@ -58,7 +57,7 @@ class GenericRepositoryImplementation<T> implements GenericRepositoryInterface<T
 
     @Override
     public T find(Long empId) {
-        return (T) entityManager.find(type.getClass(), empId);
+        return (T) entityManager.find(type, empId);
     }
 
 

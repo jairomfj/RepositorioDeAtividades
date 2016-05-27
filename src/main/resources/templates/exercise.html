@@ -21,14 +21,10 @@
                 <div class="panel panel-default">
                     <!-- Default panel contents -->
                     <div class="panel-heading">Exercícios</div>
-                    <!--<div class="panel-body">-->
-                        <!--<p>...</p>-->
-                    <!--</div>-->
 
                     <!-- Table -->
                     <table class="table">
                         <thead>
-                            <th>#</th>
                             <th class="col-lg-5">Enunciado</th>
                             <th>Criado</th>
                             <th>Tipo</th>
@@ -37,14 +33,14 @@
                         </thead>
                         <tbody>
                             <tr th:each="exercise : ${exercises}">
-                                <td th:text="${exercise.id}"></td>
                                 <td th:text="${exercise.label}"></td>
                                 <td th:text="${#dates.format(exercise.created, 'dd/MM/YYYY hh:mm:ss')}"></td>
                                 <td th:text="${exercise.type}"></td>
                                 <td th:text="${exercise.active}"></td>
                                 <td>
                                     <a th:href="@{/editExercise(id = ${exercise.id})}">Editar</a>,
-                                    <a href="#" onclick="return alert('Exercício excluído com sucesso');">Excluir</a>
+                                    <a href="#" th:onclick="${'javascript:deleteExercise(' + exercise.id + ')'}">Excluir</a>
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 </td>
                             </tr>
                         </tbody>
@@ -54,6 +50,9 @@
 
         </div>
     </div>
+
+<script th:src="@{/assets/js/exercise.js}" type="text/javascript"></script>
+
 
 </body>
 </html>
