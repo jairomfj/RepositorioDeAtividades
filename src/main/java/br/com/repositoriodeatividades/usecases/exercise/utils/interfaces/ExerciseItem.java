@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.exercise.interfaces;
+package br.com.repositoriodeatividades.usecases.exercise.utils.interfaces;
 
 
 public interface ExerciseItem {

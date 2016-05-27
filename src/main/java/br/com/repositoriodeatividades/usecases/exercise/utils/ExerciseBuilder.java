@@ -1,8 +1,8 @@
-package br.com.repositoriodeatividades.usecases.exercise;
+package br.com.repositoriodeatividades.usecases.exercise.utils;
 
-import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseType;
-import br.com.repositoriodeatividades.usecases.exercise.interfaces.ExerciseItem;
-import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.ExerciseItem;
+import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.ExerciseOption;
 import br.com.repositoriodeatividades.usecases.util.RepositoryUtils;

@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports.models;
 
-import br.com.repositoriodeatividades.usecases.exercise.exceptions.InvalidFormatException;
-import br.com.repositoriodeatividades.usecases.exercise.interfaces.Readable;
+import br.com.repositoriodeatividades.usecases.exercise.utils.exceptions.InvalidFormatException;
+import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Readable;
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

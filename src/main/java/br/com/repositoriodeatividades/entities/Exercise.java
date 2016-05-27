@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.entities;
 
-import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseLevelType;
-import br.com.repositoriodeatividades.usecases.exercise.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

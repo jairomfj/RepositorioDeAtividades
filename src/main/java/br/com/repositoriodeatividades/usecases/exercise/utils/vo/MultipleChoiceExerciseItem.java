@@ -1,6 +1,6 @@
-package br.com.repositoriodeatividades.usecases.exercise.vo;
+package br.com.repositoriodeatividades.usecases.exercise.utils.vo;
 
-import br.com.repositoriodeatividades.usecases.exercise.interfaces.ExerciseItem;
+import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.ExerciseItem;
 
 public class MultipleChoiceExerciseItem implements ExerciseItem {
 

@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.exercise.enums;
+package br.com.repositoriodeatividades.usecases.exercise.utils.enums;
 
 /**
  * Created by jairomendes on 3/31/16.

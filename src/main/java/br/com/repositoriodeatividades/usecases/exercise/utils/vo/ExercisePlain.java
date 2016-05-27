@@ -1,7 +1,6 @@
-package br.com.repositoriodeatividades.usecases.exercise.vo;
+package br.com.repositoriodeatividades.usecases.exercise.utils.vo;
 
-import br.com.repositoriodeatividades.entities.User;
-import br.com.repositoriodeatividades.usecases.exercise.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
 
 /**
  * Created by jairomendes on 4/1/16.

@@ -1,9 +1,9 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports;
 
 
-import br.com.repositoriodeatividades.usecases.exercise.enums.FileReaderType;
-import br.com.repositoriodeatividades.usecases.exercise.interfaces.Importable;
-import br.com.repositoriodeatividades.usecases.exercise.interfaces.Readable;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.FileReaderType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Importable;
+import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Readable;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseExtractor;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseParser;

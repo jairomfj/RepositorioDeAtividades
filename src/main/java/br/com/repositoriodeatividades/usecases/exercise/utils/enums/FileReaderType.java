@@ -1,8 +1,8 @@
-package br.com.repositoriodeatividades.usecases.exercise.enums;
+package br.com.repositoriodeatividades.usecases.exercise.utils.enums;
 
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.PdfReader;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.WordDocReader;
-import br.com.repositoriodeatividades.usecases.exercise.interfaces.Readable;
+import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Readable;
 
 
 public enum FileReaderType {

@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.exercise;
+package br.com.repositoriodeatividades.usecases.exercise.retrieve;
 
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.User;

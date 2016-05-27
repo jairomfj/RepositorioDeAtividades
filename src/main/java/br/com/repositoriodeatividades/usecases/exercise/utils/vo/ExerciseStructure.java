@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.exercise.vo;
+package br.com.repositoriodeatividades.usecases.exercise.utils.vo;
 
 
 import br.com.repositoriodeatividades.entities.Exercise;

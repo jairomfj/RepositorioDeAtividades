@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.exercise.enums;
+package br.com.repositoriodeatividades.usecases.exercise.utils.enums;
 
 public enum ExerciseEnumeration {
 
