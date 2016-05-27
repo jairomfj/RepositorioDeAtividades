@@ -50,8 +50,9 @@ public class ExerciseBuilder {
 
     public Exercise build(ExercisePlain exercisePlain) {
         List<ExerciseOption> exerciseOptionList = new ArrayList<>();
-        if(exercisePlain.getOptionLabel().length > 0) {
-            for(String optionLabel : exercisePlain.getOptionLabel()) {
+        String[] optionLabels = exercisePlain.getOptionLabel();
+        if(optionLabels != null && optionLabels.length > 0) {
+            for(String optionLabel : optionLabels) {
                 optionLabel = repositoryUtils.extractEnumerationFromString(optionLabel.trim()).trim();
 
                 if(optionLabel.equals("") || optionLabel.equals(null))

@@ -29,7 +29,7 @@ public class ExerciseExtractor implements Extractable {
             throw new IllegalArgumentException("File cannot be empty");
         }
 
-        List<String> exercises = new ArrayList<String>();
+        List<String> exercises = new ArrayList<>();
         ExerciseEnumeration candidateExerciseEnumeration = null;
         String[] splitFileContent = fileContent.split("\\n");
 
@@ -37,7 +37,7 @@ public class ExerciseExtractor implements Extractable {
         for(String line : splitFileContent) {
             ExerciseEnumeration exerciseEnumeration = repositoryUtils.findEnumeration(line.trim());
 
-            if (candidateExerciseEnumeration == null) {
+            if (candidateExerciseEnumeration == null && !exerciseEnumeration.equals(ExerciseEnumeration.NONE)) {
                 candidateExerciseEnumeration = exerciseEnumeration;
             } else if(isNewExercise(candidateExerciseEnumeration, exerciseEnumeration)) {
                 log.info("Exercise text: " + exercise);
