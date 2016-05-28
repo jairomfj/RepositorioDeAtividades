@@ -28,7 +28,7 @@ public class ExerciseController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "/editExercise", method = RequestMethod.GET)
+    @RequestMapping(value = "/exercise/edit", method = RequestMethod.GET)
     public String showView(String id, Model model) {
         try {
             Long exerciseId = Long.parseLong(id);
