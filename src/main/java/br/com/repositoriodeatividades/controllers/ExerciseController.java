@@ -2,7 +2,7 @@ package br.com.repositoriodeatividades.controllers;
 
 import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.usecases.exercise.retrieve.RetrieveExercises;
-import br.com.repositoriodeatividades.usecases.exercise.retrieve.models.RetrieveSingleExercise;
+import br.com.repositoriodeatividades.usecases.exercise.retrieve.RetrieveSingleExercise;
 import br.com.repositoriodeatividades.usecases.exercise.retrieve.models.vo.ExerciseVO;
 import br.com.repositoriodeatividades.usecases.user.FindLoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
