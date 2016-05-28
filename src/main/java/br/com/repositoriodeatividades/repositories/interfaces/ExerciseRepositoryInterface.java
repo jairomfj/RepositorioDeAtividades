@@ -2,7 +2,7 @@ package br.com.repositoriodeatividades.repositories.interfaces;
 
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.User;
-import br.com.repositoriodeatividades.usecases.activities.create.vo.CreateActivityParameters;
+import br.com.repositoriodeatividades.usecases.activities.create.models.vo.CreateActivityParameters;
 
 import java.util.List;
 

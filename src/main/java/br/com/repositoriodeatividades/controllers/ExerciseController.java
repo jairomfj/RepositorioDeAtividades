@@ -1,8 +1,9 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.usecases.exercise.retrieve.RetrieveExercises;
+import br.com.repositoriodeatividades.usecases.exercise.retrieve.models.RetrieveSingleExercise;
+import br.com.repositoriodeatividades.usecases.exercise.retrieve.models.vo.ExerciseVO;
 import br.com.repositoriodeatividades.usecases.user.FindLoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ public class ExerciseController extends AbstractController {
 
     @Autowired FindLoggedUser findLoggedUser;
     @Autowired RetrieveExercises retrieveExercises;
+    @Autowired
+    RetrieveSingleExercise retrieveSingleExercise;
 
     @RequestMapping(value = "/exercise", method = RequestMethod.GET)
     public String retrieveExercises(Model model) {
@@ -33,7 +36,7 @@ public class ExerciseController extends AbstractController {
         try {
             Long exerciseId = Long.parseLong(id);
             User currentUser = findLoggedUser.find(getCurrentUser());
-            Exercise exercise = retrieveExercises.retrieveBy(currentUser, exerciseId);
+            ExerciseVO exercise = retrieveSingleExercise.retrieve(currentUser, exerciseId);
             if(exercise == null) {
                 return "redirect:/exercise";
             }

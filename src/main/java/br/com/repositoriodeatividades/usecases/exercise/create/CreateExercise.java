@@ -7,6 +7,7 @@ import br.com.repositoriodeatividades.entities.User;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
+import br.com.repositoriodeatividades.usecases.exercise.create.models.TagParser;
 import br.com.repositoriodeatividades.usecases.exercise.utils.ExerciseBuilder;
 import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
 import org.slf4j.Logger;

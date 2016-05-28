@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.activities.create;
+package br.com.repositoriodeatividades.usecases.activities.create.models;
 
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.entities.Tag;

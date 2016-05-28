@@ -1,4 +1,4 @@
-package br.com.repositoriodeatividades.usecases.activities.create.vo;
+package br.com.repositoriodeatividades.usecases.activities.create.models.vo;
 
 import br.com.repositoriodeatividades.entities.User;
 

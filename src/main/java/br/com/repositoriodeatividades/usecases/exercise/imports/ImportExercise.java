@@ -1,12 +1,12 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports;
 
 
-import br.com.repositoriodeatividades.usecases.exercise.utils.enums.FileReaderType;
-import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Importable;
-import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Readable;
 import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseExtractor;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseParser;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.FileReaderType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Importable;
+import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Readable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class ImportExercise implements Importable {
 
     @Override
     public List<Exercise> execute(MultipartFile file) {
-        List<Exercise> exerciseList = new ArrayList();
+        List<Exercise> exerciseList = new ArrayList<>();
         try {
             log.info("Initiating importation of the file " + file.getOriginalFilename());
             Readable fileReader = getFileReader(file.getOriginalFilename());
