@@ -47,7 +47,6 @@ public class ActivityController extends AbstractController {
                 String amount = request.getParameter("amount_" + i);
                 String[] tags = extractTags(request.getParameterValues("tags_" + i));
                 createActivityParametersList.add(new CreateActivityParameters(Integer.parseInt(id), level, Integer.parseInt(amount), tags, currentUser.getUsername()));
-                i++;
             }
 
             List<Exercise> exercises = createActivity.execute(createActivityParametersList);

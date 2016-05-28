@@ -46,7 +46,8 @@ public class CreateActivity {
             try {
                 List persistedExercises = exerciseRepository.findAllBy(createActivityParameters);
                 List<Map> exercisesClassified = exerciseClassifier.classify(persistedExercises, createActivityParameters.getTags());
-                finalExerciseList.addAll(getValuesFromListLimitedBy(createActivityParameters.getAmount(), exercisesClassified));
+                List<Exercise> exercisesOrdered = getExercisesFromListLimitedBy(createActivityParameters.getAmount(), exercisesClassified);
+                filterAddedExercises(exercisesOrdered, finalExerciseList);
             } catch (Exception e) {
                 log.error("Error while extracting exercises");
             }
@@ -55,10 +56,22 @@ public class CreateActivity {
         long seed = System.nanoTime();
         Collections.shuffle(finalExerciseList, new Random(seed));
 
-        // TODO improve enumeration algorithm
         enumerateExercises(finalExerciseList);
 
         return finalExerciseList;
+    }
+
+    private void filterAddedExercises(List<Exercise> exercisesOdered, List<Exercise> finalExerciseList) {
+
+        for(Exercise orderedExercise : exercisesOdered) {
+            boolean alreadyAdded = false;
+            for(Exercise finalExercise : finalExerciseList) {
+                if(orderedExercise.getId() == finalExercise.getId())
+                    alreadyAdded = true;
+            }
+            if(!alreadyAdded)
+                finalExerciseList.add(orderedExercise);
+        }
     }
 
     private void enumerateExercises(List<Exercise> exerciseList) {
@@ -79,9 +92,9 @@ public class CreateActivity {
         }
     }
 
-    private List<Exercise> getValuesFromListLimitedBy(int ammount, List<Map> exercises) {
+    private List<Exercise> getExercisesFromListLimitedBy(int ammount, List<Map> exercises) {
         List<Exercise> exerciseList = new ArrayList<>();
-        for(int i = 0; i < ammount; i++) {
+        for(int i = 0; i < ammount && i < exercises.size(); i++) {
             exerciseList.add((Exercise) exercises.get(i).get("exercise"));
         }
         return exerciseList;
