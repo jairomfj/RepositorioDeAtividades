@@ -23,8 +23,9 @@ public class TagRepositoryImplementation extends GenericRepositoryImplementation
     @Override
     public Collection<Tag> find(Tag tag) {
         return entityManager.createQuery(
-                "select t from Tag t where t.label = :label", Tag.class)
+                "select t from Tag t where t.label = :label and t.exercise = :exercise", Tag.class)
                 .setParameter("label", tag.getLabel())
+                .setParameter("exercise", tag.getExercise())
                 .getResultList();
     }
 

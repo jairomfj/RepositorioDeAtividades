@@ -2,11 +2,9 @@ package br.com.repositoriodeatividades.usecases.exercise.utils.vo;
 
 import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
 
-/**
- * Created by jairomendes on 4/1/16.
- */
 public class ExercisePlain {
 
+    private Long exerciseId;
     private String exerciseLabel;
     private String exerciseType;
     private ExerciseLevelType exerciseLevel;
@@ -62,5 +60,13 @@ public class ExercisePlain {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Long getExerciseId() {
+        return exerciseId;
+    }
+
+    public void setExerciseId(Long exerciseId) {
+        this.exerciseId = exerciseId;
     }
 }

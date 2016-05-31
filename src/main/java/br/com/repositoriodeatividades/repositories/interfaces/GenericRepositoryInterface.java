@@ -5,8 +5,8 @@ import br.com.repositoriodeatividades.entities.User;
 import java.util.List;
 
 public interface GenericRepositoryInterface<T> {
-    public T save(T emp);
-    public Boolean delete(T emp);
-    public T edit(T emp);
-    public T find(Long empId);
+    T save(T emp);
+    Boolean delete(T emp);
+    T edit(T emp);
+    T find(Long empId);
 }
