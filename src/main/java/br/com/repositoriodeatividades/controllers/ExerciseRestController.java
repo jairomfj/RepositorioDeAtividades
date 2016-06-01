@@ -60,15 +60,19 @@ public class ExerciseRestController extends AbstractController {
     @RequestMapping(value = "/exercise/edit", method = RequestMethod.POST)
     public ResponseEntity<String> edit(ExercisePlain exercisePlain) {
         HttpStatus status;
+        String body = "";
         try {
             getCurrentUser();
             editExercise.edit(exercisePlain);
             status = HttpStatus.OK;
+            body = "Exercício atualizado com sucesso.";
         } catch (IllegalArgumentException iae) {
             status = HttpStatus.BAD_REQUEST;
+            body = "Erro ao atualizar o exercício. Verifique se todos os dados foram inseridos corretamente.";
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
+            body = "Erro ao atualizar o exercício. Tente novamente mais tarde.";
         }
-        return new ResponseEntity<>("", status);
+        return new ResponseEntity<>(body, status);
     }
 }

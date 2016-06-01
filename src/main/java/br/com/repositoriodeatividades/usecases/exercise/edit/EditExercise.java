@@ -33,26 +33,22 @@ public class EditExercise {
     public void edit(ExercisePlain exercisePlain) {
 
         Exercise exercise = updateExercise(exercisePlain);
-        exercise.setTags(updateTags(exercisePlain.getExerciseTags(), exercise));
-        exerciseRepository.edit(exercise);
-
+        updateTags(exercisePlain.getExerciseTags(), exercise);
 
         log.info("oi");
 
     }
 
-    @Transactional
     private Exercise updateExercise(ExercisePlain exercisePlain) {
         Exercise persistedExercise = exerciseRepository.find(exercisePlain.getExerciseId());
         persistedExercise.setLabel(exercisePlain.getExerciseLabel());
         persistedExercise.setLevel(exercisePlain.getExerciseLevel());
         persistedExercise.setType(exercisePlain.getExerciseType());
-
+        exerciseRepository.edit(persistedExercise);
         return persistedExercise;
     }
 
 
-    @Transactional
     private List<Tag> updateTags(String[] exerciseTags, Exercise persistedExercise) {
 
         Collection<Tag> persistedTags = persistedExercise.getTags();
@@ -61,6 +57,11 @@ public class EditExercise {
         List<Tag> tagsThatShouldBeRemoved = tagsThatShouldBeRemoved(newTags, (List) persistedTags);
         for(Tag tagToBeRemoved : tagsThatShouldBeRemoved) {
             tagRepository.delete(tagToBeRemoved);
+        }
+
+        for(Tag newTag : newTags) {
+            if(!tagIsAlreadyPersisted(newTag, (List) persistedTags))
+                tagRepository.save(newTag);
         }
 
         return newTags;
@@ -82,18 +83,13 @@ public class EditExercise {
         return tagsThatShouldBeRemoved;
     }
 
-    private List<Tag> tagsThatShouldBePersisted(List<Tag> newTags, List<Tag> persistedTags) {
-        List<Tag> tagsThatShouldBePersisted = new ArrayList<>();
-        for(Tag newTag : newTags) {
-            boolean found = false;
-            for(Tag persistedTag : persistedTags) {
-                if(persistedTag.getLabel().equals(newTag.getLabel())) {
-                    found = true;
-                }
+    private boolean tagIsAlreadyPersisted(Tag newTag, List<Tag> persistedTags) {
+        boolean alreadyPersisted = false;
+        for(Tag persistedTag : persistedTags) {
+            if(persistedTag.getLabel().equals(newTag.getLabel())) {
+                alreadyPersisted = true;
             }
-            if(!found)
-                tagsThatShouldBePersisted.add(newTag);
         }
-        return tagsThatShouldBePersisted;
+        return alreadyPersisted;
     }
 }

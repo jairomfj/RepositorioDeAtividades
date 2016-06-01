@@ -29,7 +29,7 @@ class GenericRepositoryImplementation<T> implements GenericRepositoryInterface<T
         this.entityManager = entityManager;
     }
 
-    @Override
+    @Override @Transactional
     public T save(T emp) {
         entityManager.persist(emp);
         entityManager.flush();

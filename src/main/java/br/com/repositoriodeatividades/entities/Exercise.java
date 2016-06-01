@@ -38,7 +38,7 @@ public class Exercise {
     @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ExerciseOption> exerciseOption;
 
-    @OneToMany(mappedBy = "exercise", targetEntity = Tag.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "exercise", targetEntity = Tag.class, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Tag> tags;
 
     public Exercise() {}
