@@ -6,6 +6,6 @@ import java.util.Collection;
 
 public interface TagRepositoryInterface extends GenericRepositoryInterface<Tag>{
 
-    public Collection<Tag> list();
-    public Collection<Tag> find(Tag tag);
+    Collection<Tag> list();
+    Collection<Tag> find(Tag tag);
 }

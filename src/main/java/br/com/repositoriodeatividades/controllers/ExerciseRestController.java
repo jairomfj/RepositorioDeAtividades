@@ -2,6 +2,7 @@ package br.com.repositoriodeatividades.controllers;
 
 import br.com.repositoriodeatividades.usecases.exercise.create.CreateExercise;
 import br.com.repositoriodeatividades.usecases.exercise.delete.DeleteExercise;
+import br.com.repositoriodeatividades.usecases.exercise.edit.EditExercise;
 import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ public class ExerciseRestController extends AbstractController {
     @Autowired CreateExercise createExercise;
 
     @Autowired DeleteExercise deleteExercise;
+
+    @Autowired EditExercise editExercise;
 
     @RequestMapping(value = "/exercise", method = RequestMethod.POST)
     public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain) {
@@ -45,6 +48,21 @@ public class ExerciseRestController extends AbstractController {
         try {
             getCurrentUser();
             deleteExercise.delete(id);
+            status = HttpStatus.OK;
+        } catch (IllegalArgumentException iae) {
+            status = HttpStatus.BAD_REQUEST;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>("", status);
+    }
+
+    @RequestMapping(value = "/exercise/edit", method = RequestMethod.POST)
+    public ResponseEntity<String> edit(ExercisePlain exercisePlain) {
+        HttpStatus status;
+        try {
+            getCurrentUser();
+            editExercise.edit(exercisePlain);
             status = HttpStatus.OK;
         } catch (IllegalArgumentException iae) {
             status = HttpStatus.BAD_REQUEST;

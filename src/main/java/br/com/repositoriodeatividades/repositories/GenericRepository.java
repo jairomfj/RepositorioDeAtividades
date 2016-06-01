@@ -40,6 +40,7 @@ class GenericRepositoryImplementation<T> implements GenericRepositoryInterface<T
     public Boolean delete(T emp) {
         try {
             entityManager.remove(emp);
+            entityManager.flush();
         } catch (Exception ex) {
             return false;
         }
