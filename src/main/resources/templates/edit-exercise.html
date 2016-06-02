@@ -53,9 +53,9 @@
                                 <div class="col-sm-1">
                                     <label>Dificuldade: </label>
                                     <select th:name="exerciseLevel">
-                                        <option th:value="EASY">Fácil</option>
-                                        <option th:value="MEDIUM">Médio</option>
-                                        <option th:value="HARD">Difícil</option>
+                                        <option th:value="EASY" th:selected="${#strings.toString(exercise.level) == 'EASY'}">Fácil</option>
+                                        <option th:value="MEDIUM" th:selected="${#strings.toString(exercise.level) == 'MEDIUM'}">Médio</option>
+                                        <option th:value="HARD" th:selected="${#strings.toString(exercise.level) == 'HARD'}">Difícil</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-1"></div>
