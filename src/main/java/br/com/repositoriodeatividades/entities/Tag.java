@@ -10,8 +10,7 @@ import java.util.List;
 @Table(name = "tag")
 public class Tag {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
@@ -20,8 +19,7 @@ public class Tag {
     @NotNull
     private Date created = Calendar.getInstance().getTime();
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull @ManyToOne(fetch = FetchType.LAZY)
     private Exercise exercise;
 
     public Tag() { }

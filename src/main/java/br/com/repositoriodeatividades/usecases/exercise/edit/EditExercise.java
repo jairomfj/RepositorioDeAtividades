@@ -1,7 +1,9 @@
 package br.com.repositoriodeatividades.usecases.exercise.edit;
 
 import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.ExerciseOption;
 import br.com.repositoriodeatividades.entities.Tag;
+import br.com.repositoriodeatividades.repositories.interfaces.ExerciseOptionRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.exercise.create.models.TagParser;
@@ -9,20 +11,24 @@ import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-@Component
+@Service @Transactional
 public class EditExercise {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     ExerciseRepositoryInterface exerciseRepository;
+
+
+    @Autowired
+    ExerciseOptionRepositoryInterface exerciseOptionRepository;
 
     @Autowired
     TagRepositoryInterface tagRepository;
@@ -33,6 +39,7 @@ public class EditExercise {
     public void edit(ExercisePlain exercisePlain) {
 
         Exercise exercise = updateExercise(exercisePlain);
+        updateExerciseOptions(exercisePlain.getOptionLabel(), exercise);
         updateTags(exercisePlain.getExerciseTags(), exercise);
 
         log.info("oi");
@@ -48,19 +55,39 @@ public class EditExercise {
         return persistedExercise;
     }
 
+    private void updateExerciseOptions(String[] newOptions, Exercise exercise) {
+
+        List<ExerciseOption> persistedOptions = exercise.getExerciseOptions();
+
+        for(int i = 0; i < persistedOptions.size(); i++) {
+
+            String newOptionLabel = newOptions[i];
+            ExerciseOption persistedOption = persistedOptions.get(i);
+
+            if(StringUtils.isEmpty(newOptionLabel)) {
+                exerciseOptionRepository.delete(persistedOption);
+                continue;
+            }
+
+            if(!persistedOption.getLabel().equals(newOptionLabel)) {
+                persistedOption.setLabel(newOptions[i]);
+                exerciseOptionRepository.edit(persistedOption);
+            }
+        }
+    }
+
 
     private List<Tag> updateTags(String[] exerciseTags, Exercise persistedExercise) {
 
-        Collection<Tag> persistedTags = persistedExercise.getTags();
+        List<Tag> persistedTags = persistedExercise.getTags();
         List<Tag> newTags = tagParser.parse(exerciseTags, persistedExercise);
 
-        List<Tag> tagsThatShouldBeRemoved = tagsThatShouldBeRemoved(newTags, (List) persistedTags);
-        for(Tag tagToBeRemoved : tagsThatShouldBeRemoved) {
+        List<Tag> tagsThatShouldBeRemoved = tagsThatShouldBeRemoved(newTags, persistedTags);
+        for(Tag tagToBeRemoved : tagsThatShouldBeRemoved)
             tagRepository.delete(tagToBeRemoved);
-        }
 
         for(Tag newTag : newTags) {
-            if(!tagIsAlreadyPersisted(newTag, (List) persistedTags))
+            if(!tagIsAlreadyPersisted(newTag, persistedTags))
                 tagRepository.save(newTag);
         }
 
@@ -73,9 +100,8 @@ public class EditExercise {
         for(Tag persistedTag : persistedTags) {
             boolean found = false;
             for(Tag tag : newTags) {
-                if(tag.getLabel().equals(persistedTag.getLabel())) {
+                if(tag.getLabel().equals(persistedTag.getLabel()))
                     found = true;
-                }
             }
             if(!found)
                 tagsThatShouldBeRemoved.add(persistedTag);
@@ -86,9 +112,8 @@ public class EditExercise {
     private boolean tagIsAlreadyPersisted(Tag newTag, List<Tag> persistedTags) {
         boolean alreadyPersisted = false;
         for(Tag persistedTag : persistedTags) {
-            if(persistedTag.getLabel().equals(newTag.getLabel())) {
+            if(persistedTag.getLabel().equals(newTag.getLabel()))
                 alreadyPersisted = true;
-            }
         }
         return alreadyPersisted;
     }

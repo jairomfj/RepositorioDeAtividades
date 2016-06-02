@@ -45,12 +45,17 @@
                                 <div class="col-sm-1"></div>
                             </div>
 
+                            <hr />
+
                             <div class="row">
                                 <div class="col-sm-1"></div>
                                 <div class="col-sm-10">
                                     <input type="hidden" th:id="exerciseId" th:value="${exercise.id}" th:name="exerciseId" />
                                     <input type="hidden" th:id="exerciseType" th:value="${exercise.type}" th:name="exerciseType" />
                                     <input th:name="exerciseLabel" th:value="${exercise.label}" class="form-control" />
+
+                                    <br />
+
                                     <div th:each="option : ${exercise.exerciseOptions}">
                                         <input th:name="optionLabel" th:value="${option.label}" class="form-control"  />
                                     </div>

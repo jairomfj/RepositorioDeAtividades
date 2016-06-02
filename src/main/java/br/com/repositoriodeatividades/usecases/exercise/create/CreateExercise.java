@@ -2,8 +2,10 @@ package br.com.repositoriodeatividades.usecases.exercise.create;
 
 
 import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.ExerciseOption;
 import br.com.repositoriodeatividades.entities.Tag;
 import br.com.repositoriodeatividades.entities.User;
+import br.com.repositoriodeatividades.repositories.interfaces.ExerciseOptionRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
@@ -25,10 +27,13 @@ public class CreateExercise {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    ExerciseRepositoryInterface exerciseRepositoryImplementation;
+    ExerciseRepositoryInterface exerciseRepository;
 
     @Autowired
-    TagRepositoryInterface tagRepositoryImplementation;
+    TagRepositoryInterface tagRepository;
+
+    @Autowired
+    ExerciseOptionRepositoryInterface exerciseOptionRepository;
 
     @Autowired
     UserRepositoryInterface userRepository;
@@ -54,12 +59,14 @@ public class CreateExercise {
 
         Exercise exercise = exerciseBuilder.build(exercisePlain);
         exercise.setUser(user);
-        exerciseRepositoryImplementation.save(exercise);
+        exerciseRepository.save(exercise);
 
         List<Tag> tagList = tagParser.parse(exercisePlain.getExerciseTags(), exercise);
-        for(Tag tag : tagList) {
-            tagRepositoryImplementation.save(tag);
-        }
+        for(Tag tag : tagList)
+            tagRepository.save(tag);
+
+        for(ExerciseOption exerciseOption : exercise.getExerciseOptions())
+            exerciseOptionRepository.save(exerciseOption);
 
     }
 }

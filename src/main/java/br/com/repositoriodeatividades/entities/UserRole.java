@@ -8,12 +8,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user_role")
 public class UserRole {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @OneToOne
+    @NotNull @OneToOne
     private User user;
 
     @NotNull

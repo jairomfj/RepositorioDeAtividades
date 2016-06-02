@@ -13,8 +13,7 @@ import java.util.List;
 @Table(name = "exercise")
 public class Exercise {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
@@ -35,7 +34,7 @@ public class Exercise {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "exercise", targetEntity = ExerciseOption.class, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<ExerciseOption> exerciseOption;
 
     @OneToMany(mappedBy = "exercise", targetEntity = Tag.class, fetch = FetchType.LAZY, orphanRemoval = true)
