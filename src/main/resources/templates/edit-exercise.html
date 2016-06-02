@@ -15,16 +15,32 @@
 
     <div class="container-fluid">
 
-        <div class="row-fluid">
-            <div class="page-header">
-                <h1>Editar exercício</h1>
+        <div class="row">
+            <div class="col-lg-12">
+                <a th:href="@{/exercise}">Voltar</a>
             </div>
         </div>
 
-        <div class="row-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h1>Editar exercício</h1>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div th:class="row-fluid">
+
+            <div th:class="row">
+                <div th:class="col-lg-12" align="center">
+                    <span th:id="response"></span>
+                </div>
+            </div>
 
             <div class="col-lg-12">
-                <form class="form-horizontal exercise-form" enctype="multipart/form-data" action="/exercise/edit" method="post">
+                <form class="form-horizontal exercise-form" id="edit-exercise">
                     <fieldset>
                         <div class="form-group">
 
@@ -63,7 +79,7 @@
                                     <div class="form-group">
                                         <div class="col-md-offset-1 col-md-8">
                                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                                            <button class="btn btn-primary save-exercise">OK</button>
+                                            <button class="btn btn-primary" id="update-exercise">OK</button>
                                         </div>
                                     </div>
                                 </div>
@@ -75,6 +91,7 @@
             </div>
         </div>
     </div>
+<script th:src="@{/assets/js/edit-exercise.js}" type="text/javascript"></script>
 <script th:src="@{/assets/js/jquery.tagsparser.js}" type="text/javascript"></script>
 
 
