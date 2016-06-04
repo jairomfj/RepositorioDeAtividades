@@ -29,7 +29,7 @@
                 <div class="col-sm-1">Quantidade</div>
             </div>
 
-            <form class="form-horizontal exercise-form" action="/activity/create" method="post">
+            <form class="form-horizontal exercise-form" action="/activity/create" id="form" method="post">
                 <fieldset>
                     <div class="form-group">
 
@@ -49,12 +49,12 @@
                             </div>
 
                             <div class="col-sm-1">
-                                <input th:name="amount_0" th:value="0" class="amount" />
+                                <input name="amount_0" class="amount" type="number" required="required" />
                             </div>
                         </div>
 
                         <div class="row">
-                            <input type="hidden" th:name="id_1" th:value="1" />
+                            <input type="hidden" th:name="id_1" th:value="1"  />
 
                             <div class="col-sm-8">
                                 <input type="text" class="tags" th:name="tags_1" />
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="col-sm-1">
-                                <input th:name="amount_1" th:value="0" class="amount" />
+                                <input name="amount_1" class="amount" type="number" required="required" />
                             </div>
                         </div>
 
@@ -89,13 +89,13 @@
                             </div>
 
                             <div class="col-sm-1">
-                                <input th:name="amount_2" th:value="0" class="amount" />
+                                <input name="amount_2" class="amount" type="number" required="required" />
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-3"></div>
-                            <div class="col-sm-2"><button class="btn btn-primary">OK</button></div>
+                            <div class="col-sm-2"><button class="btn btn-primary" id="submit">OK</button></div>
                             <div class="col-sm-3"></div>
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                         </div>
@@ -112,6 +112,7 @@
 </div>
 
 <script th:src="@{/assets/js/jquery.tagsparser.js}" type="text/javascript"></script>
+<script th:src="@{/assets/js/activity.js}" type="text/javascript"></script>
 
 
 </body>

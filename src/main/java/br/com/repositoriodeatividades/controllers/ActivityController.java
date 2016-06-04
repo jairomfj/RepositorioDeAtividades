@@ -38,7 +38,7 @@ public class ActivityController extends AbstractController {
             User currentUser = getCurrentUser();
 
             List<CreateActivityParameters> createActivityParametersList = new ArrayList<>();
-            for(int i = 0; ; i++) {
+            for(int i = 0; i < 3; i++) {
                 String id = request.getParameter("id_" + i);
 
                 if(id == null) break;
@@ -46,7 +46,9 @@ public class ActivityController extends AbstractController {
                 String level = request.getParameter("level_" + i);
                 String amount = request.getParameter("amount_" + i);
                 String[] tags = extractTags(request.getParameterValues("tags_" + i));
-                createActivityParametersList.add(new CreateActivityParameters(Integer.parseInt(id), level, Integer.parseInt(amount), tags, currentUser.getUsername()));
+                if(tags != null) {
+                    createActivityParametersList.add(new CreateActivityParameters(Integer.parseInt(id), level, Integer.parseInt(amount), tags, currentUser.getUsername()));
+                }
             }
 
             List<Exercise> exercises = createActivity.execute(createActivityParametersList);
@@ -65,7 +67,7 @@ public class ActivityController extends AbstractController {
     }
 
     private String[] extractTags(String[] tags) {
-        if(StringUtils.isEmpty(tags)) {
+        if(StringUtils.isEmpty(tags[0])) {
             return null;
         }
         return tags[0].toUpperCase().split(",");
