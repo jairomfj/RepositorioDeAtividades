@@ -26,13 +26,13 @@ public class ActivityController extends AbstractController {
     CreateActivity createActivity;
 
 
-    @RequestMapping(value = "/createActivity", method = RequestMethod.GET)
+    @RequestMapping(value = "/activity/create", method = RequestMethod.GET)
     public String createActivityView() { return "activity"; }
 
     @RequestMapping(value = "/document", method = RequestMethod.GET)
     public String activityView() { return "document"; }
 
-    @RequestMapping(value = "/createActivity", method = RequestMethod.POST)
+    @RequestMapping(value = "/activity/create", method = RequestMethod.POST)
     public String createActivity(HttpServletRequest request, Model model) {
         try {
             User currentUser = getCurrentUser();

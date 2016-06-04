@@ -18,7 +18,13 @@
         <div class="row-fluid">
 
             <div class="col-lg-12">
-                <div class="panel panel-default">
+
+                <h2 th:if="${exercises == null}">
+                    Ops, você ainda não tem nenhum exercício,
+                    <small><a href="/exercise/upload">clique aqui para importar novos.</a></small>
+                </h2>
+
+                <div class="panel panel-default" th:if="${exercises != null}">
                     <!-- Default panel contents -->
                     <div class="panel-heading">Exercícios</div>
 

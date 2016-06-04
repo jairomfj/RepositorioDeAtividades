@@ -25,7 +25,7 @@ public class ExerciseRestController extends AbstractController {
 
     @Autowired EditExercise editExercise;
 
-    @RequestMapping(value = "/exercise", method = RequestMethod.POST)
+    @RequestMapping(value = "/exercise/create", method = RequestMethod.POST)
     public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain) {
 
         HttpStatus status;
