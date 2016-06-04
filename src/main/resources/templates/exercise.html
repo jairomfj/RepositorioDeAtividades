@@ -19,12 +19,12 @@
 
             <div class="col-lg-12">
 
-                <h2 th:if="${exercises == null}">
+                <h2 th:if="${exercises.size() == 0}">
                     Ops, você ainda não tem nenhum exercício,
                     <small><a href="/exercise/upload">clique aqui para importar novos.</a></small>
                 </h2>
 
-                <div class="panel panel-default" th:if="${exercises != null}">
+                <div class="panel panel-default" th:if="${exercises.size() > 0}">
                     <!-- Default panel contents -->
                     <div class="panel-heading">Exercícios</div>
 
