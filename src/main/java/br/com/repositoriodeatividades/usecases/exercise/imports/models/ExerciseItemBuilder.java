@@ -28,7 +28,7 @@ public class ExerciseItemBuilder {
         log.info("Building exercise items");
 
         if(exerciseAsString == null || exerciseAsString.equals("")) {
-            throw new IllegalAccessException("Exercise cannot be null or empty");
+            throw new IllegalArgumentException("Exercise cannot be null or empty");
         }
 
         String[] splittedText = exerciseAsString.split("\\n");

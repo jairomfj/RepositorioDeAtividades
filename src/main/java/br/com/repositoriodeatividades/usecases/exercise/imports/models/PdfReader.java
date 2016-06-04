@@ -1,6 +1,5 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports.models;
 
-import br.com.repositoriodeatividades.usecases.exercise.imports.models.FileReader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripper;
 import org.apache.pdfbox.util.PDFTextStripperByArea;

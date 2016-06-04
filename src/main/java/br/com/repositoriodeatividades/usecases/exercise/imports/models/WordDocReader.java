@@ -1,6 +1,5 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports.models;
 
-import br.com.repositoriodeatividades.usecases.exercise.imports.models.FileReader;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 
 import java.io.File;
