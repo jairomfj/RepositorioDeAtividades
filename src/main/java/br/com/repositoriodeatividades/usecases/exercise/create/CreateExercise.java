@@ -48,7 +48,7 @@ public class CreateExercise {
 
         log.info("Saving exercise extracted from file");
 
-        if(exercisePlain.equals(null)) {
+        if(exercisePlain == null) {
             throw new IllegalArgumentException("Exercise label cannot be null");
         }
 
