@@ -40,7 +40,8 @@ dependencies {
 	compile('org.apache.poi:poi-scratchpad:3.9')
 	compile('org.apache.poi:poi-scratchpad:3.0.1-FINAL')
 	compile('commons-io:commons-io:2.4')
-	compile('org.spockframework:spock-core:1.0-groovy-2.4')
+
+
 	compile('com.fasterxml:jackson-module-json-org:0.9.1')
 	compile("org.springframework.boot:spring-boot-devtools")
 
@@ -57,8 +58,26 @@ dependencies {
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("org.spockframework:spock-spring:1.0-groovy-2.4")
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4')
 }
 
+sourceSets {
+    integTest {
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+}
+
+configurations {
+    integTestCompile.extendsFrom testCompile
+    integTestRuntime.extendsFrom testRuntime
+}
+
+task integTest(type: Test) {
+    testClassesDir = sourceSets.integTest.output.classesDir
+    classpath = sourceSets.integTest.runtimeClasspath
+}
 
 apply plugin: 'idea'
 
