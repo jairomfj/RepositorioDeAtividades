@@ -11,7 +11,7 @@ function deleteExerciseViaAjax(id) {
     $.post("http://localhost:8080/exercise/delete", { id: id, _csrf: _csrf })
         .done(function( response ) {
             alert("Exercício excluído com sucesso!");
-            location.reload();
+            window.location = "http://localhost:8080/exercise/";
         })
         .fail(function(response) {
             alert("Erro ao excluir o exercício selecionado.");
