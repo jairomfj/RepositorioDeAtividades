@@ -19,6 +19,7 @@ public class RepositoryUtils {
     ApplicationContext applicationContext;
 
     public ExerciseEnumeration findEnumeration(String text) {
+        text = text.replaceAll(" ","");
         for(ExerciseEnumeration enumeration : ExerciseEnumeration.values()) {
             Pattern pattern = Pattern.compile(enumeration.getFullEnumeration());
             Matcher matcher = pattern.matcher(text);
@@ -33,29 +34,6 @@ public class RepositoryUtils {
         String finalText = "";
         finalText = text.replaceAll(findEnumeration(text).getFullEnumeration(),"");
         return finalText;
-    }
-
-    public String getFileContent(String path) {
-        BufferedReader br = null;
-        String fileContent = "";
-        try {
-            String sCurrentLine;
-            br = new BufferedReader(new FileReader(applicationContext.getResource(path).getFile()));
-
-            while ((sCurrentLine = br.readLine()) != null) {
-                fileContent += sCurrentLine + "\n";
-            }
-            return fileContent;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            try {
-                if (br != null)br.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
     }
 
 }

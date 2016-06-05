@@ -16,7 +16,7 @@ public class Exercise {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100000)
     private String label;
 
     @Column(nullable = false) @DateTimeFormat(pattern="dd-MM-YYYY hh:mm:ss")

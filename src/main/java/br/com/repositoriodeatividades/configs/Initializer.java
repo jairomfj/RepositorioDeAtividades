@@ -19,9 +19,8 @@ public class Initializer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        createUser();
+//        createUser();
     }
-
 
     private void createUser() {
         User user = userRepository.findByUsername("user");

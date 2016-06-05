@@ -4,9 +4,13 @@
 
 $(document).ready(function(){
 
+
+
     var exerciseLength = parseInt($("#exercise-length").val());
 
     hideThings();
+
+    adaptTextareaSize();
 
     $(".save-exercise").click(function(e) {
         e.preventDefault();
@@ -47,6 +51,15 @@ $(document).ready(function(){
 
     function hideThings() {
         $("#all-exercises-imported").hide();
+    }
+
+    function adaptTextareaSize() {
+        var textareas = document.getElementsByTagName("textarea");
+        for(var i = 0; i < textareas.length; i++) {
+            var textarea = textareas[i];
+            textarea.style.height = "1px";
+            textarea.style.height = (25 + textarea.scrollHeight)+"px";
+        }
     }
 
 });
