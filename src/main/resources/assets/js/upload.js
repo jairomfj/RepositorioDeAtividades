@@ -1,14 +1,5 @@
-/**
- * Created by jairomendes on 4/16/16.
- */
 
 $(document).ready(function(){
-
-
-
-    var exerciseLength = parseInt($("#exercise-length").val());
-
-    hideThings();
 
     adaptTextareaSize();
 
@@ -39,18 +30,6 @@ $(document).ready(function(){
             .fail(function() {
                 alert("Erro ao importar o exercício selecionado!");
             })
-    }
-
-    function updateExercisesLeftAmmount() {
-        exerciseLength = exerciseLength - 1;
-        if(exerciseLength == 0) {
-            $("#all-exercises-imported").show();
-            $("#extracted-exercises").hide();
-        }
-    }
-
-    function hideThings() {
-        $("#all-exercises-imported").hide();
     }
 
     function adaptTextareaSize() {

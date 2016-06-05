@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Criar atividade</title>
+    <title>Atividade</title>
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/document.css}" />
     <script th:src="@{/assets/js/bootstrap.min.js}" type="text/javascript"></script>
 </head>
 <body>
@@ -10,7 +11,12 @@
 
 <div class="container">
 
-    <!--TODO adicionar botão de retornar à tela de criação de atividades-->
+    <div class="row not-printable">
+        <br />
+        <div class="col-lg-12">
+            <a th:href="@{/activity/create}">Voltar</a>
+        </div>
+    </div>
 
     <div class="row">
         <div class="page-header">

@@ -31,9 +31,7 @@ public class RepositoryUtils {
     }
 
     public String extractEnumerationFromString(String text) {
-        String finalText = "";
-        finalText = text.replaceAll(findEnumeration(text).getFullEnumeration(),"");
-        return finalText;
+        return text.replaceAll(findEnumeration(text).getFullEnumeration(),"");
     }
 
 }

@@ -34,7 +34,7 @@ public class ActivityController extends AbstractController {
     public String activityView() { return "document"; }
 
     @RequestMapping(value = "/activity/create", method = RequestMethod.POST)
-    public String createActivity(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String createActivity(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 
         Integer status;
         String message;
@@ -58,7 +58,7 @@ public class ActivityController extends AbstractController {
 
             List<Exercise> exercises = createActivity.execute(createActivityParametersList);
 
-            redirectAttributes.addAttribute("exercises", exercises);
+            model.addAttribute("exercises", exercises);
             return "document";
         } catch (IllegalArgumentException iae) {
             status = 400;
