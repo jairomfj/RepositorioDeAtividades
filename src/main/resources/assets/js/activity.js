@@ -1,6 +1,6 @@
 
 
-$("#submit").click(function(e){
+$("#submit").click(function(){
     var fields = document.getElementsByClassName("tags");
     validateFields(fields);
 });

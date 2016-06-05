@@ -2,6 +2,7 @@ package br.com.repositoriodeatividades.usecases.exercise.imports;
 
 
 import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.usecases.exercise.imports.models.exceptions.InvalidFileFormatException;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseExtractor;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseParser;
 import br.com.repositoriodeatividades.usecases.exercise.utils.enums.FileReaderType;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,24 +28,27 @@ public class ImportExercise implements Importable {
     ExerciseParser exerciseParser;
 
     @Override
-    public List<Exercise> execute(MultipartFile file) {
-        List<Exercise> exerciseList = new ArrayList<>();
-        try {
-            log.info("Initiating importation of the file " + file.getOriginalFilename());
-            Readable fileReader = getFileReader(file.getOriginalFilename());
-            String fileContent = fileReader.read(file);
-            List<String> exercisesAsString = exerciseExtractor.extract(fileContent);
-            exerciseList = exerciseParser.parse(exercisesAsString);
-        } catch (Exception e) {
-            log.error(e.getMessage());
+    public List<Exercise> execute(MultipartFile file) throws Exception {
+        log.info("Initiating importation of the file " + file.getOriginalFilename());
+
+        if(file.getSize() == 0) {
+            throw new IllegalArgumentException("No file was selected");
         }
-        return exerciseList;
+
+        Readable fileReader = getFileReader(file.getOriginalFilename());
+        String fileContent = fileReader.read(file);
+        List<String> exercisesAsString = exerciseExtractor.extract(fileContent);
+        return exerciseParser.parse(exercisesAsString);
     }
 
 
     private Readable getFileReader(String contentType) {
-        int startIndex = contentType.indexOf(".") + 1;
-        String text = contentType.substring(startIndex, contentType.length());
-        return FileReaderType.valueOf(text.toUpperCase()).getReader();
+        try {
+            int startIndex = contentType.indexOf(".") + 1;
+            String text = contentType.substring(startIndex, contentType.length());
+            return FileReaderType.valueOf(text.toUpperCase()).getReader();
+        } catch (Exception e) {
+            throw new InvalidFileFormatException("This format is not accepted.");
+        }
     }
 }

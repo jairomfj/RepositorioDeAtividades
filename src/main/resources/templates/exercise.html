@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
@@ -31,22 +32,21 @@
                     <!-- Table -->
                     <table class="table">
                         <thead>
-                            <th class="col-lg-5">Enunciado</th>
-                            <th>Criado</th>
-                            <th>Tipo</th>
-                            <th>Ativo</th>
-                            <th>-</th>
+                            <th th:value="Enunciado" class="col-lg-5" />
+                            <th th:value="Criado" />
+                            <th th:value="Tipo" />
+                            <th th:value="Opções" />
                         </thead>
                         <tbody>
                             <tr th:each="exercise : ${exercises}">
-                                <td th:text="${exercise.label}"></td>
-                                <td th:text="${#dates.format(exercise.created, 'dd/MM/YYYY hh:mm:ss')}"></td>
-                                <td th:text="${exercise.type}"></td>
-                                <td th:text="${exercise.active}"></td>
+                                <td th:text="${exercise.label}" />
+                                <td th:text="${#dates.format(exercise.created, 'dd/MM/YYYY hh:mm:ss')}" />
+                                <td th:if="${#strings.toString(exercise.type) == 'NO_CHOICE'}" th:text="Dissertativo" />
+                                <td th:if="${#strings.toString(exercise.type) == 'MULTIPLE_CHOICE'}" th:text="${'Multipla' + ' ' + 'escolha'}" />
                                 <td>
-                                    <a th:href="@{/exercise/edit(id = ${exercise.id})}">Editar</a>,
-                                    <a href="#" th:onclick="${'javascript:deleteExercise(' + exercise.id + ')'}">Excluir</a>
-                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                    <a th:href="@{/exercise/edit(id = ${exercise.id})}" th:text="Editar" />,
+                                    <a th:href="@{#}" th:onclick="${'javascript:deleteExercise(' + exercise.id + ')'}" th:text="Excluir" />
+                                    <input th:type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 </td>
                             </tr>
                         </tbody>

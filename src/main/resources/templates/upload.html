@@ -19,8 +19,23 @@
         <h1>Importar exercícios</h1>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12">
+    <div class="row-fluid" >
+        <div class="col-lg-3"></div>
+        <div class="col-lg-5">
+
+            <div th:if="${status == 400}" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <span th:text="${message}"></span>
+            </div>
+
+            <div th:if="${status == 500}" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <span th:text="${message}"></span>
+            </div>
+
+
             <form class="form-horizontal" enctype="multipart/form-data" action="/exercise/upload" method="post">
                 <fieldset>
 
@@ -29,17 +44,17 @@
 
                     <!-- File Button -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="uploadFile">Importar arquivo</label>
-                        <div class="col-md-4">
-                            <input id="uploadFile" name="uploadFile" class="input-file" type="file" />
+                        <label class="col-md-5 control-label" for="uploadFile">Importar arquivo</label>
+                        <div class="col-md-5">
+                            <input id="uploadFile" name="uploadFile" class="input-file" type="file" required="required" />
                         </div>
                     </div>
 
 
                     <!-- Button -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="import"></label>
-                        <div class="col-md-4">
+                        <label class="col-md-5 control-label" for="import"></label>
+                        <div class="col-md-5">
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                             <button id="import" name="import" class="btn btn-primary">Importar</button>
                         </div>
@@ -48,12 +63,7 @@
                 </fieldset>
             </form>
         </div>
-    </div>
-
-    <div class="row">
-        <div th:id="no-exercises-found" th:if="${exercises != null and exercises.size() == 0}">
-            <h2>Nenhum exercício foi extraído.</h2>
-        </div>
+        <div class="col-lg-4"></div>
     </div>
 
     <div th:id="extracted-exercises" th:if="${exercises != null and exercises.size() > 0}">
