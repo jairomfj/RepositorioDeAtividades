@@ -23,6 +23,16 @@
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
 
+
+            <div th:if="${status == 400}" class="alert alert-danger" role="alert">
+                <span th:text="${message}"></span>
+            </div>
+
+            <div th:if="${status == 500}" class="alert alert-danger" role="alert">
+                <span th:text="${message}"></span>
+            </div>
+
+
             <div class="row headers">
                 <div class="col-sm-8">Tags</div>
                 <div class="col-sm-1">Dificuldade</div>

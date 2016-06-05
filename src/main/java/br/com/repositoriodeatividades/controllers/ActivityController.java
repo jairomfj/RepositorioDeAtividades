@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -33,7 +34,11 @@ public class ActivityController extends AbstractController {
     public String activityView() { return "document"; }
 
     @RequestMapping(value = "/activity/create", method = RequestMethod.POST)
-    public String createActivity(HttpServletRequest request, Model model) {
+    public String createActivity(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+
+        Integer status;
+        String message;
+
         try {
             User currentUser = getCurrentUser();
 
@@ -53,17 +58,19 @@ public class ActivityController extends AbstractController {
 
             List<Exercise> exercises = createActivity.execute(createActivityParametersList);
 
-            model.addAttribute("exercises", exercises);
-            log.info("Activity has been created");
+            redirectAttributes.addAttribute("exercises", exercises);
             return "document";
         } catch (IllegalArgumentException iae) {
-            iae.printStackTrace();
+            status = 400;
+            message = "Preencha valores válidos para a geração das atividades.";
         } catch (Exception e) {
-            e.printStackTrace();
+            status = 500;
+            message = "Ocorreu um erro, tente novamente.";
         }
 
-        //TODO improve error handling
-        return "";
+        redirectAttributes.addFlashAttribute("status", status);
+        redirectAttributes.addFlashAttribute("message", message);
+        return "redirect:create";
     }
 
     private String[] extractTags(String[] tags) {
@@ -72,8 +79,5 @@ public class ActivityController extends AbstractController {
         }
         return tags[0].toUpperCase().split(",");
     }
-
-
-
 
 }

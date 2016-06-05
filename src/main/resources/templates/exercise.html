@@ -7,6 +7,7 @@
 <body>
 
 <div th:include="fragments/home-header :: home-header"></div>
+<link rel="stylesheet" type="text/css" th:href="@{/assets/css/exercise.css}" />
 
     <div class="container-fluid">
 
@@ -32,10 +33,10 @@
                     <!-- Table -->
                     <table class="table">
                         <thead>
-                            <th th:value="Enunciado" class="col-lg-5" />
-                            <th th:value="Criado" />
-                            <th th:value="Tipo" />
-                            <th th:value="Opções" />
+                            <th th:text="Enunciado" class="col-lg-5" />
+                            <th th:text="${'Data' + ' ' + 'de' + ' ' + 'criação'}" />
+                            <th th:text="Tipo" />
+                            <th th:text="Opções" />
                         </thead>
                         <tbody>
                             <tr th:each="exercise : ${exercises}">
@@ -45,7 +46,7 @@
                                 <td th:if="${#strings.toString(exercise.type) == 'MULTIPLE_CHOICE'}" th:text="${'Multipla' + ' ' + 'escolha'}" />
                                 <td>
                                     <a th:href="@{/exercise/edit(id = ${exercise.id})}" th:text="Editar" />,
-                                    <a th:href="@{#}" th:onclick="${'javascript:deleteExercise(' + exercise.id + ')'}" th:text="Excluir" />
+                                    <a th:href="@{#}" th:class="delete" th:onclick="${'javascript:deleteExercise(' + exercise.id + ')'}" th:text="Excluir" />
                                     <input th:type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                 </td>
                             </tr>
