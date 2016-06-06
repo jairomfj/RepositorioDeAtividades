@@ -37,16 +37,15 @@ public class EditExercise {
     TagParser tagParser;
 
     public void edit(ExercisePlain exercisePlain) {
-
+        log.info("Editing exercise data");
         Exercise exercise = updateExercise(exercisePlain);
         updateExerciseOptions(exercisePlain.getOptionLabel(), exercise);
         updateTags(exercisePlain.getExerciseTags(), exercise);
-
-        log.info("oi");
-
+        log.info("Exercise successfully updated");
     }
 
     private Exercise updateExercise(ExercisePlain exercisePlain) {
+        log.info("Updating exercise");
         Exercise persistedExercise = exerciseRepository.find(exercisePlain.getExerciseId());
         persistedExercise.setLabel(exercisePlain.getExerciseLabel());
         persistedExercise.setLevel(exercisePlain.getExerciseLevel());
@@ -56,9 +55,9 @@ public class EditExercise {
     }
 
     private void updateExerciseOptions(String[] newOptions, Exercise exercise) {
+        log.info("Updating exercise option");
 
         List<ExerciseOption> persistedOptions = exercise.getExerciseOptions();
-
         for(int i = 0; i < persistedOptions.size(); i++) {
 
             String newOptionLabel = newOptions[i];
@@ -78,6 +77,7 @@ public class EditExercise {
 
 
     private List<Tag> updateTags(String[] exerciseTags, Exercise persistedExercise) {
+        log.info("Updating exercise tags");
 
         List<Tag> persistedTags = persistedExercise.getTags();
         List<Tag> newTags = tagParser.parse(exerciseTags, persistedExercise);
