@@ -12,7 +12,7 @@ class ExerciseClassifierSpec extends Specification {
         exerciseClassifier = new ExerciseClassifier()
     }
 
-    def 'should classificate exercises'() {
+    def 'should classify exercises'() {
         given:
         def filterTags = ["A", "B", "C", "D"]
 
