@@ -50,9 +50,10 @@ public class CreateActivity {
 
                 int totalAdded = 0;
                 for(int i = 0; totalAdded < createActivityParameters.getAmount() &&  i < exercisesClassified.size(); i++) {
-                    Exercise orderedExercise = (Exercise) exercisesClassified.get(i).get("exercise");
-                    if(!exerciseAlreadyAdded(orderedExercise, finalExerciseList)) {
-                        finalExerciseList.add(orderedExercise);
+                    Map orderedExercise = exercisesClassified.get(i);
+                    if(!shouldAddExerciseToFinalList((Exercise) orderedExercise.get("exercise"), finalExerciseList) &&
+                            isScoreGraterThan(10.0, (Double) orderedExercise.get("score"))) {
+                        finalExerciseList.add((Exercise) orderedExercise.get("exercise"));
                         totalAdded++;
                     }
                 }
@@ -70,7 +71,11 @@ public class CreateActivity {
         return finalExerciseList;
     }
 
-    private boolean exerciseAlreadyAdded(Exercise orderedExercise, List<Exercise> finalExerciseList) {
+    private boolean isScoreGraterThan(double min, Double score) {
+        return score * 100 >  min;
+    }
+
+    private boolean shouldAddExerciseToFinalList(Exercise orderedExercise, List<Exercise> finalExerciseList) {
         boolean alreadyAdded = false;
         for(Exercise finalExercise : finalExerciseList) {
             if(orderedExercise.getId() == finalExercise.getId())
