@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 public class RepositoryUtils {
 
     public ExerciseEnumeration findEnumeration(String text) {
-        text = text.replaceAll(" ","");
         for(ExerciseEnumeration enumeration : ExerciseEnumeration.values()) {
             Pattern pattern = Pattern.compile(enumeration.getFullEnumeration());
             Matcher matcher = pattern.matcher(text);
