@@ -6,7 +6,6 @@ public enum ExerciseEnumeration {
     NUMBER_BAR("^\\d\\)","^\\d"),
     NUMBER_DOT("^\\d\\.", "^\\d"),
     NUMBER_HYPHEN("^\\d-", "^\\d"),
-    NUMBER_SPACE_HYPHEN("^\\d\\s*-", "^\\d"),
     CHAR_BAR("^\\A[^\\W\\d_]{1}\\)", "^\\A[^\\W\\d_]{1}"),
     CHAR_DOT("^\\A[^\\W\\d_]{1}\\.", "^\\A[^\\W\\d_]{1}"),
     CHAR_HYPHEN("^\\A[^\\W\\d_]{1}-", "\\A[^\\W\\d_]{1}"),
