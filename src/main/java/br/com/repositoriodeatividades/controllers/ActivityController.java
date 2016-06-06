@@ -58,8 +58,12 @@ public class ActivityController extends AbstractController {
 
             List<Exercise> exercises = createActivity.execute(createActivityParametersList);
 
-            model.addAttribute("exercises", exercises);
-            return "document";
+            if(exercises.size() > 0) {
+                model.addAttribute("exercises", exercises);
+                return "document";
+            }
+            status = 400;
+            message = "Ops, você não possui nenhum exercício.";
         } catch (IllegalArgumentException iae) {
             status = 400;
             message = "Preencha valores válidos para a geração das atividades.";

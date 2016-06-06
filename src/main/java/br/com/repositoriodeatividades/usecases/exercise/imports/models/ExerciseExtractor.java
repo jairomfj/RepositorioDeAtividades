@@ -35,16 +35,19 @@ public class ExerciseExtractor implements Extractable {
 
         String exercise = "";
         for(String line : splitFileContent) {
-            ExerciseEnumeration exerciseEnumeration = repositoryUtils.findEnumeration(line.trim());
+            String[] splittedFinalLine = line.split("\\r");
+            for (String finalLine : splittedFinalLine) {
+                ExerciseEnumeration exerciseEnumeration = repositoryUtils.findEnumeration(finalLine.trim());
 
-            if (candidateExerciseEnumeration == null && !exerciseEnumeration.equals(ExerciseEnumeration.NONE)) {
-                candidateExerciseEnumeration = exerciseEnumeration;
-            } else if(isNewExercise(candidateExerciseEnumeration, exerciseEnumeration)) {
-                log.info("Exercise text: " + exercise);
-                exercises.add(exercise);
-                exercise = "";
+                if (candidateExerciseEnumeration == null && !exerciseEnumeration.equals(ExerciseEnumeration.NONE)) {
+                    candidateExerciseEnumeration = exerciseEnumeration;
+                } else if (isNewExercise(candidateExerciseEnumeration, exerciseEnumeration)) {
+                    log.info("Exercise text: " + exercise);
+                    exercises.add(exercise);
+                    exercise = "";
+                }
+                exercise += finalLine.trim() + "\n";
             }
-            exercise += line.trim() + "\n";
         }
 
         if(exercise.equals("")) {
