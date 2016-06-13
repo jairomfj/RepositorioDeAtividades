@@ -54,6 +54,9 @@ public class ExerciseBuilder {
         if(optionLabels != null && optionLabels.length > 0) {
             for(String optionLabel : optionLabels) {
                 optionLabel = repositoryUtils.extractEnumerationFromString(optionLabel.trim()).trim();
+                if(optionLabel.trim().endsWith("?")) {
+                    optionLabel = optionLabel.substring(0, optionLabel.length());
+                }
 
                 if(optionLabel.equals("") || optionLabel.equals(null))
                     continue;
