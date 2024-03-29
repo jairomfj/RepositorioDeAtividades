@@ -1,9 +1,9 @@
 package br.com.repositoriodeatividades.repositories.interfaces;
 
-import br.com.repositoriodeatividades.entities.ExerciseOption;
+import br.com.repositoriodeatividades.entities.ExerciseOptionEntity;
 
-public interface ExerciseOptionRepositoryInterface extends GenericRepositoryInterface<ExerciseOption> {
+public interface ExerciseOptionRepositoryInterface extends GenericRepositoryInterface<ExerciseOptionEntity> {
 
-    ExerciseOption find(ExerciseOption exerciseOption);
+    ExerciseOptionEntity find(ExerciseOptionEntity exerciseOption);
 
 }

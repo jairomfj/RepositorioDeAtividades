@@ -1,8 +1,8 @@
 package br.com.repositoriodeatividades.usecases.activities.create;
 
-import br.com.repositoriodeatividades.entities.Exercise;
-import br.com.repositoriodeatividades.entities.ExerciseOption;
-import br.com.repositoriodeatividades.entities.User;
+import br.com.repositoriodeatividades.entities.ExerciseEntity;
+import br.com.repositoriodeatividades.entities.ExerciseOptionEntity;
+import br.com.repositoriodeatividades.entities.UserEntity;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.activities.create.models.ExerciseClassifier;
@@ -28,21 +28,21 @@ public class CreateActivity {
     @Autowired
     ExerciseClassifier exerciseClassifier;
 
-    public List<Exercise> execute(List<CreateActivityParameters> createActivityParametersList) throws Exception {
+    public List<ExerciseEntity> execute(List<CreateActivityParameters> createActivityParametersList) throws Exception {
 
-        if(createActivityParametersList.size() == 0) {
+        if(createActivityParametersList.isEmpty()) {
             throw new IllegalArgumentException("No data has been passed");
         }
 
-        User user = userRepository.findByUsername(createActivityParametersList.get(0).getUsername());
-        if(user == null) {
+        Optional<UserEntity> user = userRepository.findByUsername(createActivityParametersList.get(0).getUsername());
+        if(user.isEmpty()) {
             throw new IllegalStateException("User not found");
         }
 
-        List<Exercise> finalExerciseList = new ArrayList<>();
+        List<ExerciseEntity> finalExerciseList = new ArrayList<>();
         for(CreateActivityParameters createActivityParameters : createActivityParametersList) {
 
-            createActivityParameters.setUser(user);
+            createActivityParameters.setUser(user.get());
 
             try {
                 List persistedExercises = exerciseRepository.findAllBy(createActivityParameters);
@@ -51,9 +51,9 @@ public class CreateActivity {
                 int totalAdded = 0;
                 for(int i = 0; totalAdded < createActivityParameters.getAmount() &&  i < exercisesClassified.size(); i++) {
                     Map orderedExercise = exercisesClassified.get(i);
-                    if(!shouldAddExerciseToFinalList((Exercise) orderedExercise.get("exercise"), finalExerciseList) &&
+                    if(!shouldAddExerciseToFinalList((ExerciseEntity) orderedExercise.get("exercise"), finalExerciseList) &&
                             isScoreGraterThan(10.0, (Double) orderedExercise.get("score"))) {
-                        finalExerciseList.add((Exercise) orderedExercise.get("exercise"));
+                        finalExerciseList.add((ExerciseEntity) orderedExercise.get("exercise"));
                         totalAdded++;
                     }
                 }
@@ -75,27 +75,27 @@ public class CreateActivity {
         return score * 100 >  min;
     }
 
-    private boolean shouldAddExerciseToFinalList(Exercise orderedExercise, List<Exercise> finalExerciseList) {
+    private boolean shouldAddExerciseToFinalList(ExerciseEntity orderedExercise, List<ExerciseEntity> finalExerciseList) {
         boolean alreadyAdded = false;
-        for(Exercise finalExercise : finalExerciseList) {
+        for(ExerciseEntity finalExercise : finalExerciseList) {
             if(orderedExercise.getId() == finalExercise.getId())
                 alreadyAdded = true;
         }
         return alreadyAdded;
     }
 
-    private void enumerateExercises(List<Exercise> exerciseList) {
+    private void enumerateExercises(List<ExerciseEntity> exerciseList) {
         for(int i = 0; i < exerciseList.size(); i++) {
-            Exercise exercise = exerciseList.get(i);
+            ExerciseEntity exercise = exerciseList.get(i);
             String exerciseLabel = i + 1 + ") " + exercise.getLabel();
             exercise.setLabel(exerciseLabel);
             enumerateExerciseOptions(exercise.getExerciseOptions());
         }
     }
 
-    private void enumerateExerciseOptions(List<ExerciseOption> exerciseOptionList) {
+    private void enumerateExerciseOptions(List<ExerciseOptionEntity> exerciseOptionList) {
         char enumeration = 'a';
-        for(ExerciseOption option : exerciseOptionList) {
+        for(ExerciseOptionEntity option : exerciseOptionList) {
             String optionLabel = enumeration + ") " + option.getLabel();
             option.setLabel(optionLabel);
             enumeration++;

@@ -3,8 +3,8 @@ package br.com.repositoriodeatividades.repositories;
 import br.com.repositoriodeatividades.repositories.interfaces.GenericRepositoryInterface;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository

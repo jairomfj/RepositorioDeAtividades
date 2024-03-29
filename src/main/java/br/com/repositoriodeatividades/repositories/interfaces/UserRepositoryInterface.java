@@ -1,9 +1,11 @@
 package br.com.repositoriodeatividades.repositories.interfaces;
 
-import br.com.repositoriodeatividades.entities.User;
+import br.com.repositoriodeatividades.entities.UserEntity;
 
-public interface UserRepositoryInterface extends GenericRepositoryInterface<User> {
+import java.util.Optional;
 
-    User findByUsername(String username);
+public interface UserRepositoryInterface extends GenericRepositoryInterface<UserEntity> {
+
+    Optional<UserEntity> findByUsername(String username);
 
 }

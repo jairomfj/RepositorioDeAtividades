@@ -1,9 +1,12 @@
 package br.com.repositoriodeatividades.controllers;
 
+import br.com.repositoriodeatividades.entities.UserEntity;
 import br.com.repositoriodeatividades.usecases.exercise.create.CreateExercise;
 import br.com.repositoriodeatividades.usecases.exercise.delete.DeleteExercise;
 import br.com.repositoriodeatividades.usecases.exercise.edit.EditExercise;
+import br.com.repositoriodeatividades.usecases.exercise.utils.vo.CreateExerciseInput;
 import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
+import br.com.repositoriodeatividades.usecases.user.FindLoggedUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +17,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 public class ExerciseRestController extends AbstractController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired CreateExercise createExercise;
+    @Autowired
+    CreateExercise createExercise;
 
-    @Autowired DeleteExercise deleteExercise;
+    @Autowired
+    DeleteExercise deleteExercise;
 
-    @Autowired EditExercise editExercise;
+    @Autowired
+    EditExercise editExercise;
+
+    @Autowired
+    FindLoggedUser findLoggedUser;
 
     @RequestMapping(value = "/exercise/create", method = RequestMethod.POST)
-    public ResponseEntity<String> uploadFile(ExercisePlain exercisePlain) {
+    public ResponseEntity<String> create(CreateExerciseInput exercisePlain) {
 
         HttpStatus status;
         try {
-            User currentUser = getCurrentUser();
-            exercisePlain.setUsername(currentUser.getUsername());
-            createExercise.saveFileExtractedExercises(exercisePlain);
+            Long currentUserID = getCurrentUserID();
+            exercisePlain.setUserID(currentUserID);
+            createExercise.saveExtractedExercise(exercisePlain);
             status = HttpStatus.CREATED;
         } catch (IllegalArgumentException iae) {
             status = HttpStatus.BAD_REQUEST;
@@ -43,11 +54,12 @@ public class ExerciseRestController extends AbstractController {
     }
 
     @RequestMapping(value = "/exercise/delete", method = RequestMethod.POST)
-    public ResponseEntity<String> delete(Long id) {
+    public ResponseEntity<String> delete(String externalId) {
         HttpStatus status;
         try {
-            getCurrentUser();
-            deleteExercise.delete(id);
+            User user = getCurrentUser();
+            UserEntity userEntity = findLoggedUser.find(user);
+            deleteExercise.delete(userEntity, UUID.fromString(externalId));
             status = HttpStatus.OK;
         } catch (IllegalArgumentException iae) {
             status = HttpStatus.BAD_REQUEST;

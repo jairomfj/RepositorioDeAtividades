@@ -1,8 +1,8 @@
 package br.com.repositoriodeatividades.usecases.exercise.retrieve.models.vo;
 
-import br.com.repositoriodeatividades.entities.ExerciseOption;
-import br.com.repositoriodeatividades.entities.Tag;
-import br.com.repositoriodeatividades.entities.User;
+import br.com.repositoriodeatividades.entities.ExerciseOptionEntity;
+import br.com.repositoriodeatividades.entities.TagEntity;
+import br.com.repositoriodeatividades.entities.UserEntity;
 import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
 
 import java.util.List;
@@ -17,13 +17,15 @@ public class ExerciseVO {
 
     private ExerciseLevelType level;
 
-    private User user;
+    private UserEntity user;
 
-    private List<ExerciseOption> exerciseOption;
+    private List<ExerciseOptionEntity> exerciseOption;
 
     private String tags;
 
-    public ExerciseVO(Long id, String label, String type, ExerciseLevelType level, User user, List<ExerciseOption> exerciseOption, List<Tag> tags) {
+    private String options;
+
+    public ExerciseVO(Long id, String label, String type, ExerciseLevelType level, UserEntity user, List<ExerciseOptionEntity> exerciseOption, List<TagEntity> tags, String options) {
         this.id = id;
         this.label = label;
         this.type = type;
@@ -31,6 +33,7 @@ public class ExerciseVO {
         this.user = user;
         this.exerciseOption = exerciseOption;
         this.tags = tagsToStringFormat(tags);
+        this.options = options;
     }
 
     public Long getId() {
@@ -65,19 +68,19 @@ public class ExerciseVO {
         this.level = level;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
-    public List<ExerciseOption> getExerciseOptions() {
+    public List<ExerciseOptionEntity> getExerciseOptions() {
         return exerciseOption;
     }
 
-    public void setExerciseOptions(List<ExerciseOption> exerciseOption) {
+    public void setExerciseOptions(List<ExerciseOptionEntity> exerciseOption) {
         this.exerciseOption = exerciseOption;
     }
 
@@ -89,12 +92,20 @@ public class ExerciseVO {
         this.tags = tags;
     }
 
-    private String tagsToStringFormat(List<Tag> tags) {
+    private String tagsToStringFormat(List<TagEntity> tags) {
 
         String tagsAsString = "";
-        for(Tag tag : tags) {
+        for(TagEntity tag : tags) {
             tagsAsString += tag.getLabel() + ",";
         }
         return tagsAsString;
+    }
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
     }
 }

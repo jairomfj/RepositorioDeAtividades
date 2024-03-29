@@ -1,11 +1,11 @@
 package br.com.repositoriodeatividades.repositories.interfaces;
 
-import br.com.repositoriodeatividades.entities.Tag;
+import br.com.repositoriodeatividades.entities.TagEntity;
 
 import java.util.Collection;
 
-public interface TagRepositoryInterface extends GenericRepositoryInterface<Tag>{
+public interface TagRepositoryInterface extends GenericRepositoryInterface<TagEntity>{
 
-    Collection<Tag> list();
-    Collection<Tag> find(Tag tag);
+    Collection<TagEntity> list();
+    Collection<TagEntity> find(TagEntity tag);
 }

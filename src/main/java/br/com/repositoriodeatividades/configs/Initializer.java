@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.configs;
 
-import br.com.repositoriodeatividades.entities.User;
-import br.com.repositoriodeatividades.entities.UserRole;
+import br.com.repositoriodeatividades.entities.UserEntity;
+import br.com.repositoriodeatividades.entities.UserRoleEntity;
 import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.UserRoleRepositoryInterface;
 import org.springframework.beans.factory.InitializingBean;
@@ -19,20 +19,20 @@ public class Initializer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-//        createUser();
+        createUser();
     }
 
     private void createUser() {
-        User user = userRepository.findByUsername("user");
-        if(user == null) {
-            User newUser = new User();
-            user.setUsername("user");
-            user.setPassword("pass");
+        var userOptional = userRepository.findByUsername("admin");
+        if(userOptional.isEmpty()) {
+            UserEntity newUser = new UserEntity();
+            newUser.setUsername("admin");
+            newUser.setPassword("admin");
             userRepository.save(newUser);
 
-            UserRole userRole = new UserRole();
+            UserRoleEntity userRole = new UserRoleEntity();
             userRole.setUser(newUser);
-            userRole.setRole("USER_ROLE");
+            userRole.setRole("ADMIN_ROLE");
             userRoleRepository.save(userRole);
 
         }

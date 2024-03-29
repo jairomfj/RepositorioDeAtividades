@@ -1,17 +1,19 @@
 package br.com.repositoriodeatividades.entities;
 
+
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
-@Entity
-@Table(name = "user_role")
-public class UserRole {
+@Entity(name = "UserRole")
+@Table(name = "user_roles")
+public class UserRoleEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull @OneToOne
-    private User user;
+    @NotNull
+    @OneToOne
+    private UserEntity user;
 
     @NotNull
     private String role;
@@ -32,11 +34,11 @@ public class UserRole {
         this.role = role;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 }

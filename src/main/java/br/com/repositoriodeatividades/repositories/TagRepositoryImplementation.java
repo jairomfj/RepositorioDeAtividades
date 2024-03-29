@@ -1,29 +1,29 @@
 package br.com.repositoriodeatividades.repositories;
 
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
-import br.com.repositoriodeatividades.entities.Tag;
+import br.com.repositoriodeatividades.entities.TagEntity;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
 @Repository
-public class TagRepositoryImplementation extends GenericRepositoryImplementation<Tag> implements TagRepositoryInterface {
+public class TagRepositoryImplementation extends GenericRepositoryImplementation<TagEntity> implements TagRepositoryInterface {
 
     public TagRepositoryImplementation() {
-        super(Tag.class);
+        super(TagEntity.class);
     }
 
     @Override
-    public Collection<Tag> list() {
-        TypedQuery<Tag> query = entityManager.createQuery("select t from Tag t", Tag.class);
+    public Collection<TagEntity> list() {
+        TypedQuery<TagEntity> query = entityManager.createQuery("select t from Tag t", TagEntity.class);
         return query.getResultList();
     }
 
     @Override
-    public Collection<Tag> find(Tag tag) {
+    public Collection<TagEntity> find(TagEntity tag) {
         return entityManager.createQuery(
-                "select t from Tag t where t.label = :label and t.exercise = :exercise", Tag.class)
+                "select t from Tag t where t.label = :label and t.exercise = :exercise", TagEntity.class)
                 .setParameter("label", tag.getLabel())
                 .setParameter("exercise", tag.getExercise())
                 .getResultList();

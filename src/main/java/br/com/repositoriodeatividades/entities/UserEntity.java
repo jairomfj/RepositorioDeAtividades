@@ -1,16 +1,16 @@
 package br.com.repositoriodeatividades.entities;
 
+
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "user")
-public class User {
+@Entity(name = "User")
+@Table(name = "users")
+public class UserEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
@@ -25,7 +25,7 @@ public class User {
     @NotNull
     private boolean enabled;
 
-    public User() {}
+    public UserEntity() {}
 
     public Long getId() {
         return id;

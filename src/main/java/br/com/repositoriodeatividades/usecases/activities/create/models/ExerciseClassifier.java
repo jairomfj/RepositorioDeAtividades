@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.usecases.activities.create.models;
 
-import br.com.repositoriodeatividades.entities.Exercise;
-import br.com.repositoriodeatividades.entities.Tag;
+import br.com.repositoriodeatividades.entities.ExerciseEntity;
+import br.com.repositoriodeatividades.entities.TagEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -9,10 +9,10 @@ import java.util.*;
 @Component
 public class ExerciseClassifier {
 
-    public List<Map> classify(List<Exercise> exerciseList, String[] tags) {
+    public List<Map> classify(List<ExerciseEntity> exerciseList, String[] tags) {
         List<Map> exerciseMapList = new ArrayList();
 
-        for(Exercise exercise : exerciseList) {
+        for(ExerciseEntity exercise : exerciseList) {
             Map map = new HashMap();
             String[] exerciseTags = extractExerciseTags(exercise.getTags());
             map.put("score", calculateScore(exerciseTags, tags));
@@ -55,11 +55,11 @@ public class ExerciseClassifier {
         return match / tagsSize;
     }
 
-    private String[] extractExerciseTags(List<Tag> exerciseTags) {
+    private String[] extractExerciseTags(List<TagEntity> exerciseTags) {
 
         List<String> stringTagList = new ArrayList<>();
 
-        for(Tag tag : exerciseTags) {
+        for(TagEntity tag : exerciseTags) {
             stringTagList.add(tag.getLabel());
         }
 

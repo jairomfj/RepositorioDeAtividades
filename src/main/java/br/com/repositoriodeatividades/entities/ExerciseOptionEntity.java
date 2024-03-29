@@ -1,13 +1,12 @@
 package br.com.repositoriodeatividades.entities;
 
 import jakarta.persistence.*;
-
 import java.util.Calendar;
 import java.util.Date;
 
-@Entity
-@Table(name = "exercise_option")
-public class ExerciseOption {
+@Entity(name = "ExerciseOption")
+@Table(name = "exercise_options")
+public class ExerciseOptionEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,16 +21,16 @@ public class ExerciseOption {
     private boolean active = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Exercise exercise;
+    private ExerciseEntity exercise;
 
-    public ExerciseOption() {
+    public ExerciseOptionEntity() {
     }
 
-    public Exercise getExercise() {
+    public ExerciseEntity getExercise() {
         return exercise;
     }
 
-    public void setExercise(Exercise exercise) {
+    public void setExercise(ExerciseEntity exercise) {
         this.exercise = exercise;
     }
 
@@ -67,11 +66,11 @@ public class ExerciseOption {
         this.active = active;
     }
 
-    public Exercise getQuestion() {
+    public ExerciseEntity getQuestion() {
         return exercise;
     }
 
-    public void setQuestion(Exercise exercise) {
+    public void setQuestion(ExerciseEntity exercise) {
         this.exercise = exercise;
     }
 

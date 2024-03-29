@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface Parseable {
 
-    List parse(List content) throws Exception;
+    List parse(List<String> content) throws Exception;
 
 }

@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.usecases.activities.create.models.vo;
 
-import br.com.repositoriodeatividades.entities.User;
+import br.com.repositoriodeatividades.entities.UserEntity;
 
 /**
  * Created by jairomendes on 4/16/16.
@@ -12,7 +12,7 @@ public class CreateActivityParameters {
     private int amount;
     private String[] tags;
     private String username;
-    private User user;
+    private UserEntity user;
 
     public CreateActivityParameters(Integer id, String level, int amount, String[] tags, String username) {
         this.id = id;
@@ -62,11 +62,11 @@ public class CreateActivityParameters {
         this.username = username;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 }

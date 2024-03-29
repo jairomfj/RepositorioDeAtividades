@@ -1,8 +1,8 @@
 package br.com.repositoriodeatividades.usecases.exercise.edit;
 
-import br.com.repositoriodeatividades.entities.Exercise;
-import br.com.repositoriodeatividades.entities.ExerciseOption;
-import br.com.repositoriodeatividades.entities.Tag;
+import br.com.repositoriodeatividades.entities.ExerciseEntity;
+import br.com.repositoriodeatividades.entities.ExerciseOptionEntity;
+import br.com.repositoriodeatividades.entities.TagEntity;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseOptionRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
@@ -38,30 +38,31 @@ public class EditExercise {
 
     public void edit(ExercisePlain exercisePlain) {
         log.info("Editing exercise data");
-        Exercise exercise = updateExercise(exercisePlain);
+        ExerciseEntity exercise = updateExercise(exercisePlain);
         updateExerciseOptions(exercisePlain.getOptionLabel(), exercise);
         updateTags(exercisePlain.getExerciseTags(), exercise);
         log.info("Exercise successfully updated");
     }
 
-    private Exercise updateExercise(ExercisePlain exercisePlain) {
+    private ExerciseEntity updateExercise(ExercisePlain exercisePlain) {
         log.info("Updating exercise");
-        Exercise persistedExercise = exerciseRepository.find(exercisePlain.getExerciseId());
+        ExerciseEntity persistedExercise = exerciseRepository.find(exercisePlain.getExerciseId());
         persistedExercise.setLabel(exercisePlain.getExerciseLabel());
         persistedExercise.setLevel(exercisePlain.getExerciseLevel());
         persistedExercise.setType(exercisePlain.getExerciseType());
+        persistedExercise.setOptions(exercisePlain.getExerciseOptions());
         exerciseRepository.edit(persistedExercise);
         return persistedExercise;
     }
 
-    private void updateExerciseOptions(String[] newOptions, Exercise exercise) {
+    private void updateExerciseOptions(String[] newOptions, ExerciseEntity exercise) {
         log.info("Updating exercise option");
 
-        List<ExerciseOption> persistedOptions = exercise.getExerciseOptions();
+        List<ExerciseOptionEntity> persistedOptions = exercise.getExerciseOptions();
         for(int i = 0; i < persistedOptions.size(); i++) {
 
             String newOptionLabel = newOptions[i];
-            ExerciseOption persistedOption = persistedOptions.get(i);
+            ExerciseOptionEntity persistedOption = persistedOptions.get(i);
 
             if(StringUtils.isEmpty(newOptionLabel)) {
                 exerciseOptionRepository.delete(persistedOption);
@@ -76,17 +77,17 @@ public class EditExercise {
     }
 
 
-    private List<Tag> updateTags(String[] exerciseTags, Exercise persistedExercise) {
+    private List<TagEntity> updateTags(String[] exerciseTags, ExerciseEntity persistedExercise) {
         log.info("Updating exercise tags");
 
-        List<Tag> persistedTags = persistedExercise.getTags();
-        List<Tag> newTags = tagParser.parse(exerciseTags, persistedExercise);
+        List<TagEntity> persistedTags = persistedExercise.getTags();
+        List<TagEntity> newTags = tagParser.parse(exerciseTags, persistedExercise);
 
-        List<Tag> tagsThatShouldBeRemoved = tagsThatShouldBeRemoved(newTags, persistedTags);
-        for(Tag tagToBeRemoved : tagsThatShouldBeRemoved)
+        List<TagEntity> tagsThatShouldBeRemoved = tagsThatShouldBeRemoved(newTags, persistedTags);
+        for(TagEntity tagToBeRemoved : tagsThatShouldBeRemoved)
             tagRepository.delete(tagToBeRemoved);
 
-        for(Tag newTag : newTags) {
+        for(TagEntity newTag : newTags) {
             if(!tagIsAlreadyPersisted(newTag, persistedTags))
                 tagRepository.save(newTag);
         }
@@ -95,11 +96,11 @@ public class EditExercise {
 
     }
 
-    private List<Tag> tagsThatShouldBeRemoved(List<Tag> newTags, List<Tag> persistedTags) {
-        List<Tag> tagsThatShouldBeRemoved = new ArrayList<>();
-        for(Tag persistedTag : persistedTags) {
+    private List<TagEntity> tagsThatShouldBeRemoved(List<TagEntity> newTags, List<TagEntity> persistedTags) {
+        List<TagEntity> tagsThatShouldBeRemoved = new ArrayList<>();
+        for(TagEntity persistedTag : persistedTags) {
             boolean found = false;
-            for(Tag tag : newTags) {
+            for(TagEntity tag : newTags) {
                 if(tag.getLabel().equals(persistedTag.getLabel()))
                     found = true;
             }
@@ -109,9 +110,9 @@ public class EditExercise {
         return tagsThatShouldBeRemoved;
     }
 
-    private boolean tagIsAlreadyPersisted(Tag newTag, List<Tag> persistedTags) {
+    private boolean tagIsAlreadyPersisted(TagEntity newTag, List<TagEntity> persistedTags) {
         boolean alreadyPersisted = false;
-        for(Tag persistedTag : persistedTags) {
+        for(TagEntity persistedTag : persistedTags) {
             if(persistedTag.getLabel().equals(newTag.getLabel()))
                 alreadyPersisted = true;
         }

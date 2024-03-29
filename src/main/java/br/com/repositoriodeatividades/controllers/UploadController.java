@@ -1,10 +1,9 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.entities.Exercise;
 import br.com.repositoriodeatividades.usecases.exercise.imports.ImportExercise;
+import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExtractedExercise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class FileController extends AbstractController {
+public class UploadController extends AbstractController {
 
     @Autowired
     ImportExercise importExercise;
@@ -31,19 +30,20 @@ public class FileController extends AbstractController {
 
         Integer status;
         String message;
-        List<Exercise> exercises = new ArrayList<>();
+        List<ExtractedExercise> exercises = new ArrayList<>();
 
         try {
             exercises = importExercise.execute(uploadFile);
             status = 200;
             message = "Exercícios extraídos com sucesso.";
-        } catch (IllegalArgumentException iae) {
+        } catch (IllegalArgumentException e) {
             status = 400;
-            message = iae.getMessage();
+            message = e.getMessage();
         } catch (Exception e) {
             status = 500;
             message = "Ocorreu um erro, tente novamente.";
         }
+
         redirectAttributes.addFlashAttribute("exercises", exercises);
         redirectAttributes.addFlashAttribute("status", status);
         redirectAttributes.addFlashAttribute("message", message);

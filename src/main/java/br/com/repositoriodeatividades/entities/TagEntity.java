@@ -1,18 +1,16 @@
 package br.com.repositoriodeatividades.entities;
 
-
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Calendar;
 import java.util.Date;
 
-@Entity
-@Table(name = "tag")
-public class Tag {
+@Entity(name = "Tag")
+@Table(name = "tags")
+public class TagEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
@@ -22,11 +20,11 @@ public class Tag {
     private Date created = Calendar.getInstance().getTime();
 
     @NotNull @ManyToOne(fetch = FetchType.LAZY)
-    private Exercise exercise;
+    private ExerciseEntity exercise;
 
-    public Tag() { }
+    public TagEntity() { }
 
-    public Tag(String label) {
+    public TagEntity(String label) {
         this.label = label;
     }
 
@@ -54,11 +52,11 @@ public class Tag {
         this.created = created;
     }
 
-    public Exercise getExercise() {
+    public ExerciseEntity getExercise() {
         return exercise;
     }
 
-    public void setExercise(Exercise exercise) {
+    public void setExercise(ExerciseEntity exercise) {
         this.exercise = exercise;
     }
 }

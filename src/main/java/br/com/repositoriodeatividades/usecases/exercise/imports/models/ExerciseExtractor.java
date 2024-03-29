@@ -21,7 +21,7 @@ public class ExerciseExtractor implements Extractable {
     public RepositoryUtils repositoryUtils;
 
     @Override
-    public List<String> extract(String fileContent) throws Exception {
+    public List<String> extract(String fileContent) {
 
         log.info("Extracting list of exercises as string");
 
@@ -42,7 +42,6 @@ public class ExerciseExtractor implements Extractable {
                 if (candidateExerciseEnumeration == null && !exerciseEnumeration.equals(ExerciseEnumeration.NONE)) {
                     candidateExerciseEnumeration = exerciseEnumeration;
                 } else if (isNewExercise(candidateExerciseEnumeration, exerciseEnumeration)) {
-                    log.info("Exercise text: " + exercise);
                     exercises.add(exercise);
                     exercise = "";
                 }

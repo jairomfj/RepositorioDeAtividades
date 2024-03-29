@@ -5,19 +5,31 @@ $(document).ready(function(){
 
     $(".save-exercise").click(function(e) {
         e.preventDefault();
-        var clickedForm = $(this).parent();
-        while(true) {
-            var itemTagName = clickedForm[0].tagName;
-            if(itemTagName == 'FORM') break;
-            if(itemTagName == 'BODY') { clickedForm = null; break; }
-            clickedForm = clickedForm.parent()
-        }
+        var clickedForm = getForm($(this));
         var uri = clickedForm.attr("action");
         var formData = clickedForm.serializeArray();
 
         postFormData(clickedForm, uri, formData);
 
     });
+
+    $(".ignore-exercise").click(function(e) {
+        e.preventDefault();
+        var clickedForm = getForm($(this));
+        clickedForm.slideUp("1000");
+    });
+
+    function getForm(e) {
+        var clickedForm = e.parent();
+        while(true) {
+            var itemTagName = clickedForm[0].tagName;
+            if(itemTagName === 'FORM') break;
+            if(itemTagName === 'BODY') { clickedForm = null; break; }
+            clickedForm = clickedForm.parent()
+        }
+
+        return clickedForm;
+    }
 
     function postFormData(clickedForm, uri, formData) {
         $.post(uri, formData, function(data, textStatus, jqXHR) {})

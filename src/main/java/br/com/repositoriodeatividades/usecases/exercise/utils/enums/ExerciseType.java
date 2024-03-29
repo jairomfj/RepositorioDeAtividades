@@ -5,6 +5,7 @@ package br.com.repositoriodeatividades.usecases.exercise.utils.enums;
  */
 public enum ExerciseType {
 
+    UNKNOWN,
     NO_CHOICE,
     MULTIPLE_CHOICE
 

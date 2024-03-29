@@ -1,7 +1,6 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports.models;
 
 import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Parseable;
-import br.com.repositoriodeatividades.entities.Exercise;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -17,35 +16,37 @@ public class ExerciseParser implements Parseable {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private final int THREAD_AMMOUNT = 5;
+    private static final int THREAD_AMOUNT = 5;
 
     @Override
-    public List<Exercise> parse(List exercises) throws Exception {
-        if(exercises == null || exercises.size() == 0) {
+    public List<ExtractedExercise> parse(List<String> exercises) throws Exception {
+        if (exercises == null || exercises.size() == 0) {
             throw new IllegalAccessException("List of exercises cannot be or empty");
         }
         return parseInParallel(exercises);
     }
 
-    public List<Exercise> parseInParallel(List<String> exercises) throws Exception {
+    public List<ExtractedExercise> parseInParallel(List<String> exercises) {
 
         log.info("Execute parse in parallel");
 
-        List<Exercise> exerciseList = new ArrayList();
+        List<ExtractedExercise> exerciseList = new ArrayList<>();
 
         try {
-            ExecutorService executor = Executors.newFixedThreadPool(THREAD_AMMOUNT);
-            for(final String exercise : exercises) {
-               executor.execute(new ExerciseParserParallel(exercise, exerciseList));
+            ExecutorService executor = Executors.newFixedThreadPool(THREAD_AMOUNT);
+            for (final String exercise : exercises) {
+                executor.execute(new ExerciseParserParallel(exercise, exerciseList));
             }
             executor.shutdown();
-            while (!executor.awaitTermination(24L, TimeUnit.SECONDS)) { }
+            while (!executor.awaitTermination(24L, TimeUnit.SECONDS)) {
+            }
             log.info("Parse ended");
         } catch (InterruptedException e) {
-            log.error("Error during parse: " + e.getStackTrace().toString());
+            log.error("Error during parse: ", e);
             e.printStackTrace();
 
         }
+
         return exerciseList;
     }
 

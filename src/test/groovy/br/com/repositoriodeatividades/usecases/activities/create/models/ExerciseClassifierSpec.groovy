@@ -1,7 +1,6 @@
 package br.com.repositoriodeatividades.usecases.activities.create.models
 
-import br.com.repositoriodeatividades.entities.Exercise
-import br.com.repositoriodeatividades.entities.Tag
+
 import spock.lang.Specification
 
 class ExerciseClassifierSpec extends Specification {

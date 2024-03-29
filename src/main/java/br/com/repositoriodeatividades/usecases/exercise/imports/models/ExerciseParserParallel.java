@@ -2,7 +2,7 @@ package br.com.repositoriodeatividades.usecases.exercise.imports.models;
 
 import br.com.repositoriodeatividades.usecases.exercise.utils.ExerciseBuilder;
 import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.ExerciseItem;
-import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.ExerciseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,11 +12,14 @@ public class ExerciseParserParallel implements Runnable {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private List<Exercise> exerciseList;
-    ExerciseBuilder exerciseBuilder;
-    ExerciseItemBuilder exerciseItemBuilder;
+    private String exerciseString;
 
-    ExerciseParserParallel(String exerciseString, List<Exercise> exerciseList) {
+    private List<ExtractedExercise> exerciseList;
+    private ExerciseBuilder exerciseBuilder;
+    private ExerciseItemBuilder exerciseItemBuilder;
+
+    ExerciseParserParallel(String exerciseString, List<ExtractedExercise> exerciseList) {
+        this.exerciseString = exerciseString;
         this.exerciseList = exerciseList;
         this.exerciseBuilder = new ExerciseBuilder();
         this.exerciseItemBuilder = new ExerciseItemBuilder(exerciseString);
@@ -27,8 +30,14 @@ public class ExerciseParserParallel implements Runnable {
         try {
             log.info("Running thread");
             List<ExerciseItem> exerciseItemList = exerciseItemBuilder.buildExerciseItems();
-            Exercise exercise = exerciseBuilder.build(exerciseItemList);
-            exerciseList.add(exercise);
+            ExerciseEntity exercise = exerciseBuilder.build(exerciseItemList);
+            exerciseList.add(new ExtractedExercise(
+                    exercise.getLabel(),
+                    exercise.getType(),
+                    exercise.getOptions(),
+                    this.exerciseString
+            ));
+
         } catch (Exception e) {
             log.error(e.getMessage());
         }

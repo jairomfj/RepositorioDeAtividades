@@ -21,9 +21,9 @@ public class WebSecurityConfig {
     public void configAuthentication(DataSource dataSource, AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(
-                        "select username, password, enabled from user where username=?")
+                        "select username, password, enabled from users where username=?")
                 .authoritiesByUsernameQuery(
-                        "select u.username, ur.role from user u inner join user_role ur on ur.user_id = u.id where u.username=?");
+                        "select u.username, ur.role from users u inner join user_roles ur on ur.user_id = u.id where u.username=?");
     }
 
     @Bean

@@ -1,10 +1,10 @@
 package br.com.repositoriodeatividades.usecases.exercise.imports;
 
 
-import br.com.repositoriodeatividades.entities.Exercise;
-import br.com.repositoriodeatividades.usecases.exercise.imports.models.exceptions.InvalidFileFormatException;
+import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExtractedExercise;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseExtractor;
 import br.com.repositoriodeatividades.usecases.exercise.imports.models.ExerciseParser;
+import br.com.repositoriodeatividades.usecases.exercise.imports.models.exceptions.InvalidFileFormatException;
 import br.com.repositoriodeatividades.usecases.exercise.utils.enums.FileReaderType;
 import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Importable;
 import br.com.repositoriodeatividades.usecases.exercise.utils.interfaces.Readable;
@@ -28,10 +28,10 @@ public class ImportExercise implements Importable {
     ExerciseParser exerciseParser;
 
     @Override
-    public List<Exercise> execute(MultipartFile file) throws Exception {
+    public List<ExtractedExercise> execute(MultipartFile file) throws Exception {
         log.info("Initiating importation of the file " + file.getOriginalFilename());
 
-        if(file.getSize() == 0) {
+        if (file.getSize() == 0) {
             throw new IllegalArgumentException("No file was selected");
         }
 
@@ -41,11 +41,10 @@ public class ImportExercise implements Importable {
         return exerciseParser.parse(exercisesAsString);
     }
 
-
     private Readable getFileReader(String contentType) {
         try {
             int startIndex = contentType.indexOf(".") + 1;
-            String text = contentType.substring(startIndex, contentType.length());
+            String text = contentType.substring(startIndex);
             return FileReaderType.valueOf(text.toUpperCase()).getReader();
         } catch (Exception e) {
             throw new InvalidFileFormatException("This format is not accepted.");

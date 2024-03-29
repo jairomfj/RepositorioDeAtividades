@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.usecases.exercise.create.models
 
-import br.com.repositoriodeatividades.entities.Tag
+
 import spock.lang.Specification
 
 class TagParserSpec extends Specification {

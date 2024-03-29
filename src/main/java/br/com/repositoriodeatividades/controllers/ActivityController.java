@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.entities.Exercise;
+import br.com.repositoriodeatividades.entities.ExerciseEntity;
 import br.com.repositoriodeatividades.usecases.activities.create.CreateActivity;
 import br.com.repositoriodeatividades.usecases.activities.create.models.vo.CreateActivityParameters;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,7 +56,7 @@ public class ActivityController extends AbstractController {
                 }
             }
 
-            List<Exercise> exercises = createActivity.execute(createActivityParametersList);
+            List<ExerciseEntity> exercises = createActivity.execute(createActivityParametersList);
 
             if(exercises.size() > 0) {
                 model.addAttribute("exercises", exercises);
