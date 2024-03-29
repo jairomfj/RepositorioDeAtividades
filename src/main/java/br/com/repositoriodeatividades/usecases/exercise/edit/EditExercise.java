@@ -8,13 +8,13 @@ import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepository
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.exercise.create.models.TagParser;
 import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 

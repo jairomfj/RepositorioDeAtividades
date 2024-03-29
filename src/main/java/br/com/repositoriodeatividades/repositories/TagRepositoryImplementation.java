@@ -2,9 +2,9 @@ package br.com.repositoriodeatividades.repositories;
 
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.entities.Tag;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
 import java.util.Collection;
 
 @Repository

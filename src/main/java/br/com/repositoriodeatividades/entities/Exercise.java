@@ -2,9 +2,9 @@ package br.com.repositoriodeatividades.entities;
 
 import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
 import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +13,8 @@ import java.util.List;
 @Table(name = "exercise")
 public class Exercise {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, length = 100000)

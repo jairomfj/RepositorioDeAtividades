@@ -1,0 +1,12 @@
+1) Qual o seu nome?
+a) Jairo
+b) Tamires
+c) Caio
+d) Jessica
+
+
+2) Quantos anos voce tem?
+a) 1
+b) 2
+c) 3
+d) 4

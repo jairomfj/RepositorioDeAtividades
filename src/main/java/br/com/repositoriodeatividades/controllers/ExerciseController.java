@@ -23,8 +23,9 @@ public class ExerciseController extends AbstractController {
     public String retrieveExercises(Model model) {
         try {
             User user = findLoggedUser.find(getCurrentUser());
-            model.addAttribute("exercises", retrieveExercises.findAllBy(user));
-            return "exercise";
+            var exercises = retrieveExercises.findAllBy(user);
+            model.addAttribute("exercises", exercises);
+            return "exercises";
         } catch (Exception e) {
             e.printStackTrace();
             return "login";

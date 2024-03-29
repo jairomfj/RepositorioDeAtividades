@@ -1,6 +1,7 @@
 package br.com.repositoriodeatividades.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.Calendar;
 import java.util.Date;
 

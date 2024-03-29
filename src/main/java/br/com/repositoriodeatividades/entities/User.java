@@ -1,14 +1,16 @@
 package br.com.repositoriodeatividades.entities;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "user")
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull

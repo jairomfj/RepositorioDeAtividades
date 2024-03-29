@@ -2,6 +2,7 @@ package br.com.repositoriodeatividades.repositories;
 
 import br.com.repositoriodeatividades.entities.ExerciseOption;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseOptionRepositoryInterface;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

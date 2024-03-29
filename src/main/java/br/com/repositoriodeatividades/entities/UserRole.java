@@ -1,8 +1,7 @@
 package br.com.repositoriodeatividades.entities;
 
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Table(name = "user_role")

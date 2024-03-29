@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+
+<div th:include="fragments/home-header :: home-header"></div>
+<link rel="stylesheet" type="text/css" th:href="@{/assets/css/exercises.css}" />
+
+    <div class="container-fluid">
+
+        <div class="row-fluid">
+            <div class="page-header">
+                <h1>Exercícios <small>Gerencie aqui seus exercícios já importados</small></h1>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+
+            <div class="col-lg-6">
+
+                <h2 th:if="${exercises.size() == 0}">
+                    Ops, você ainda não tem nenhum exercício,
+                    <small><a href="/exercise/upload">clique aqui para importar novos.</a></small>
+                </h2>
+
+                <div class="panel panel-default" th:if="${exercises.size() > 0}">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Exercícios</div>
+
+                    <!-- Table -->
+                    <table class="table">
+                        <thead>
+                            <th th:text="Enunciado" class="col-lg-9" />
+                            <th th:text="Opções" />
+                        </thead>
+                        <tbody>
+                            <tr th:each="exercise : ${exercises}">
+                                <td th:text="${exercise.label}" />
+                                <td>
+                                    <a th:href="@{/exercise/edit(id = ${exercise.externalId})}" th:text="Editar" /> /
+                                    <a th:href="@{/exercise/delete(id = ${exercise.externalId})}" th:text="Excluir" />
+                                    <input th:type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script th:src="@{/assets/js/exercises.js}" type="text/javascript"></script>
+
+
+</body>
+</html>
