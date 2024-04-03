@@ -3,7 +3,6 @@
 /build/
 /.idea/
 /.gradle/
-/gradle/
 /out/
 
 # Intellij config files
