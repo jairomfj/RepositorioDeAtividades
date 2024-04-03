@@ -4,12 +4,17 @@ import br.com.repositoriodeatividades.entities.UserEntity;
 import br.com.repositoriodeatividades.entities.UserRoleEntity;
 import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.UserRoleRepositoryInterface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Initializer implements InitializingBean {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
 
     @Autowired
     UserRepositoryInterface userRepository;
@@ -19,15 +24,25 @@ public class Initializer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        createUser();
+        try {
+            var userOptional = userRepository.findByUsername("admin");
+            if (userOptional.isEmpty()) {
+                createUser();
+            }
+        } catch (Exception e) {
+            log.warn("Could not find user");
+            createUser();
+        }
+
     }
 
     private void createUser() {
-        var userOptional = userRepository.findByUsername("admin");
-        if(userOptional.isEmpty()) {
+
+        try {
             UserEntity newUser = new UserEntity();
             newUser.setUsername("admin");
             newUser.setPassword("admin");
+            newUser.setEnabled(true);
             userRepository.save(newUser);
 
             UserRoleEntity userRole = new UserRoleEntity();
@@ -35,6 +50,8 @@ public class Initializer implements InitializingBean {
             userRole.setRole("ADMIN_ROLE");
             userRoleRepository.save(userRole);
 
+        } catch (Exception e) {
+            log.warn("Could not create user");
         }
     }
 

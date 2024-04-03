@@ -114,7 +114,7 @@
                                     <label>Original:</label>
 
                                     <div class="row">
-                                        <textarea th:name="exerciseOriginal" th:text="${exercise.original}" class="form-control"></textarea>
+                                        <textarea disabled th:name="exerciseOriginal" th:text="${exercise.original}" class="form-control"></textarea>
 
                                     </div>
 
@@ -129,8 +129,8 @@
 
                                     <label>Escolhas:</label>
 
-                                    <div class="row" th:each="option : ${exercise.extractedOptions}" >
-                                        <input type="text" class="tags" name="exerciseTags" th:text="${option}" />
+                                    <div th:each="option : ${exercise.extractedOptions}" >
+                                        <input type="text" class="form-control" th:value="${option}" name="exerciseOption" />
                                     </div>
 
 
