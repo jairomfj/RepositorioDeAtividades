@@ -50,4 +50,35 @@ public class UploadController extends AbstractController {
 
         return "redirect:upload";
     }
+
+    @RequestMapping(value = "/exercise/upload-v2", method = RequestMethod.GET)
+    public String uploadFileViewV2() {
+        return "upload-v2";
+    }
+
+    @RequestMapping(value = "/exercise/upload-v2", method = RequestMethod.POST)
+    public String uploadFileV2(@RequestParam("uploadFile") MultipartFile uploadFile, RedirectAttributes redirectAttributes) {
+
+        Integer status;
+        String message;
+        List<ExtractedExercise> exercises = new ArrayList<>();
+
+        try {
+            exercises = importExercise.execute(uploadFile);
+            status = 200;
+            message = "Exercícios extraídos com sucesso.";
+        } catch (IllegalArgumentException e) {
+            status = 400;
+            message = e.getMessage();
+        } catch (Exception e) {
+            status = 500;
+            message = "Ocorreu um erro, tente novamente.";
+        }
+
+        redirectAttributes.addFlashAttribute("exercises", exercises);
+        redirectAttributes.addFlashAttribute("status", status);
+        redirectAttributes.addFlashAttribute("message", message);
+
+        return "redirect:upload-v2";
+    }
 }

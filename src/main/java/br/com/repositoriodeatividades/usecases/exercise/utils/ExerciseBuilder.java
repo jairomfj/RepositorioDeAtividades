@@ -16,21 +16,16 @@ import java.util.List;
 @Component
 public class ExerciseBuilder {
 
-    @Autowired
-    RepositoryUtils repositoryUtils;
+    private RepositoryUtils repositoryUtils = new RepositoryUtils();
 
     public ExerciseEntity build(List<ExerciseItem> exerciseItemList) throws Exception {
         if (exerciseItemList == null) {
             throw new IllegalAccessException("ExerciseItemList cannot be null");
         }
 
-        if (exerciseItemList.size() == 0) {
+        if (exerciseItemList.isEmpty()) {
             throw new IllegalAccessException("ExerciseItemList cannot be null");
         }
-
-        ExerciseEntity exercise = new ExerciseEntity();
-        exercise.setType(ExerciseType.UNKNOWN.toString());
-        exercise.setLabel(exerciseItemList.get(0).getLabel());
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 1; i < exerciseItemList.size(); i++) {
@@ -38,7 +33,12 @@ public class ExerciseBuilder {
             stringBuilder.append("\n");
         }
 
-        exercise.setOptions(stringBuilder.toString());
+        var input = new CreateExerciseInput();
+        input.setExerciseLabel(exerciseItemList.get(0).getLabel());
+        input.setExerciseOptions(stringBuilder.toString());
+
+        var exercise = build(input);
+        exercise.setType(ExerciseType.UNKNOWN.toString());
 
         return exercise;
     }

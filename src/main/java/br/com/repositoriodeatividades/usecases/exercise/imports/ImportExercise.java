@@ -41,6 +41,21 @@ public class ImportExercise implements Importable {
         return exerciseParser.parse(exercisesAsString);
     }
 
+    @Override
+    public List<ExtractedExercise> executeV2(MultipartFile file) throws Exception {
+        log.info("Initiating importation of the file " + file.getOriginalFilename());
+
+        if (file.getSize() == 0) {
+            throw new IllegalArgumentException("No file was selected");
+        }
+
+        Readable fileReader = getFileReader(file.getOriginalFilename());
+        String fileContent = fileReader.read(file);
+        List<String> exercisesAsString = exerciseExtractor.extract(fileContent);
+
+        return exerciseParser.parse(exercisesAsString);
+    }
+
     private Readable getFileReader(String contentType) {
         try {
             int startIndex = contentType.indexOf(".") + 1;

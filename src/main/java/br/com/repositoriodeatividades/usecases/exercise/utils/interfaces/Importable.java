@@ -9,4 +9,5 @@ import java.util.List;
 public interface Importable {
 
     List<ExtractedExercise> execute(MultipartFile file) throws Exception;
+    List<ExtractedExercise> executeV2(MultipartFile file) throws Exception;
 }

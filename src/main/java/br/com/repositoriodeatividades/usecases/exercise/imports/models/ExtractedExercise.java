@@ -3,16 +3,19 @@ package br.com.repositoriodeatividades.usecases.exercise.imports.models;
 public class ExtractedExercise {
 
     private String original;
-
     private String label;
     private String type;
     private String options;
 
-    public ExtractedExercise(String label, String type, String options, String original) {
+    private String[] extractedOptions;
+
+    public ExtractedExercise(String label, String type, String options, String original, String[] extractedOptions) {
         this.label = label;
         this.type = type;
         this.options = options;
         this.original = original;
+        this.extractedOptions = extractedOptions;
+
     }
 
     public String getLabel() {
@@ -45,5 +48,13 @@ public class ExtractedExercise {
 
     public void setOriginal(String original) {
         this.original = original;
+    }
+
+    public String[] getExtractedOptions() {
+        return extractedOptions;
+    }
+
+    public void setExtractedOptions(String[] extractedOptions) {
+        this.extractedOptions = extractedOptions;
     }
 }
