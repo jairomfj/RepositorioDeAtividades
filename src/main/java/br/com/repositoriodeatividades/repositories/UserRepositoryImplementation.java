@@ -14,11 +14,8 @@ public class UserRepositoryImplementation extends GenericRepositoryImplementatio
     }
 
     @Override
-    public Optional<UserEntity> findByUsername(String username) {
-        var user = entityManager.createQuery("select u from User u where u.username = :username", UserEntity.class)
+    public UserEntity findByUsername(String username) {
+        return entityManager.createQuery("select u from User u where u.username = :username", UserEntity.class)
                 .setParameter("username", username).getSingleResult();
-
-
-        return Optional.ofNullable(user);
     }
 }

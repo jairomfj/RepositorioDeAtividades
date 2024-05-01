@@ -1,9 +1,8 @@
 package br.com.repositoriodeatividades.configs;
 
-import br.com.repositoriodeatividades.entities.UserEntity;
-import br.com.repositoriodeatividades.entities.UserRoleEntity;
-import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
-import br.com.repositoriodeatividades.repositories.interfaces.UserRoleRepositoryInterface;
+import br.com.repositoriodeatividades.usecases.user.CreateUserInput;
+import br.com.repositoriodeatividades.usecases.user.UserRole;
+import br.com.repositoriodeatividades.usecases.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -15,44 +14,28 @@ public class Initializer implements InitializingBean {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-
     @Autowired
-    UserRepositoryInterface userRepository;
-
-    @Autowired
-    UserRoleRepositoryInterface userRoleRepository;
+    UserService userService;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         try {
-            var userOptional = userRepository.findByUsername("admin");
-            if (userOptional.isEmpty()) {
-                createUser();
+            var userOptional = userService.findByUsername("admin");
+            if (userOptional == null) {
+                createAdminUser();
             }
         } catch (Exception e) {
             log.warn("Could not find user");
-            createUser();
+            createAdminUser();
         }
-
     }
 
-    private void createUser() {
-
-        try {
-            UserEntity newUser = new UserEntity();
-            newUser.setUsername("admin");
-            newUser.setPassword("admin");
-            newUser.setEnabled(true);
-            userRepository.save(newUser);
-
-            UserRoleEntity userRole = new UserRoleEntity();
-            userRole.setUser(newUser);
-            userRole.setRole("ADMIN_ROLE");
-            userRoleRepository.save(userRole);
-
-        } catch (Exception e) {
-            log.warn("Could not create user");
-        }
+    private void createAdminUser() {
+        userService.createUser(new CreateUserInput(
+                "admin",
+                "admin@433@teste",
+                UserRole.ADMIN)
+        );
     }
 
 }

@@ -1,7 +1,6 @@
 package br.com.repositoriodeatividades.controllers;
 
-import br.com.repositoriodeatividades.entities.UserEntity;
-import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface;
+import br.com.repositoriodeatividades.usecases.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -9,7 +8,7 @@ import org.springframework.security.core.userdetails.User;
 abstract class AbstractController {
 
     @Autowired
-    UserRepositoryInterface userRepository;
+    UserService userService;
 
     protected User getCurrentUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -17,8 +16,11 @@ abstract class AbstractController {
 
     protected Long getCurrentUserID() {
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        var userOptional = userRepository.findByUsername(user.getUsername());
-        var userEntity = userOptional.orElseThrow();
+        var userEntity = userService.findByUsername(user.getUsername());
+
+        if (userEntity == null) {
+            throw new IllegalStateException("User not found: " + user.getUsername());
+        }
 
         return userEntity.getId();
     }

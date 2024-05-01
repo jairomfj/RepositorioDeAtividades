@@ -28,21 +28,21 @@ public class CreateActivity {
     @Autowired
     ExerciseClassifier exerciseClassifier;
 
-    public List<ExerciseEntity> execute(List<CreateActivityParameters> createActivityParametersList) throws Exception {
+    public List<ExerciseEntity> execute(List<CreateActivityParameters> createActivityParametersList) {
 
         if(createActivityParametersList.isEmpty()) {
             throw new IllegalArgumentException("No data has been passed");
         }
 
-        Optional<UserEntity> user = userRepository.findByUsername(createActivityParametersList.get(0).getUsername());
-        if(user.isEmpty()) {
+        UserEntity user = userRepository.findByUsername(createActivityParametersList.get(0).getUsername());
+        if(user == null) {
             throw new IllegalStateException("User not found");
         }
 
         List<ExerciseEntity> finalExerciseList = new ArrayList<>();
         for(CreateActivityParameters createActivityParameters : createActivityParametersList) {
 
-            createActivityParameters.setUser(user.get());
+            createActivityParameters.setUser(user);
 
             try {
                 List persistedExercises = exerciseRepository.findAllBy(createActivityParameters);

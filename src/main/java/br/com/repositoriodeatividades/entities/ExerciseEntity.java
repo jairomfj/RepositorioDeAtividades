@@ -2,7 +2,6 @@ package br.com.repositoriodeatividades.entities;
 
 import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
 import br.com.repositoriodeatividades.usecases.exercise.utils.vo.CreateExerciseInput;
-import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -47,6 +46,10 @@ public class ExerciseEntity {
 
     @Column(nullable = false, length = 100000)
     private String options;
+
+    @Column(nullable = false)
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<CategoryEntity> categories;
 
     public ExerciseEntity() {}
 
@@ -158,5 +161,13 @@ public class ExerciseEntity {
 
     public void setOptions(String options) {
         this.options = options;
+    }
+
+    public List<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryEntity> categories) {
+        this.categories = categories;
     }
 }

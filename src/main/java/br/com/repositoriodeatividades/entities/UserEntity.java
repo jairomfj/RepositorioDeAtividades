@@ -4,7 +4,7 @@ package br.com.repositoriodeatividades.entities;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity(name = "User")
 @Table(name = "users")
@@ -20,7 +20,7 @@ public class UserEntity {
     private String password;
 
     @NotNull
-    private Date created;
+    private LocalDateTime created;
 
     @NotNull
     private boolean enabled;
@@ -51,11 +51,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
