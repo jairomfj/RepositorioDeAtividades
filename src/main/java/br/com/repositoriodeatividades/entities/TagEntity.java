@@ -17,7 +17,7 @@ public class TagEntity {
     private String label;
 
     @NotNull
-    private Date created = Calendar.getInstance().getTime();
+    private Date createdAt = Calendar.getInstance().getTime();
 
     @NotNull @ManyToOne(fetch = FetchType.LAZY)
     private ExerciseEntity exercise;
@@ -44,12 +44,12 @@ public class TagEntity {
         this.label = label;
     }
 
-    public Date getCreated() {
-        return created;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public ExerciseEntity getExercise() {

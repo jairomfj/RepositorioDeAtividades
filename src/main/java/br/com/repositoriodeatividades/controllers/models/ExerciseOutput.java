@@ -1,6 +1,6 @@
 package br.com.repositoriodeatividades.controllers.models;
 
-import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevel;
 
 import java.util.Date;
 import java.util.UUID;
@@ -14,9 +14,9 @@ public class ExerciseOutput {
     private Date created;
     private String type;
     private boolean active;
-    private ExerciseLevelType level;
+    private ExerciseLevel level;
 
-    public ExerciseOutput(UUID externalId, String label, Date created, String type, boolean active, ExerciseLevelType level) {
+    public ExerciseOutput(UUID externalId, String label, Date created, String type, boolean active, ExerciseLevel level) {
         this.externalId = externalId;
         this.label = label.substring(0, getEndIndex(label)).concat("...");
         this.created = created;
@@ -45,7 +45,7 @@ public class ExerciseOutput {
         return active;
     }
 
-    public ExerciseLevelType getLevel() {
+    public ExerciseLevel getLevel() {
         return level;
     }
 

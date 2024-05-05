@@ -4,7 +4,7 @@ import br.com.repositoriodeatividades.entities.ExerciseEntity;
 import br.com.repositoriodeatividades.entities.UserEntity;
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.activities.create.models.vo.CreateActivityParameters;
-import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevel;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class ExerciseRepositoryImplementation extends GenericRepositoryImplement
             return entityManager.createQuery(
                     "select e from Exercise e " +
                     "where e.level = :level and e.user = :user")
-                    .setParameter("level", ExerciseLevelType.valueOf(activityParameters.getLevel()))
+                    .setParameter("level", ExerciseLevel.valueOf(activityParameters.getLevel()))
                     .setParameter("user", activityParameters.getUser())
                     .getResultList();
 

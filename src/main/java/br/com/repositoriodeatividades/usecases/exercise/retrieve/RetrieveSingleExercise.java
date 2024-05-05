@@ -29,8 +29,8 @@ public class RetrieveSingleExercise {
         ExerciseEntity exercise = retrieveBy(user, externalId);
         return new ExerciseVO(
                 exercise.getId(),
-                exercise.getLabel(),
-                exercise.getType(),
+                exercise.getText(),
+                exercise.getType().toString(),
                 exercise.getLevel(),
                 exercise.getUser(),
                 exercise.getExerciseOptions(),

@@ -34,9 +34,9 @@ public class ExerciseController extends AbstractController {
                     .stream()
                     .map(it -> new ExerciseOutput(
                             it.getExternalId(),
-                            it.getLabel(),
-                            it.getCreated(),
-                            it.getType(),
+                            it.getText(),
+                            it.getCreatedAt(),
+                            it.getType().toString(),
                             it.isActive(),
                             it.getLevel()
                     )).collect(Collectors.toList());

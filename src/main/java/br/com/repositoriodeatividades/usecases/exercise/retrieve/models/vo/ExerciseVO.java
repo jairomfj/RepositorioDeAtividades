@@ -3,7 +3,7 @@ package br.com.repositoriodeatividades.usecases.exercise.retrieve.models.vo;
 import br.com.repositoriodeatividades.entities.ExerciseOptionEntity;
 import br.com.repositoriodeatividades.entities.TagEntity;
 import br.com.repositoriodeatividades.entities.UserEntity;
-import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevel;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class ExerciseVO {
 
     private String type;
 
-    private ExerciseLevelType level;
+    private ExerciseLevel level;
 
     private UserEntity user;
 
@@ -25,7 +25,7 @@ public class ExerciseVO {
 
     private String options;
 
-    public ExerciseVO(Long id, String label, String type, ExerciseLevelType level, UserEntity user, List<ExerciseOptionEntity> exerciseOption, List<TagEntity> tags, String options) {
+    public ExerciseVO(Long id, String label, String type, ExerciseLevel level, UserEntity user, List<ExerciseOptionEntity> exerciseOption, List<TagEntity> tags, String options) {
         this.id = id;
         this.label = label;
         this.type = type;
@@ -60,11 +60,11 @@ public class ExerciseVO {
         this.type = type;
     }
 
-    public ExerciseLevelType getLevel() {
+    public ExerciseLevel getLevel() {
         return level;
     }
 
-    public void setLevel(ExerciseLevelType level) {
+    public void setLevel(ExerciseLevel level) {
         this.level = level;
     }
 

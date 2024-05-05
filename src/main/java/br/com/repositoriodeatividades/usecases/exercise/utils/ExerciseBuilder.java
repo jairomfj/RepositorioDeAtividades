@@ -38,7 +38,7 @@ public class ExerciseBuilder {
         input.setExerciseOptions(stringBuilder.toString());
 
         var exercise = build(input);
-        exercise.setType(ExerciseType.UNKNOWN.toString());
+        exercise.setType(ExerciseType.UNKNOWN);
 
         return exercise;
     }

@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ExerciseParserParallel implements Runnable {
 
@@ -36,8 +35,8 @@ public class ExerciseParserParallel implements Runnable {
             String[] list = exercise.getExerciseOptions().stream().map((ExerciseOptionEntity::getLabel)).toList().toArray(new String[0]);
 
             exerciseList.add(new ExtractedExercise(
-                    exercise.getLabel(),
-                    exercise.getType(),
+                    exercise.getText(),
+                    exercise.getType().toString(),
                     exercise.getOptions(),
                     this.exerciseString,
                     list

@@ -20,7 +20,7 @@ public class UserEntity {
     private String password;
 
     @NotNull
-    private LocalDateTime created;
+    private LocalDateTime createdAt;
 
     @NotNull
     private boolean enabled;
@@ -51,12 +51,12 @@ public class UserEntity {
         this.password = password;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public boolean isEnabled() {

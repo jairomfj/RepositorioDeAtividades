@@ -1,7 +1,7 @@
 package br.com.repositoriodeatividades.usecases.exercise.utils.enums;
 
 
-public enum ExerciseLevelType {
+public enum ExerciseLevel {
 
     EASY(0),
     MEDIUM(1),
@@ -9,7 +9,7 @@ public enum ExerciseLevelType {
 
     private int level;
 
-    ExerciseLevelType(int level) {
+    ExerciseLevel(int level) {
         this.level = level;
     }
 

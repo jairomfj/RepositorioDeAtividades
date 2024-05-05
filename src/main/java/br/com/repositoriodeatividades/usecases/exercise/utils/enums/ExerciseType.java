@@ -5,8 +5,17 @@ package br.com.repositoriodeatividades.usecases.exercise.utils.enums;
  */
 public enum ExerciseType {
 
-    UNKNOWN,
-    NO_CHOICE,
-    MULTIPLE_CHOICE
+    UNKNOWN(0),
+    NO_CHOICE(1),
+    MULTIPLE_CHOICE(2);
 
+    private final int code;
+
+    ExerciseType(int code) {
+        this.code = code;
+    }
+
+    public int getCode() {
+        return code;
+    }
 }

@@ -4,9 +4,7 @@ import br.com.repositoriodeatividades.entities.UserEntity
 import br.com.repositoriodeatividades.entities.UserRoleEntity
 import br.com.repositoriodeatividades.repositories.interfaces.UserRepositoryInterface
 import br.com.repositoriodeatividades.repositories.interfaces.UserRoleRepositoryInterface
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import java.security.MessageDigest
 import java.time.LocalDateTime
 
 
@@ -38,7 +36,7 @@ class UserService(
             newUser.username = input.username
             newUser.password = password
             newUser.isEnabled = true
-            newUser.created = LocalDateTime.now()
+            newUser.createdAt = LocalDateTime.now()
 
             userRepository.save(newUser)
 

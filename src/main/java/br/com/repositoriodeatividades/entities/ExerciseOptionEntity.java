@@ -15,7 +15,7 @@ public class ExerciseOptionEntity {
     private String label;
 
     @Column(nullable = false)
-    private Date created = Calendar.getInstance().getTime();
+    private Date createdAt = Calendar.getInstance().getTime();
 
     @Column(nullable = false)
     private boolean active = true;
@@ -50,12 +50,12 @@ public class ExerciseOptionEntity {
         this.label = label;
     }
 
-    public Date getCreated() {
-        return created;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public boolean isActive() {

@@ -7,6 +7,7 @@ import br.com.repositoriodeatividades.repositories.interfaces.ExerciseOptionRepo
 import br.com.repositoriodeatividades.repositories.interfaces.ExerciseRepositoryInterface;
 import br.com.repositoriodeatividades.repositories.interfaces.TagRepositoryInterface;
 import br.com.repositoriodeatividades.usecases.exercise.create.models.TagParser;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseType;
 import br.com.repositoriodeatividades.usecases.exercise.utils.vo.ExercisePlain;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -47,9 +48,9 @@ public class EditExercise {
     private ExerciseEntity updateExercise(ExercisePlain exercisePlain) {
         log.info("Updating exercise");
         ExerciseEntity persistedExercise = exerciseRepository.find(exercisePlain.getExerciseId());
-        persistedExercise.setLabel(exercisePlain.getExerciseLabel());
+        persistedExercise.setText(exercisePlain.getExerciseLabel());
         persistedExercise.setLevel(exercisePlain.getExerciseLevel());
-        persistedExercise.setType(exercisePlain.getExerciseType());
+        persistedExercise.setType(ExerciseType.valueOf(exercisePlain.getExerciseType()));
         persistedExercise.setOptions(exercisePlain.getExerciseOptions());
         exerciseRepository.edit(persistedExercise);
         return persistedExercise;

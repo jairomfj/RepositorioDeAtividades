@@ -1,10 +1,9 @@
 package br.com.repositoriodeatividades.entities;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity(name = "Category")
 @Table(name = "categories")
@@ -13,14 +12,16 @@ public class CategoryEntity {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
-    private Date created = Calendar.getInstance().getTime();
+    @Column(nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @NotNull @ManyToMany(fetch = FetchType.LAZY)
-    private ExerciseEntity exercise;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "exercise_categories", joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "exercise_id"))
+    private Set<ExerciseEntity> exercise;
 
     public CategoryEntity() { }
 
@@ -40,11 +41,19 @@ public class CategoryEntity {
         this.name = name;
     }
 
-    public Date getCreated() {
-        return created;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Set<ExerciseEntity> getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(Set<ExerciseEntity> exercise) {
+        this.exercise = exercise;
     }
 }

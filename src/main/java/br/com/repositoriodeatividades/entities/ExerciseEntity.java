@@ -1,14 +1,14 @@
 package br.com.repositoriodeatividades.entities;
 
-import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevelType;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseLevel;
+import br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseType;
 import br.com.repositoriodeatividades.usecases.exercise.utils.vo.CreateExerciseInput;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
+import static br.com.repositoriodeatividades.usecases.exercise.utils.enums.ExerciseType.UNKNOWN;
 
 @Entity(name = "Exercise")
 @Table(name = "exercises")
@@ -18,19 +18,19 @@ public class ExerciseEntity {
     private Long id;
 
     @Column(nullable = false, length = 100000)
-    private String label;
+    private String text;
 
     @Column(nullable = false) @DateTimeFormat(pattern="dd-MM-YYYY hh:mm:ss")
-    private Date created = Calendar.getInstance().getTime();
+    private Date createdAt = Calendar.getInstance().getTime();
 
     @Column()
-    private String type = "";
+    private ExerciseType type = UNKNOWN;
 
     @Column(nullable = false)
     private boolean active = true;
 
     @Column(nullable = false)
-    private ExerciseLevelType level;
+    private ExerciseLevel level;
 
     @ManyToOne
     private UserEntity user;
@@ -44,17 +44,18 @@ public class ExerciseEntity {
     @Column(nullable = false, length = 36, name = "external_id")
     private String externalId;
 
-    @Column(nullable = false, length = 100000)
+    @Column(length = 100000)
     private String options;
 
-    @Column(nullable = false)
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<CategoryEntity> categories;
+    @JoinTable(name = "exercise_categories", joinColumns = @JoinColumn(name = "exercise_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<CategoryEntity> categories;
 
     public ExerciseEntity() {}
 
-    public ExerciseEntity(String label, List<ExerciseOptionEntity> exerciseOptionList) {
-        this.label = label;
+    public ExerciseEntity(String text, List<ExerciseOptionEntity> exerciseOptionList) {
+        this.text = text;
         this.exerciseOption = exerciseOptionList;
 
         for(ExerciseOptionEntity exerciseOption : exerciseOptionList) {
@@ -63,8 +64,8 @@ public class ExerciseEntity {
     }
 
     public ExerciseEntity(CreateExerciseInput exercisePlain, List<ExerciseOptionEntity> exerciseOptionList) {
-        this.label = exercisePlain.getExerciseLabel();
-        this.type = exercisePlain.getExerciseType();
+        this.text = exercisePlain.getExerciseLabel();
+        this.type = ExerciseType.valueOf(exercisePlain.getExerciseType());
         this.level = exercisePlain.getExerciseLevel();
         this.options = exercisePlain.getExerciseOptions();
         this.exerciseOption = exerciseOptionList;
@@ -83,20 +84,20 @@ public class ExerciseEntity {
         this.id = id;
     }
 
-    public String getLabel() {
-        return label;
+    public String getText() {
+        return text;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Date getCreated() {
-        return created;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public boolean isActive() {
@@ -115,11 +116,11 @@ public class ExerciseEntity {
         this.user = user;
     }
 
-    public String getType() {
+    public ExerciseType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ExerciseType type) {
         this.type = type;
     }
 
@@ -131,11 +132,11 @@ public class ExerciseEntity {
         this.exerciseOption = questionOption;
     }
 
-    public ExerciseLevelType getLevel() {
+    public ExerciseLevel getLevel() {
         return level;
     }
 
-    public void setLevel(ExerciseLevelType level) {
+    public void setLevel(ExerciseLevel level) {
         this.level = level;
     }
 
@@ -163,11 +164,11 @@ public class ExerciseEntity {
         this.options = options;
     }
 
-    public List<CategoryEntity> getCategories() {
+    public Set<CategoryEntity> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<CategoryEntity> categories) {
+    public void setCategories(Set<CategoryEntity> categories) {
         this.categories = categories;
     }
 }

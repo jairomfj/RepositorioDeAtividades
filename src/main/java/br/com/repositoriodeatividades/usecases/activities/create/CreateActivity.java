@@ -87,8 +87,8 @@ public class CreateActivity {
     private void enumerateExercises(List<ExerciseEntity> exerciseList) {
         for(int i = 0; i < exerciseList.size(); i++) {
             ExerciseEntity exercise = exerciseList.get(i);
-            String exerciseLabel = i + 1 + ") " + exercise.getLabel();
-            exercise.setLabel(exerciseLabel);
+            String exerciseLabel = i + 1 + ") " + exercise.getText();
+            exercise.setText(exerciseLabel);
             enumerateExerciseOptions(exercise.getExerciseOptions());
         }
     }
