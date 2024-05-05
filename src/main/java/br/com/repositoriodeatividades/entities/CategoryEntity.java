@@ -16,6 +16,9 @@ public class CategoryEntity {
     private String name;
 
     @Column(nullable = false)
+    private String externalID;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -55,5 +58,13 @@ public class CategoryEntity {
 
     public void setExercise(Set<ExerciseEntity> exercise) {
         this.exercise = exercise;
+    }
+
+    public String getExternalID() {
+        return externalID;
+    }
+
+    public void setExternalID(String externalID) {
+        this.externalID = externalID;
     }
 }
