@@ -3,11 +3,12 @@ package br.com.repositoriodeatividades.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
-@Entity(name = "Category")
-@Table(name = "categories")
-public class CategoryEntity {
+@Entity(name = "Subject")
+@Table(name = "subjects")
+public class SubjectEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -15,24 +16,16 @@ public class CategoryEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String externalID;
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "exercise_categories", joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "exercise_id"))
-    private Set<ExerciseEntity> exercise;
+    @OneToMany(mappedBy = "subject", targetEntity = CategoryEntity.class, fetch = FetchType.LAZY, orphanRemoval = false)
+    private List<CategoryEntity> categories;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private SubjectEntity subject;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ClassYearEntity classYear;
-
-    public CategoryEntity() { }
+    public SubjectEntity() { }
 
     public long getId() {
         return id;
@@ -58,19 +51,19 @@ public class CategoryEntity {
         this.createdAt = createdAt;
     }
 
-    public Set<ExerciseEntity> getExercise() {
-        return exercise;
-    }
-
-    public void setExercise(Set<ExerciseEntity> exercise) {
-        this.exercise = exercise;
-    }
-
     public String getExternalID() {
         return externalID;
     }
 
     public void setExternalID(String externalID) {
         this.externalID = externalID;
+    }
+
+    public List<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryEntity> categories) {
+        this.categories = categories;
     }
 }

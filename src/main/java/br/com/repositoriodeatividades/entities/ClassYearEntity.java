@@ -3,11 +3,11 @@ package br.com.repositoriodeatividades.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
-@Entity(name = "Category")
-@Table(name = "categories")
-public class CategoryEntity {
+@Entity(name = "ClassYear")
+@Table(name = "class_years")
+public class ClassYearEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -21,18 +21,10 @@ public class CategoryEntity {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "exercise_categories", joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "exercise_id"))
-    private Set<ExerciseEntity> exercise;
+    @OneToMany(mappedBy = "classYear", targetEntity = CategoryEntity.class, fetch = FetchType.LAZY, orphanRemoval = false)
+    private List<CategoryEntity> categories;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private SubjectEntity subject;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ClassYearEntity classYear;
-
-    public CategoryEntity() { }
+    public ClassYearEntity() { }
 
     public long getId() {
         return id;
@@ -58,19 +50,19 @@ public class CategoryEntity {
         this.createdAt = createdAt;
     }
 
-    public Set<ExerciseEntity> getExercise() {
-        return exercise;
-    }
-
-    public void setExercise(Set<ExerciseEntity> exercise) {
-        this.exercise = exercise;
-    }
-
     public String getExternalID() {
         return externalID;
     }
 
     public void setExternalID(String externalID) {
         this.externalID = externalID;
+    }
+
+    public List<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryEntity> categories) {
+        this.categories = categories;
     }
 }

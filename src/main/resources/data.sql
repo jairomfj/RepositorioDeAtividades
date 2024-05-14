@@ -6,9 +6,27 @@ WHERE
         SELECT id FROM users WHERE id = 1
     );
 
+-- class year
+INSERT INTO class_year (id, name, external_id, created_at)
+SELECT 1, '1o Ano', '1o-ano', now()
+WHERE
+    NOT EXISTS (
+        SELECT id FROM class_year WHERE id = 1
+    );
+
+
+-- subjects
+INSERT INTO subjects (id, name, external_id, created_at)
+SELECT 1, 'Português', 'portugues', now()
+WHERE
+    NOT EXISTS (
+        SELECT id FROM subjects WHERE id = 1
+    );
+
+
 -- categories
-INSERT INTO categories (id, created_at, name, external_id)
-SELECT 1, NOW(), 'Teste', 'teste'
+INSERT INTO categories (id, created_at, name, external_id, class_year, subjects)
+SELECT 1, NOW(), 'Teste', 'teste', 1, 1
 WHERE
     NOT EXISTS (
         SELECT id FROM categories WHERE id = 1

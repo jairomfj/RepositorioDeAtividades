@@ -18,6 +18,4 @@ public class RetrieveExercises {
     public List<ExerciseEntity> findAllBy(UserEntity currentUser) {
         return exerciseRepository.findAllBy(currentUser);
     }
-
-
 }
